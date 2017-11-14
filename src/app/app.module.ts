@@ -5,8 +5,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
-import { Almacen } from './providers/almacen';
-import { Producto } from './providers/producto';
+import { AlmacenService } from './providers/almacen';
+import { ProductoService } from './providers/producto';
 import { NotaPedido } from './providers/nota-pedido';
 import { Api } from './providers/api';
 
@@ -30,8 +30,8 @@ import { AppRoutingModule } from './app.route';
     AppRoutingModule
   ],
   providers: [
-    Almacen,
-    Producto,
+    AlmacenService,
+    ProductoService,
     NotaPedido,
     Api
   ],

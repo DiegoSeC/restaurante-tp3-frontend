@@ -3,14 +3,14 @@ import { NotaPedido as NotaPedidoInterface } from './nota-pedido.interface';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Almacen } from '../providers/almacen';
-import { Producto } from '../providers/producto';
+import { AlmacenService } from '../providers/almacen';
+import { ProductoService } from '../providers/producto';
 import { NotaPedido } from '../providers/nota-pedido';
 import { Almacen as AlmacenInterface } from '../interfaces/almacen.interface';
 import { Producto as ProductoInterface } from '../interfaces/producto.interface';
 
 @Component({
-  selector: 'page-new-nota-pedido',
+  selector: 'app-new-nota-pedido',
   templateUrl: 'new-nota-pedido.html'
 })
 export class NewNotaPedidoPage implements OnInit, OnDestroy {
@@ -26,8 +26,8 @@ export class NewNotaPedidoPage implements OnInit, OnDestroy {
   private sub: any;
 
   constructor(private modalService: NgbModal,
-              private almacen: Almacen,
-              private producto: Producto,
+              private almacen: AlmacenService,
+              private producto: ProductoService,
               private notaApi: NotaPedido,
               private router: Router,
               private route: ActivatedRoute) {
@@ -44,7 +44,7 @@ export class NewNotaPedidoPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      if(typeof params['id'] === 'undefined') {
+      if (typeof params['id'] === 'undefined') {
         this.setDefaultNotaPedido();
       } else {
         this.getNotaPedido(params['id']);
@@ -104,7 +104,7 @@ export class NewNotaPedidoPage implements OnInit, OnDestroy {
   quitarProducto(producto: ProductoInterface, index: number) {
     this.nota.productos.splice(index, 1);
     this.productos.filter(p => {
-      if(p.uuid === producto.uuid) {
+      if (p.uuid === producto.uuid) {
         p.disabled = false;
       }
     });
@@ -113,12 +113,12 @@ export class NewNotaPedidoPage implements OnInit, OnDestroy {
   onSubmit() {
     let action = this.createNotaPedido();
 
-    if(this.action === 'actualizar') {
+    if (this.action === 'actualizar') {
       action = this.updateNotaPedido();
     }
 
     action.subscribe(data => {
-      if(this.action !== 'actualizar') {
+      if (this.action !== 'actualizar') {
         this.nota.numero = data['data']['numero'];
       }
 

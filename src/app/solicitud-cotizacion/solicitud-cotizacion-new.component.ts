@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudCotizacion } from './solicitud-cotizacion.model';
 import { Producto } from '../interfaces/producto.interface';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
+import { ProductoService } from '../providers/producto';
 
 @Component({
     selector: 'app-solicitud-cotizacion',
@@ -20,7 +21,7 @@ export class SolicitudCotizacionNewComponent {
     private sub: any;
 
     constructor(private modalService: NgbModal,
-                private producto: Producto,
+                private producto: ProductoService,
                 private solicitudService: SolicitudCotizacionService,
                 private router: Router,
                 private route: ActivatedRoute) {}

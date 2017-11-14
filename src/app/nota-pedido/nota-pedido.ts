@@ -6,7 +6,7 @@ import { NotaPedido } from '../providers/nota-pedido';
 import { NotaPedido as NotaPedidoInterface } from './nota-pedido.interface';
 
 @Component({
-  selector: 'page-nota-pedido',
+  selector: 'app-nota-pedido',
   templateUrl: 'nota-pedido.html'
 })
 export class NotaPedidoPage implements OnInit {
