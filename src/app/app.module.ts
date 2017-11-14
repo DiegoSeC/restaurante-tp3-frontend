@@ -12,6 +12,7 @@ import { Api } from './providers/api';
 
 import { AppComponent } from './app.component';
 import { NotaPedidoPageModule } from './nota-pedido/nota-pedido.module';
+import { SolicitudCotizacionModule } from './solicitud-cotizacion/solicitud-cotizacion.module';
 
 import { AppRoutingModule } from './app.route';
 
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app.route';
     NgbModule.forRoot(),
     FormsModule,
     NotaPedidoPageModule,
+    SolicitudCotizacionModule,
     AppRoutingModule
   ],
   providers: [
