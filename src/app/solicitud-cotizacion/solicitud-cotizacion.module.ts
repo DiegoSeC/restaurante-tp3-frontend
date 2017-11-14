@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
 
+import { PipesModule } from '../pipes/pipes.module';
+
 import { SolicitudCotizacionComponent } from './solicitud-cotizacion.component';
 import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion-new.component';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
@@ -17,10 +19,12 @@ import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.se
         NgbModule,
         CommonModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        PipesModule
      ],
     exports: [
-        SolicitudCotizacionComponent
+        SolicitudCotizacionComponent,
+        SolicitudCotizacionNewComponent
     ],
     providers: [
         SolicitudCotizacionService

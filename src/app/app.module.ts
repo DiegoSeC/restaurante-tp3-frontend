@@ -5,13 +5,13 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
-import { AlmacenService } from './providers/almacen';
-import { ProductoService } from './providers/producto';
-import { NotaPedido } from './providers/nota-pedido';
-import { Api } from './providers/api';
+import { AlmacenService } from './providers/almacen.service';
+import { ProductoService } from './providers/producto.service';
+import { NotaPedidoService } from './providers/nota-pedido.service';
+import { ApiService } from './providers/api.service';
 
 import { AppComponent } from './app.component';
-import { NotaPedidoPageModule } from './nota-pedido/nota-pedido.module';
+import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
 import { SolicitudCotizacionModule } from './solicitud-cotizacion/solicitud-cotizacion.module';
 
 import { AppRoutingModule } from './app.route';
@@ -25,15 +25,15 @@ import { AppRoutingModule } from './app.route';
     BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
-    NotaPedidoPageModule,
+    NotaPedidoModule,
     SolicitudCotizacionModule,
     AppRoutingModule
   ],
   providers: [
     AlmacenService,
     ProductoService,
-    NotaPedido,
-    Api
+    NotaPedidoService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

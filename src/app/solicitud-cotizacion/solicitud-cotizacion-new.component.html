@@ -20,7 +20,7 @@
                 <div class="col-sm-10">
                 <input type="text" class="form-control-plaintext" id="date" name="date"
                         required readonly
-                        placeholder="Ingrese Fecha"><!--[(ngModel)]="nota.date"-->
+                        placeholder="Ingrese Fecha"><!--[(ngModel)]="solicitud.date"-->
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let producto of nota.productos; let i = index">
+                    <tr *ngFor="let producto of solicitud.productos; let i = index">
                         <td>{{ producto.sku }}</td>
                         <td>{{ producto.name }}</td>
                         <td>
@@ -109,40 +109,70 @@
         </div>
     </div>
     
+    <!--
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="direccion">Contacto:</label>
                 <input type="text" class="form-control" id="contacto" name="contacto"
-                        required #contacto="ngModel"
-                        placeholder="Ingrese nombre de Contacto"><!--[(ngModel)]="nota.contacto"-->
-                <!--<div *ngIf="contacto.invalid && (contacto.dirty || contacto.touched || f.submitted)"
+                        required 
+                        placeholder="Ingrese nombre de Contacto" #contacto="ngModel" [(ngModel)]="nota.contacto">
+                <div *ngIf="contacto.invalid && (contacto.dirty || contacto.touched || f.submitted)"
                     class="alert alert-danger" style="margin-top: 5px">
                 Nombre de Contacto Obligatorio
-                </div>-->
+                </div>
             </div>
         </div>
     </div>
-    
+    -->
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button type="button" name="add" class="btn btn-primary"><!--(click)="openProductoModal(productoModal)"-->
+                Añadir Proveedores
+            </button>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Unidad de Medida</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="observacion">Observaciones</label>
                 <textarea name="observacion" id="observacion" 
-                        rows="3" class="form-control"></textarea><!--[(ngModel)]="nota.observacion"-->
+                        rows="3" class="form-control" [(ngModel)]="nota.observacion"></textarea>
             </div>
         </div>
     </div>
+    -->
     
     <div class="row">
         <div class="col-sm-12 text-right">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/nota-pedido']">Cancelar</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
 </form>
       
 <!-- Modals -->
+<!--
 <ng-template #almacenModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Almacén</h4>
@@ -178,11 +208,12 @@
         </button>
     </div>
 </ng-template>
+-->
       
 <ng-template #productoModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Producto</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <button type="button" class="close" aria-label="Close"><!--(click)="d('Cross click')"-->
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -205,13 +236,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let producto of productos | search:'sku,name':query; let i = index">
+            <tr *ngFor="let producto of productos"><!--| search:'sku,name':query; let i = index-->
             <td>{{ producto.sku }}</td>
             <td>{{ producto.name }}</td>
             <td>{{ producto.unit_of_measurement }}</td>
             <td>
-                <button class="btn btn-outline-primary" [disabled]="producto.disabled"
-                        (click)="getProducto(producto, i)">
+                <button class="btn btn-outline-primary" [disabled]="producto.disabled"><!--(click)="getProducto(producto, i)"-->
                 Seleccionar
                 </button>
             </td>
@@ -220,7 +250,7 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+        <button type="button" class="btn btn-outline-dark"><!--(click)="c('Close click')"-->
         Close
         </button>
     </div>
@@ -229,7 +259,7 @@
 <ng-template #guardarModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Guardar Nota de Pedido</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <button type="button" class="close" aria-label="Close"><!--(click)="d('Cross click')"-->
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -237,10 +267,10 @@
         <p>¿Está seguro que desea {{ action }} esta nota de pedido?</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">
+        <button type="button" class="btn btn-outline-primary"><!--(click)="onSubmit()"-->
         Aceptar
         </button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+        <button type="button" class="btn btn-outline-dark"><!--(click)="c('Close click')"-->
         Cancelar
         </button>
     </div>

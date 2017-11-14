@@ -22,14 +22,14 @@
 
 <div class="row" style="margin-top: 25px;">
   <div class="col-sm-6">
-    <button type="button" name="new" (click)="goToForm()">Nuevo</button>
+    <button type="button" class="btn" name="new" (click)="goToForm()">Nuevo</button>
   </div>
   <div class="col-sm-6">
     <label class="sr-only" for="search">Search</label>
     <div class="input-group mb-2 mb-sm-0">
       <div class="input-group-addon">Buscar</div>
       <input type="text" class="form-control" id="search" [(ngModel)]="query"
-             placeholder="Ingrese su criterio de búsqueda">
+             placeholder="Ingrese numero de nota de pedido o nombre de almacen">
     </div>
   </div>
 </div>
@@ -73,7 +73,7 @@
 <div class="row">
   <div class="col-sm-6"></div>
   <div class="col-sm-6 text-right">
-    <button type="button" name="imprimir">Imprimir</button>
+    <button type="button" class="btn" name="imprimir">Imprimir</button>
   </div>
 </div>
 

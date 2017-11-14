@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { Api } from './api';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class ProveedorService {
     private endpoint = 'proveedor.array.json';
 
-    constructor(private api: Api) {}
+    constructor(private api: ApiService) {}
 
     getAll() {
         return this.api.get(this.endpoint);

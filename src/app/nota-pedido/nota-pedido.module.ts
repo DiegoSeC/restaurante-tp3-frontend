@@ -4,28 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NotaPedidoPage } from './nota-pedido';
-import { NewNotaPedidoPage } from './new-nota-pedido';
+import { NotaPedidoComponent } from './nota-pedido.component';
+import { NewNotaPedidoComponent } from './new-nota-pedido.component';
 
-import { SearchPipe } from '../pipes/search.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
-    NotaPedidoPage,
-    NewNotaPedidoPage,
-    SearchPipe
+    NotaPedidoComponent,
+    NewNotaPedidoComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ],
   exports: [
-    NotaPedidoPage,
-    NewNotaPedidoPage
+    NotaPedidoComponent,
+    NewNotaPedidoComponent
   ]
 })
-export class NotaPedidoPageModule {
+export class NotaPedidoModule {
 
 }

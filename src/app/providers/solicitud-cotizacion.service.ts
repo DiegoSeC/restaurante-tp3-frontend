@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Api } from './api';
+import { ApiService } from './api.service';
 import { SolicitudCotizacion } from '../solicitud-cotizacion/solicitud-cotizacion.model';
 
 @Injectable()
 export class SolicitudCotizacionService {
     private endpoint = 'solicitud-cotizacion.array.json';
 
-    constructor(private api: Api) {}
+    constructor(private api: ApiService) {}
 
     getAll() {
         return this.api.get(this.endpoint);

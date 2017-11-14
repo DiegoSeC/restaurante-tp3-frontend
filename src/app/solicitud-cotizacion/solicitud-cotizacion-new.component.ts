@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudCotizacion } from './solicitud-cotizacion.model';
 import { Producto } from '../interfaces/producto.interface';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
-import { ProductoService } from '../providers/producto';
+import { ProductoService } from '../providers/producto.service';
 
 @Component({
-    selector: 'app-solicitud-cotizacion',
-    templateUrl: 'solicitud-cotizacion.component.html'
+    selector: 'app-solicitud-cotizacion-new',
+    templateUrl: 'solicitud-cotizacion-new.component.html'
 })
 export class SolicitudCotizacionNewComponent {
     public action: string;
@@ -21,9 +21,10 @@ export class SolicitudCotizacionNewComponent {
     private sub: any;
 
     constructor(private modalService: NgbModal,
-                private producto: ProductoService,
+                private productoService: ProductoService,
                 private solicitudService: SolicitudCotizacionService,
                 private router: Router,
                 private route: ActivatedRoute) {}
 
+    
 }

@@ -13,8 +13,8 @@
 </div>
 
 <!--Para alertas-->
-<h5 class="alert alert-secondary" *ngIf="notaNumero" style="margin: 15px 0;">
-    Se actualizó exitosamente la nota de pedido {{ notaNumero }}
+<h5 class="alert alert-secondary" *ngIf="solicitudNumero" style="margin: 15px 0;">
+    Se actualizó exitosamente la nota de pedido {{ solicitudNumero }}
 </h5>
 
 <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
@@ -23,14 +23,14 @@
 
 <div class="row" style="margin-top: 25px;">
     <div class="col-sm-6">
-        <button type="button" class="btn btn-primary btn-sm" name="new" (click)="goToForm()">Nuevo</button>
+        <button type="button" class="btn btn-sm" name="new" (click)="goToForm()">Nuevo</button>
     </div>
     <div class="col-sm-6">
         <label class="sr-only" for="search">Search</label>
         <div class="input-group mb-2 mb-sm-0">
             <div class="input-group-addon">Buscar</div>
             <input type="text" class="form-control" id="search" 
-                    placeholder="Ingrese su criterio de búsqueda"><!--[(ngModel)]="query"-->
+                   placeholder="Ingrese numero de solicitud" [(ngModel)]="query">
         </div>
     </div>
 </div>
@@ -50,18 +50,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let solicitud of solicitudes"><!--| search:'numero,almacen':query; let i = index-->
+            <tr *ngFor="let solicitud of solicitudes | search:'numero':query; let i = index">
                 <td>
                     <input type="checkbox" name="test"><!-- [(ngModel)]="checked">-->
                 </td>
                 <td>{{ solicitud.numero }}</td>
-                <td>{{ solicitud.fecha | date:'d/M/y' }}</td>
+                <td>{{ solicitud.date | date:'d/M/y' }}</td>
                 <td>{{ solicitud.estado }}</td>
                 <td>
                     <button class="btn btn-light"><!--[disabled]="nota.estado !== 'pending'" [routerLink]="['/nota-pedido/edit/', nota.uuid]"-->
                         Editar
                     </button>
-                    <button class="btn btn-danger"><!--(click)="openAnularModal(anularModal, i)"-->
+                    <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">
                         Anular
                     </button>
                 </td>
@@ -74,14 +74,14 @@
 <div class="row">
     <div class="col-sm-6"></div>
     <div class="col-sm-6 text-right">
-        <button type="button" class="btn btn-primary btn-sm" name="imprimir">Imprimir</button>
+        <button type="button" class="btn btn-sm" name="imprimir">Imprimir</button>
     </div>
 </div>
 
 <ng-template #anularModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Anular Solicitud</h4>
-        <button type="button" class="close" aria-label="Close"><!--(click)="d('Cross click')"-->
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -92,8 +92,9 @@
         <button type="button" class="btn btn-outline-danger"><!--(click)="anular()"-->
             Anular
         </button>
-        <button type="button" class="btn btn-outline-dark"><!--(click)="c('Close click')"-->
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')"><!---->
             Cancelar
         </button>
     </div>
+
 </ng-template>

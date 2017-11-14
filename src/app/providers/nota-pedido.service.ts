@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Api } from './api';
+import { ApiService } from './api.service';
 
-import { NotaPedido as NotaPedidoInterface } from '../nota-pedido/nota-pedido.interface';
+import { NotaPedido as NotaPedidoInterface } from '../nota-pedido/nota-pedido.model';
 
 @Injectable()
-export class NotaPedido {
-  constructor(private api: Api) {}
+export class NotaPedidoService {
+  constructor(private api: ApiService) {}
 
   saveNotaPedido(nota: NotaPedidoInterface) {
     return this.api.post('productos.array.json', nota);

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import { NotaPedido } from '../providers/nota-pedido';
-import { NotaPedido as NotaPedidoInterface } from './nota-pedido.interface';
+import { NotaPedidoService } from '../providers/nota-pedido.service';
+import { NotaPedido as NotaPedidoInterface } from './nota-pedido.model';
 
 @Component({
   selector: 'app-nota-pedido',
-  templateUrl: 'nota-pedido.html'
+  templateUrl: 'nota-pedido.component.html'
 })
-export class NotaPedidoPage implements OnInit {
+export class NotaPedidoComponent implements OnInit {
   public notaPedidos: NotaPedidoInterface[] = [];
   private modalNotaRef: NgbModalRef;
   private notaIndex: number;
@@ -17,7 +17,8 @@ export class NotaPedidoPage implements OnInit {
   private sub: any;
   private anularAction: boolean;
 
-  constructor(private router: Router, private notaApi: NotaPedido,
+  constructor(private router: Router,
+              private notaApi: NotaPedidoService,
               private route: ActivatedRoute,
               private modalService: NgbModal) {
     this.getNotaPedidos();

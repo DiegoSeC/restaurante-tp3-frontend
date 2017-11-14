@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotaPedido as NotaPedidoInterface } from './nota-pedido.interface';
+import { NotaPedido as NotaPedidoInterface } from './nota-pedido.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AlmacenService } from '../providers/almacen';
-import { ProductoService } from '../providers/producto';
-import { NotaPedido } from '../providers/nota-pedido';
+import { AlmacenService } from '../providers/almacen.service';
+import { ProductoService } from '../providers/producto.service';
+import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { Almacen as AlmacenInterface } from '../interfaces/almacen.interface';
 import { Producto as ProductoInterface } from '../interfaces/producto.interface';
 
 @Component({
   selector: 'app-new-nota-pedido',
-  templateUrl: 'new-nota-pedido.html'
+  templateUrl: 'new-nota-pedido.component.html'
 })
-export class NewNotaPedidoPage implements OnInit, OnDestroy {
+export class NewNotaPedidoComponent implements OnInit, OnDestroy {
   public action: string;
   public nota: NotaPedidoInterface;
   public almacenes: AlmacenInterface[];
@@ -28,7 +28,7 @@ export class NewNotaPedidoPage implements OnInit, OnDestroy {
   constructor(private modalService: NgbModal,
               private almacen: AlmacenService,
               private producto: ProductoService,
-              private notaApi: NotaPedido,
+              private notaApi: NotaPedidoService,
               private router: Router,
               private route: ActivatedRoute) {
 

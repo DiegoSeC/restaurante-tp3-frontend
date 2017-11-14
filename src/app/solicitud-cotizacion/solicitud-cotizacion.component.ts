@@ -14,7 +14,7 @@ export class SolicitudCotizacionComponent implements OnInit {
     solicitudIndex: number;
     private modalNotaRef: NgbModalRef;
     private sub: any;
-    private anularAction: boolean;
+    anularAction: boolean;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
