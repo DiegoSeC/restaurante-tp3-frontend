@@ -1,18 +1,18 @@
 <div class="row" style="padding-top: 15px;">
     <div class="col-sm-8">
-        <h1>Solicitud de Cotizacion</h1>
+        <h2>Solicitud de Cotizacion</h2>
     </div>
     <div class="col-sm-4">
         <div class="media">
         <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
         <div class="media-body">
-            <h1 class="mt-0">Jorge Ortiz</h1>
+            <h2 class="mt-0">Jorge Ortiz</h2>
         </div>
         </div>
     </div>
 </div>
 
-<form #f="ngForm"><!--(ngSubmit)="f.valid && openGuardarModal(guardarModal)"-->
+<form #f="ngForm" (ngSubmit)="f.valid && openGuardarModal(guardarModal)">
     <div class="row" style="margin-top: 15px;">
         <div class="col-sm-6">
             <div class="form-group row">
@@ -20,53 +20,15 @@
                 <div class="col-sm-10">
                 <input type="text" class="form-control-plaintext" id="date" name="date"
                         required readonly
-                        placeholder="Ingrese Fecha"><!--[(ngModel)]="solicitud.date"-->
+                        placeholder="Ingrese Fecha" [(ngModel)]="solicitud.date">
                 </div>
             </div>
-        </div>
-        <!--
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label for="almacen" class="col-sm-2 col-form-label">Almacén:</label>
-                <div class="col-sm-8">
-                <input type="text" class="form-control" id="almacen" name="almacen"
-                        [(ngModel)]="nota.almacen" required readonly #almacen="ngModel"
-                        placeholder="Ingrese un Almacén">
-                <div *ngIf="almacen.invalid && f.submitted"
-                    class="alert alert-danger" style="margin-top: 5px">
-                    Nombre de Almacen Obligatorio
-                </div>
-                </div>
-                <div class="col-sm-2">
-                <button type="button" name="search" style="margin-top: 3px;"
-                        (click)="openAlmacenModal(almacenModal)"
-                        class="btn btn-outline-secondary btn-sm">Buscar</button>
-                </div>
-            </div>
-        </div>
-        -->
-    </div>
-    <!--
-    <div class="row">
-        <div class="col-sm-12">
-        <div class="form-group row">
-            <label for="direccion" class="col-sm-1 col-form-label">Dirección:</label>
-            <div class="col-sm-11">
-            <input type="text" class="form-control" id="direccion" name="direccion"
-                    [(ngModel)]="nota.direccion" required #direccion="ngModel"
-                    placeholder="Ingrese una Dirección">
-            <div *ngIf="direccion.invalid && f.submitted"
-                class="alert alert-danger" style="margin-top: 5px">
-                Dirección Obligatorio
-            </div>
-            </div>
-        </div>
         </div>
     </div>
-    -->
+    
     <div class="row">
         <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary"><!--(click)="openProductoModal(productoModal)"-->
+            <button type="button" name="add" class="btn btn-primary" (click)="openProductosModal(productosModal)">
                 Añadir Producto
             </button>
         </div>
@@ -98,37 +60,22 @@
                         </td>
                         <td>{{ producto.unit_of_measurement }}</td>
                         <td>
-                            <button class="btn btn-warning" >Quitar</button><!--(click)="quitarProducto(producto, i)"-->
+                            <button class="btn btn-warning" (click)="quitarProducto(producto, i)">
+                                Quitar
+                            </button>
                         </td>
                     </tr>
-                    <!--<tr *ngIf="nota.productos.length === 0">
+                    <tr *ngIf="solicitud.productos.length === 0">
                         <td colspan="5" class="text-center">Seleccione productos</td>
-                    </tr>-->
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
     
-    <!--
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label for="direccion">Contacto:</label>
-                <input type="text" class="form-control" id="contacto" name="contacto"
-                        required 
-                        placeholder="Ingrese nombre de Contacto" #contacto="ngModel" [(ngModel)]="nota.contacto">
-                <div *ngIf="contacto.invalid && (contacto.dirty || contacto.touched || f.submitted)"
-                    class="alert alert-danger" style="margin-top: 5px">
-                Nombre de Contacto Obligatorio
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-
     <div class="row">
         <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary"><!--(click)="openProductoModal(productoModal)"-->
+            <button type="button" name="add" class="btn btn-primary" (click)="openProveedoresModal(proveedoresModal)">
                 Añadir Proveedores
             </button>
         </div>
@@ -140,29 +87,28 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Cantidad</th>
-                        <th>Unidad de Medida</th>
+                        <th>Razon Social</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngFor="let proveedor of solicitud.proveedores; let i = index">
+                            <td>{{ proveedor.codigo }}</td>
+                            <td>{{ proveedor.razon_social }}</td>
+                            <td>
+                                <button class="btn btn-warning" (click)="quitarProveedor(proveedor, i)">
+                                    Quitar
+                                </button>
+                            </td>
+                    </tr>
+                    <tr *ngIf="solicitud.proveedores.length === 0">
+                        <td colspan="5" class="text-center">Seleccione proveedores</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <!--
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label for="observacion">Observaciones</label>
-                <textarea name="observacion" id="observacion" 
-                        rows="3" class="form-control" [(ngModel)]="nota.observacion"></textarea>
-            </div>
-        </div>
-    </div>
-    -->
-    
+        
     <div class="row">
         <div class="col-sm-12 text-right">
         <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
@@ -171,60 +117,23 @@
     </div>
 </form>
       
-<!-- Modals -->
-<!--
-<ng-template #almacenModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Almacén</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let almacen of almacenes">
-            <td>{{ almacen.code }}</td>
-            <td>{{ almacen.name }}</td>
-            <td>
-                <button class="btn btn-outline-primary" (click)="getAlmacen(almacen)">
-                Seleccionar
-                </button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
-        Close
-        </button>
-    </div>
-</ng-template>
--->
-      
-<ng-template #productoModal let-d="dismiss" let-c="close">
+<!-- Modales -->
+<!--Modal de Productos-->
+<ng-template #productosModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Producto</h4>
-        <button type="button" class="close" aria-label="Close"><!--(click)="d('Cross click')"-->
-        <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <div>
-        <label class="sr-only" for="search">Search</label>
-        <div class="input-group mb-2 mb-sm-0">
-            <div class="input-group-addon">Buscar</div>
-            <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                    placeholder="Ingrese su criterio de búsqueda">
-        </div>
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon">Buscar</div>
+                <input type="text" class="form-control" id="search" [(ngModel)]="query"
+                        placeholder="Ingrese sku o nombre de producto">
+            </div>
         </div>
         <table class="table">
         <thead>
@@ -236,13 +145,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let producto of productos"><!--| search:'sku,name':query; let i = index-->
+            <tr *ngFor="let producto of productos | search:'sku,name':query; let i = index">
             <td>{{ producto.sku }}</td>
             <td>{{ producto.name }}</td>
             <td>{{ producto.unit_of_measurement }}</td>
             <td>
-                <button class="btn btn-outline-primary" [disabled]="producto.disabled"><!--(click)="getProducto(producto, i)"-->
-                Seleccionar
+                <button class="btn btn-outline-primary" [disabled]="producto.disabled" (click)="addProducto(producto, i)"><!--(click)="getProducto(producto, i)"-->
+                    Agregar
                 </button>
             </td>
             </tr>
@@ -250,28 +159,74 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark"><!--(click)="c('Close click')"-->
-        Close
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
         </button>
     </div>
 </ng-template>
-      
-<ng-template #guardarModal let-d="dismiss" let-c="close">
+
+<!--Modal de Proveedores-->
+<ng-template #proveedoresModal let-d="dismiss" let-c="close">
     <div class="modal-header">
-        <h4 class="modal-title">Guardar Nota de Pedido</h4>
-        <button type="button" class="close" aria-label="Close"><!--(click)="d('Cross click')"-->
+        <h4 class="modal-title">Almacén</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <p>¿Está seguro que desea {{ action }} esta nota de pedido?</p>
+        <div>
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon">Buscar</div>
+                <input type="text" class="form-control" id="search" [(ngModel)]="query"
+                        placeholder="Ingrese nombre del proveedor">
+            </div>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let proveedor of proveedores | search:'razon_social':query; let i = index">
+                <td>{{ proveedor.codigo }}</td>
+                <td>{{ proveedor.razon_social }}</td>
+                <td>
+                    <button class="btn btn-outline-primary" [disabled]="proveedor.disabled" (click)="addProveedor(proveedor, i)">
+                        Agregar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary"><!--(click)="onSubmit()"-->
-        Aceptar
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
         </button>
-        <button type="button" class="btn btn-outline-dark"><!--(click)="c('Close click')"-->
-        Cancelar
+    </div>
+</ng-template>
+
+<!--Confirmacion de registro-->
+<ng-template #guardarModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+        <h4 class="modal-title">Guardar solicitud de Cotizacion</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>¿Está seguro que desea {{ action }} esta solicitud de cotizacion?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">
+            Aceptar
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
         </button>
     </div>
 </ng-template>

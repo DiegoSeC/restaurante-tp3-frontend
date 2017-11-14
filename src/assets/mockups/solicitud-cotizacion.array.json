@@ -3,8 +3,8 @@
 		{
 			"uuid": "11c92058-c00a-4e42-a651-933d66e3e966",
 			"numero": 1,
-			"fecha": "Thursday, June 29, 2017 8:29 AM",
-			"date": "Thursday, June 29, 2017 8:29 AM",
+			"fecha": "Thursday, June 29, 2017 8:29 PM",
+			"date": "Thursday, June 29, 2017 8:29 PM",
 			"estado": "active",
 			"productos": [
 				{
@@ -22,7 +22,7 @@
 					"cantidad": 10
 				}
 			],
-			"suppliers": [
+			"proveedores": [
 				{
 					"uuid": "f2f7c8ad-98f2-4d00-a408-0994163f58e6",
 					"codigo": 2,
@@ -36,7 +36,7 @@
 			]
 		},
 		{
-			"uuid": "11c92058-c00a-4e42-a651-933d66e3e967",
+			"uuid": "11c92058-c00a-4e42-a652-933d66e3e967",
 			"numero": 2,
 			"fecha": "Thursday, June 29, 2017 7:31 AM",
 			"date": "Thursday, June 29, 2017 8:29 AM",
@@ -50,7 +50,7 @@
 					"cantidad": 15
 				}
 			],
-			"suppliers": [
+			"proveedores": [
 				{
 					"uuid": "f2f7c8ad-98f2-4d00-a408-0994163f68e6",
 					"codigo": 3,
@@ -58,6 +58,34 @@
 				},
 				{
 					"uuid": "f2f7c8ad-98f2-4d00-a408-0994163f68e7",
+					"codigo": 4,
+					"razon_social": "Prueba 04"
+				}
+			]
+		},
+		{
+			"uuid": "11c92058-c00a-4e42-a653-933d66e3e967",
+			"numero": 3,
+			"fecha": "Thursday, June 29, 2017 10:21 AM",
+			"date": "Thursday, June 29, 2017 10:29 AM",
+			"estado": "pending",
+			"productos": [
+				{
+					"uuid": "f2f7c8ad-98f2-4d00-a408-0994163f58e6",
+					"codigo": 8,
+					"nombre": "Brocoli",
+					"unidadMedida": "Kg",
+					"cantidad": 15
+				}
+			],
+			"proveedores": [
+				{
+					"uuid": "f2f7c9ad-98f2-4d00-a408-0994163f68e6",
+					"codigo": 3,
+					"razon_social": "Prueba 03"
+				},
+				{
+					"uuid": "f2f8c8ad-98f2-4d00-a408-0994163f68e7",
 					"codigo": 4,
 					"razon_social": "Prueba 04"
 				}

@@ -29,9 +29,7 @@ export class SolicitudCotizacionService {
     }
 
     getOne(id: string) {
-        return this.api.get(this.endpoint, {
-                                            uuid: id
-                                            }
-                            );
+        const endpoint2 = 'solicitud-cotizacion.json';
+        return this.api.get(endpoint2);
     }
 }

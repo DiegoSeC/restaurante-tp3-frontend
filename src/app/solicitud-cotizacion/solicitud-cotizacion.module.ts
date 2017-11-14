@@ -6,9 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PipesModule } from '../pipes/pipes.module';
 
+import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
+import { ProveedorService } from '../providers/proveedor.service';
+
 import { SolicitudCotizacionComponent } from './solicitud-cotizacion.component';
 import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion-new.component';
-import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
+
 
 @NgModule({
     declarations: [

@@ -58,10 +58,10 @@
                 <td>{{ solicitud.date | date:'d/M/y' }}</td>
                 <td>{{ solicitud.estado }}</td>
                 <td>
-                    <button class="btn btn-light"><!--[disabled]="nota.estado !== 'pending'" [routerLink]="['/nota-pedido/edit/', nota.uuid]"-->
+                    <button class="btn btn-primary" [disabled]="solicitud.estado !== 'pending'" [routerLink]="['/solicitud-cotizacion/edit/', solicitud.uuid]">
                         Editar
                     </button>
-                    <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">
+                    <button class="btn btn-secondary" (click)="openAnularModal(anularModal, i)">
                         Anular
                     </button>
                 </td>
@@ -89,7 +89,7 @@
         <p>¿Está seguro de eliminar esta Solicitud de Cotizacion?</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger"><!--(click)="anular()"-->
+        <button type="button" class="btn btn-outline-danger" (click)="anular()">
             Anular
         </button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')"><!---->

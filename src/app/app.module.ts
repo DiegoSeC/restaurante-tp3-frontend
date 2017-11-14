@@ -6,9 +6,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { AlmacenService } from './providers/almacen.service';
-import { ProductoService } from './providers/producto.service';
-import { NotaPedidoService } from './providers/nota-pedido.service';
 import { ApiService } from './providers/api.service';
+import { NotaPedidoService } from './providers/nota-pedido.service';
+import { ProductoService } from './providers/producto.service';
+import { ProveedorService } from './providers/proveedor.service';
 
 import { AppComponent } from './app.component';
 import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
@@ -33,7 +34,8 @@ import { AppRoutingModule } from './app.route';
     AlmacenService,
     ProductoService,
     NotaPedidoService,
-    ApiService
+    ApiService,
+    ProveedorService
   ],
   bootstrap: [AppComponent]
 })
