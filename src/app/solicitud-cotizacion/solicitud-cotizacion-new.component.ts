@@ -36,11 +36,11 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         this.solicitud = <SolicitudCotizacion> {
             productos: [],
             proveedores: [],
-            date: `${this.today.getFullYear()}-${this.today.getMonth() + 1}-${this.today.getDay()}`
+            date: `${this.today.getDay()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
         };
         this.getProductos();
         this.getProveedores();
-        console.log('constuctor');
+        console.log('constructor');
     }
 
     ngOnInit() {
@@ -61,9 +61,9 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         this.action = 'registrar';
     }
 
-    getSolicitud(uuid: string) {
+    getSolicitud(id: string) {
         this.action = 'actualizar';
-        this.solicitudService.getOne(uuid)
+        this.solicitudService.getOne(id)
                             .subscribe(
                                 data => {
                                     console.log('getOne => ' + JSON.stringify(data));

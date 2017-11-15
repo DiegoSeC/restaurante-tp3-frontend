@@ -35,7 +35,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
     const date = new Date();
     this.nota = <NotaPedidoInterface> {
       productos: [],
-      date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`
+      date: `${date.getDay()}-${date.getMonth() + 1}-${date.getFullYear()}`
     };
 
     this.getAlmacenes();
