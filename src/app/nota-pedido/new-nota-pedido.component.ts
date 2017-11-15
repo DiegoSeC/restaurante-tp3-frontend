@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotaPedido as NotaPedidoInterface } from './nota-pedido.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AlmacenService } from '../providers/almacen.service';
 import { ProductoService } from '../providers/producto.service';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
-import { Almacen as AlmacenInterface } from '../interfaces/almacen.interface';
-import { Producto as ProductoInterface } from '../interfaces/producto.interface';
+import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
+import { Almacen as AlmacenInterface } from '../models/almacen.model';
+import { Producto as ProductoInterface } from '../models/producto.model';
 
 @Component({
   selector: 'app-new-nota-pedido',
@@ -35,7 +35,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
     const date = new Date();
     this.nota = <NotaPedidoInterface> {
       productos: [],
-      date: `${date.getDay()}-${date.getMonth() + 1}-${date.getFullYear()}`
+      date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
     };
 
     this.getAlmacenes();

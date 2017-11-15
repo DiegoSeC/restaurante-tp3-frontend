@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { SolicitudCotizacion } from '../solicitud-cotizacion/solicitud-cotizacion.model';
+import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
 
 @Injectable()
 export class SolicitudCotizacionService {

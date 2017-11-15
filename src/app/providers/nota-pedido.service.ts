@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 
-import { NotaPedido as NotaPedidoInterface } from '../nota-pedido/nota-pedido.model';
+import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
 
 @Injectable()
 export class NotaPedidoService {

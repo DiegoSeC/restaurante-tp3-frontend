@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SolicitudCotizacion } from './solicitud-cotizacion.model';
-import { Producto } from '../interfaces/producto.interface';
-import { Proveedor } from '../interfaces/proveedor.model';
+import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
+import { Producto } from '../models/producto.model';
+import { Proveedor } from '../models/proveedor.model';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
 
 import { ProductoService } from '../providers/producto.service';
@@ -33,11 +33,16 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute) {
         /*Inicializar el objeto solicitud*/
+        console.log(this.today);
+        console.log(this.today.getDate());
+        console.log(this.today.getMonth());
+        console.log(this.today.getFullYear());
         this.solicitud = <SolicitudCotizacion> {
             productos: [],
             proveedores: [],
-            date: `${this.today.getDay()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
+            date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
         };
+
         this.getProductos();
         this.getProveedores();
         console.log('constructor');

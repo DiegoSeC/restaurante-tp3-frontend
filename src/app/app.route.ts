@@ -5,6 +5,8 @@ import { NotaPedidoComponent } from './nota-pedido/nota-pedido.component';
 import { NewNotaPedidoComponent } from './nota-pedido/new-nota-pedido.component';
 import { SolicitudCotizacionComponent } from './solicitud-cotizacion/solicitud-cotizacion.component';
 import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion/solicitud-cotizacion-new.component';
+import { GuiaRemisionComponent } from './guia-remision/guia-remision.component';
+import { GuiaSalidaComponent } from './guia-salida/guia-salida.component';
 
 export const routes: Routes = [
   { path: 'nota-pedido', component: NotaPedidoComponent },
@@ -12,7 +14,9 @@ export const routes: Routes = [
   { path: 'nota-pedido/edit/:id', component: NewNotaPedidoComponent },
   { path: 'solicitud-cotizacion', component: SolicitudCotizacionComponent },
   { path: 'solicitud-cotizacion/new', component: SolicitudCotizacionNewComponent },
-  { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent }
+  { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent },
+  { path: 'guia-remision', component: GuiaRemisionComponent },
+  { path: 'guia-salida', component: GuiaSalidaComponent }
 ];
 
 @NgModule({

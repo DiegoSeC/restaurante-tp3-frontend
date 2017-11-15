@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotaPedidoService } from '../providers/nota-pedido.service';
-import { NotaPedido as NotaPedidoInterface } from './nota-pedido.model';
+import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
 
 @Component({
   selector: 'app-nota-pedido',

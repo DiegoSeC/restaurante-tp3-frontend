@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { SolicitudCotizacion } from './solicitud-cotizacion.model';
+import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
 
 @Component({
     selector: 'app-solicitud-cotizacion',

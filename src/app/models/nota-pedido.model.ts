@@ -1,4 +1,4 @@
-import { Producto } from '../interfaces/producto.interface';
+import { Producto } from '../models/producto.model';
 
 export class NotaPedido {
   constructor(
