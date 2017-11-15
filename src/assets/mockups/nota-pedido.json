@@ -1,35 +1,38 @@
 {
   "data": {
-    "uuid": "11c92058-c00a-4e42-a651-933d66e3e966",
-    "numero": 0,
-    "fecha": "Thursday, June 29, 2017 8:29 AM",
+    "uuid": "dac93eb5-46af-4b4a-bf6f-1b87a10498f1",
+    "numero": "NP17000001",
+    "fecha": "Friday, June 2, 2017 12:28 PM",
     "date": "Thursday, June 29, 2017 8:29 AM",
-    "estado": "active",
+    "estado": "pending",
     "almacen": "brown",
     "direccion": "Test Direccion",
     "contacto": "Test",
     "observacion": "Test Test",
     "productos": [
       {
-        "uuid": "f2f7c8ad-98f2-4d00-a408-0994163f58e6",
-        "codigo": 2,
-        "nombre": "Mitroc",
-        "unidadMedida": "KG",
-        "cantidad": 150
+        "uuid": "9a08fb8f-b01c-3d3e-becf-244a249e7a59",
+        "sku": "58585014",
+        "name": "quidem",
+        "description": "nihil recusandae et ea blanditiis excepturi suscipit et nam sunt voluptas autem ad aut ut ullam laudantium quaerat cupiditate dolorem",
+        "unit_of_measurement": "hy",
+        "category": {
+          "uuid": "2689764f-bb13-35a0-a96f-3073a58db753",
+          "name": "incidunt"
+        },
+        "quantity": 15
       },
       {
-        "uuid": "e35b9b39-527f-4bda-8767-a3c9c832a1b3",
-        "codigo": 3,
-        "nombre": "Ludak",
-        "unidadMedida": "UN",
-        "cantidad": 50
-      },
-      {
-        "uuid": "bb818dd9-f720-493b-8931-016b51a6e79b",
-        "codigo": 4,
-        "nombre": "Incubus",
-        "unidadMedida": "KG",
-        "cantidad": 15
+        "uuid": "4445d738-deb4-36a4-b9c3-d5c2e5273aea",
+        "sku": "43218912",
+        "name": "voluptatem",
+        "description": "beatae officia non quae quia dolorum aut blanditiis aut vel a non voluptatibus adipisci facilis laborum et eum mollitia consequatur",
+        "unit_of_measurement": "gg",
+        "category": {
+          "uuid": "1b216b6b-d232-3322-8bf7-295f2a073400",
+          "name": "porro"
+        },
+        "quantity": 20
       }
     ]
   }
