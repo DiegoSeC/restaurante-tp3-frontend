@@ -10,4 +10,8 @@ export class GuiaSalidaService {
     getAll() {
         return this.api.get(this.endpoint);
     }
+
+    getGuiaSalidas() {
+        return this.api.get(this.endpoint);
+      }
 }

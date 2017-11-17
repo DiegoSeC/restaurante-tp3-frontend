@@ -1,0 +1,101 @@
+<div class="row" style="padding-top: 15px;">
+    <div class="col-sm-8">
+      <h2>Guia de Salida</h2>
+    </div>
+    <div class="col-sm-4">
+      <div class="media">
+        <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+        <div class="media-body">
+          <h2 class="mt-0">Juan Crespo</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <h5 class="alert alert-secondary" *ngIf="notaNumero" style="margin: 15px 0;">
+    Se actualizó exitosamente la Guia de Salida {{ notaNumero }}
+  </h5>
+  
+  <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
+    Se anuló correctamente
+  </h5>
+  
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-sm-6">
+      <button type="button" class="btn" name="new" (click)="goToForm()">Nuevo</button>
+    </div>
+    <div class="col-sm-6">
+      <label class="sr-only" for="search">Search</label>
+      <div class="input-group mb-2 mb-sm-0">
+        <div class="input-group-addon">Buscar</div>
+        <input type="text" class="form-control" id="search" [(ngModel)]="query"
+               placeholder="Ingrese numero de nota de pedido o nombre de almacen">
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" name="all" [(ngModel)]="checked">
+            </th>
+            <th>Número</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Almacén Origen</th>
+            <th>Almacén Destino</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let guia of guiaSalidas | search:'numero':query; let i = index">
+            <td>
+              <input type="checkbox" name="test" [(ngModel)]="checked">
+            </td>
+            <td>{{ guia.numero }}</td>
+            <td>{{ guia.fecha | date:'d/M/y' }}</td>
+            <td>{{ guia.estado }}</td>
+            <td>{{ guia.almacen_origen }}</td>
+            <td>{{ guia.almacen_destino }}</td>
+            <td>
+              <button class="btn btn-light" [disabled]="guia.estado !== 'pending'" [routerLink]="['/nota-pedido/edit/', guia.uuid]">
+                Editar
+              </button>
+              <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">Anular</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn" name="imprimir">Imprimir</button>
+    </div>
+  </div>
+  
+  <ng-template #anularModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+      <h4 class="modal-title">Anular Guia de Salida</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>¿Está seguro de eliminar esta Guia de Salida?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="anular()">
+        Anular
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+        Cancelar
+      </button>
+    </div>
+  </ng-template>
+  
