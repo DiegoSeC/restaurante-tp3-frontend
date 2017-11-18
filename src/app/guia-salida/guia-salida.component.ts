@@ -29,9 +29,17 @@ export class GuiaSalidaComponent implements OnInit   {
         this.guiaNumero = this.route.snapshot.queryParams['id'];
     }
 
+    goToForm() {
+        this.router.navigateByUrl('guia-salida/new');
+    }
+    
     getGuiaSalidas() {
         this.guiaApi.getGuiaSalidas().subscribe(data => {
           this.guiaSalidas = data['data'];
         });
       }
+      openAnularModal(content, index) {
+        this.guiaIndex = index;
+        this.modalGuiaRef = this.modalService.open(content);
+      }    
 }

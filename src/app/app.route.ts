@@ -16,7 +16,8 @@ export const routes: Routes = [
   { path: 'solicitud-cotizacion/new', component: SolicitudCotizacionNewComponent },
   { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent },
   { path: 'guia-remision', component: GuiaRemisionComponent },
-  { path: 'guia-salida', component: GuiaSalidaComponent }
+  { path: 'guia-salida', component: GuiaSalidaComponent },
+  { path: 'guia-salida/new', component: GuiaSalidaComponent }
 ];
 
 @NgModule({
