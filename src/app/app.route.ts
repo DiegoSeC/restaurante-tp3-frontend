@@ -6,6 +6,7 @@ import { NewNotaPedidoComponent } from './nota-pedido/new-nota-pedido.component'
 import { SolicitudCotizacionComponent } from './solicitud-cotizacion/solicitud-cotizacion.component';
 import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion/solicitud-cotizacion-new.component';
 import { GuiaRemisionComponent } from './guia-remision/guia-remision.component';
+import { GuiaRemisionNewcomponent } from './guia-remision/guia-remision-new.component';
 import { GuiaSalidaComponent } from './guia-salida/guia-salida.component';
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'solicitud-cotizacion/new', component: SolicitudCotizacionNewComponent },
   { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent },
   { path: 'guia-remision', component: GuiaRemisionComponent },
+  { path: 'guia-remision/new', component: GuiaRemisionNewcomponent },
   { path: 'guia-salida', component: GuiaSalidaComponent },
   { path: 'guia-salida/new', component: GuiaSalidaComponent }
 ];

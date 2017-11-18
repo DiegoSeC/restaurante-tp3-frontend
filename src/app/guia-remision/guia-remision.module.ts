@@ -9,10 +9,12 @@ import { PipesModule } from '../pipes/pipes.module';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 
 import { GuiaRemisionComponent } from './guia-remision.component';
+import { GuiaRemisionNewcomponent } from './guia-remision-new.component';
 
 @NgModule({
     declarations: [
-        GuiaRemisionComponent
+        GuiaRemisionComponent,
+        GuiaRemisionNewcomponent
     ],
     imports: [
         CommonModule,
@@ -21,10 +23,12 @@ import { GuiaRemisionComponent } from './guia-remision.component';
         PipesModule
      ],
     exports: [
-        GuiaRemisionComponent
+        GuiaRemisionComponent,
+        GuiaRemisionNewcomponent
     ],
     providers: [
-        GuiaRemisionService
+        GuiaRemisionService,
+        GuiaRemisionNewcomponent
     ]
 })
 export class GuiaRemisionModule {}

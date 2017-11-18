@@ -1,0 +1,234 @@
+<div class="row" style="padding-top: 15px;">
+    <div class="col-sm-8">
+        <h2>Gu&iacute;a de Remisi&oacute;n</h2>
+    </div>
+    <div class="col-sm-4">
+        <div class="media">
+        <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+        <div class="media-body">
+            <h2 class="mt-0">Gustavo Aquino</h2>
+        </div>
+        </div>
+    </div>
+</div>
+
+<form #f="ngForm" (ngSubmit)="f.valid && openGuardarModal(guardarModal)">
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="date" class="col-sm-2 col-form-label">Fecha:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control-plaintext" id="date" name="date"
+                        required readonly
+                        placeholder="Ingrese Fecha" [(ngModel)]="solicitud.date">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button type="button" name="add" class="btn btn-primary" (click)="openProductosModal(productosModal)">
+                Añadir Producto
+            </button>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Unidad de Medida</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of solicitud.productos; let i = index">
+                        <td>{{ producto.sku }}</td>
+                        <td>{{ producto.name }}</td>
+                        <td>
+                            <input type="number" name="cantidad[{{ i }}]" min="1"
+                                    [(ngModel)]="producto.quantity" #cantidad="ngModel" required>
+                            <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched || f.submitted)"
+                                class="alert alert-danger" style="margin-top: 5px">
+                                Cantidad de Producto Obligatorio
+                            </div>
+                        </td>
+                        <td>{{ producto.unit_of_measurement }}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="quitarProducto(producto, i)">
+                                Quitar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="solicitud.productos.length === 0">
+                        <td colspan="5" class="text-center">Seleccione productos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button type="button" name="add" class="btn btn-primary" (click)="openProveedoresModal(proveedoresModal)">
+                Añadir Proveedores
+            </button>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Razon Social</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let proveedor of solicitud.proveedores; let i = index">
+                            <td>{{ proveedor.codigo }}</td>
+                            <td>{{ proveedor.razon_social }}</td>
+                            <td>
+                                <button class="btn btn-warning" (click)="quitarProveedor(proveedor, i)">
+                                    Quitar
+                                </button>
+                            </td>
+                    </tr>
+                    <tr *ngIf="solicitud.proveedores.length === 0">
+                        <td colspan="5" class="text-center">Seleccione proveedores</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-sm-12 text-right">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+      
+<!-- Modales -->
+<!--Modal de Productos-->
+<ng-template #notaPedidoModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+        <h4 class="modal-title">Nota de Pedidos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon">Buscar</div>
+                <input type="text" class="form-control" id="search" [(ngModel)]="query"
+                        placeholder="Ingrese numero de Nota de Pedido">
+            </div>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Código</th>
+            <th>Fecha </th>
+            <th>Almacén</th>
+            <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let notapedido of productos | search:'sku,name':query; let i = index">
+            <td>{{ notapedido.uuid }}</td>
+            <td>{{ notapedido.date }}</td>
+            <td>{{ notapedido.almacen }}</td>
+            <td>
+                <button class="btn btn-outline-primary" [disabled]="producto.disabled" (click)="addProducto(producto, i)">
+                    Agregar
+                </button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
+        </button>
+    </div>
+</ng-template>
+
+<!--Modal de Proveedores-->
+<ng-template #transportistaModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+        <h4 class="modal-title">Transportistas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon">Buscar</div>
+                <input type="text" class="form-control" id="search" [(ngModel)]="query"
+                        placeholder="Ingrese nombre del transportista">
+            </div>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transportista of proveedores | search:'name':query; let i = index">
+                <td>{{ transportista.uuid }}</td>
+                <td>{{ transportista.name }}</td>
+                <td>{{ transportista.last_name }}</td>
+                <td>
+                    <button class="btn btn-outline-primary" [disabled]="proveedor.disabled" (click)="addProveedor(proveedor, i)">
+                        Agregar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
+        </button>
+    </div>
+</ng-template>
+
+<!--Confirmacion de registro-->
+<ng-template #guardarModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+        <h4 class="modal-title">Guardar Guía de Remisión</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>¿Está seguro que desea {{ action }} esta guía de remisión?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">
+            Aceptar
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
+        </button>
+    </div>
+</ng-template>

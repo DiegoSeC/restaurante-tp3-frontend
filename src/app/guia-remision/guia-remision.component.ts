@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GuiaRemision } from '../models/guia-remision.model';
+import { error } from 'util';
 
 @Component({
     selector: 'app-guia-remision',
@@ -40,6 +41,22 @@ export class GuiaRemisionComponent implements OnInit {
 
     openAnularModal(content, index) {
         this.guiaIndex = index;
+        console.log(index);
         this.modalNotaRef = this.modalService.open(content);
+    }
+
+    anular() {
+        const guia = this.guias[this.guiaIndex];
+        this.guias[this.guiaIndex].status = 'Anulado';
+        this.anularAction = true;
+
+        this.api.cancel(guia.uuid)
+            .subscribe(data => {
+                this.modalNotaRef.close();
+            },
+            // tslint:disable-next-line:no-shadowed-variable
+            error => {
+                this.modalNotaRef.close();
+            });
     }
 }
