@@ -10,6 +10,7 @@ import { ApiService } from './providers/api.service';
 import { NotaPedidoService } from './providers/nota-pedido.service';
 import { ProductoService } from './providers/producto.service';
 import { ProveedorService } from './providers/proveedor.service';
+import { TransportistaService } from './providers/transportista.service';
 
 import { AppComponent } from './app.component';
 import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
@@ -39,7 +40,8 @@ import { AppRoutingModule } from './app.route';
     ProductoService,
     NotaPedidoService,
     ApiService,
-    ProveedorService
+    ProveedorService,
+    TransportistaService
   ],
   bootstrap: [AppComponent]
 })

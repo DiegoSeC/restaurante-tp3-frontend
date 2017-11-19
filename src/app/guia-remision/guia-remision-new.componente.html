@@ -6,7 +6,7 @@
         <div class="media">
         <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
         <div class="media-body">
-            <h2 class="mt-0">Gustavo Aquino</h2>
+            <h2 class="mt-0">GustavoAquino</h2>
         </div>
         </div>
     </div>
@@ -16,23 +16,64 @@
     <div class="row" style="margin-top: 15px;">
         <div class="col-sm-6">
             <div class="form-group row">
-                <label for="date" class="col-sm-2 col-form-label">Fecha:</label>
+                <label for="warehouse_from" class="col-sm-2 col-form-label">Nota de Pedido:</label>
+                <div class="col-sm-8">
+                <input type="text" class="form-control" id="warehouse_from" name="warehouse_from"
+                        [(ngModel)]="guia.warehouse_from" required readonly #almacen="ngModel"
+                        placeholder="Nota de Pedido">
+                <div *ngIf="almacen.invalid && f.submitted"
+                    class="alert alert-danger" style="margin-top: 5px">Nombre de Nota de Pedido Obligatorio
+                </div>
+                </div>
+                <div class="col-sm-2">
+                <button type="button" name="search" style="margin-top: 3px;"
+                        (click)="openNotaPedidoModal(notaPedidoModal)"
+                        class="btn btn-outline-secondary btn-sm">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control-plaintext" id="date" name="date"
-                        required readonly
-                        placeholder="Ingrese Fecha" [(ngModel)]="solicitud.date">
+                    <input type="text" class="form-control-plaintext" id="date" name="date"
+                    [(ngModel)]="guia.date" required readonly
+                    placeholder="Ingrese Fecha">
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="row">
-        <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary" (click)="openProductosModal(productosModal)">
-                Añadir Producto
-            </button>
-        </div>
-    </div>
+      <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="direccion" class="col-sm-2 col-form-label">Almac&eacute;n Origen:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="direccion" name="direccion"
+                         [(ngModel)]="guia.warehouse_from" required #direccion="ngModel"
+                         placeholder="Ingrese una Dirección">
+                  <div *ngIf="direccion.invalid && f.submitted"
+                      class="alert alert-danger" style="margin-top: 5px">
+                     Dirección Obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                  <label for="direccion" class="col-sm-2 col-form-label">Almac&eacute;n Destino:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="direccion2" name="direccion2"
+                           [(ngModel)]="guia.warehouse_to" required #direccion="ngModel"
+                           placeholder="Ingrese una Dirección">
+                    <div *ngIf="direccion.invalid && f.submitted"
+                        class="alert alert-danger" style="margin-top: 5px">
+                       Dirección Obligatorio
+                    </div>
+                  </div>
+                </div>
+              </div>
+     </div>
     
     <div class="row" style="margin-top: 15px;">
         <div class="col-sm-12">
@@ -46,7 +87,7 @@
                         <th>Acción</th>
                     </tr>
                 </thead>
-                <tbody>
+                <!--<tbody>
                     <tr *ngFor="let producto of solicitud.productos; let i = index">
                         <td>{{ producto.sku }}</td>
                         <td>{{ producto.name }}</td>
@@ -68,50 +109,72 @@
                     <tr *ngIf="solicitud.productos.length === 0">
                         <td colspan="5" class="text-center">Seleccione productos</td>
                     </tr>
-                </tbody>
+                </tbody>-->
             </table>
         </div>
     </div>
     
-    <div class="row">
-        <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary" (click)="openProveedoresModal(proveedoresModal)">
-                Añadir Proveedores
-            </button>
+
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="almacen" class="col-sm-2 col-form-label">Transportista:</label>
+                <!--<div class="col-sm-8">
+                    <input type="text" class="form-control" id="almacen" name="almacen"
+                        [(ngModel)]="nota.almacen" required readonly #almacen="ngModel"
+                        placeholder="Transportista">
+                    <div *ngIf="almacen.invalid && f.submitted"
+                        class="alert alert-danger" style="margin-top: 5px">Nombre del transportista Obligatorio
+                    </div>
+                </div>-->
+                <div class="col-sm-2">
+                    <button type="button" name="search" style="margin-top: 3px;"
+                    (click)="openTransportistaModal(transporteModal)"
+                    class="btn btn-outline-secondary btn-sm">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label for="date" class="col-sm-2 col-form-label">Placa:</label>
+                <!--<div class="col-sm-10">
+                    <input type="text" class="form-control" id="date" name="date"
+                    [(ngModel)]="nota.date" required
+                    placeholder="Ingrese Fecha">
+                </div>-->
+            </div>
         </div>
     </div>
 
     <div class="row" style="margin-top: 15px;">
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <!--<label for="licencia" class="col-sm-2 col-form-label">Licenca:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="licencia" name="licencia"
+                    [(ngModel)]="nota.licencia" required #almacen="ngModel"
+                    placeholder="Licencia">
+                </div>
+                <div *ngIf="almacen.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
+                    Campo Obligatorio
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Razon Social</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let proveedor of solicitud.proveedores; let i = index">
-                            <td>{{ proveedor.codigo }}</td>
-                            <td>{{ proveedor.razon_social }}</td>
-                            <td>
-                                <button class="btn btn-warning" (click)="quitarProveedor(proveedor, i)">
-                                    Quitar
-                                </button>
-                            </td>
-                    </tr>
-                    <tr *ngIf="solicitud.proveedores.length === 0">
-                        <td colspan="5" class="text-center">Seleccione proveedores</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="form-group">
+            <label for="observacion">Observaciones:</label>
+            <textarea name="observacion" id="observacion" [(ngModel)]="guia.comment"
+                        rows="3" class="form-control"></textarea>
+            </div>
         </div>
     </div>
         
     <div class="row">
         <div class="col-sm-12 text-right">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/guia-remision']">Cancelar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
@@ -145,12 +208,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let notapedido of productos | search:'sku,name':query; let i = index">
-            <td>{{ notapedido.uuid }}</td>
-            <td>{{ notapedido.date }}</td>
+            <tr *ngFor="let notapedido of notaspedidos | search:'numero,uuid':query; let i = index">
+            <td>{{ notapedido.numero }}</td>
+            <td>{{ notapedido.fecha }}</td>
             <td>{{ notapedido.almacen }}</td>
             <td>
-                <button class="btn btn-outline-primary" [disabled]="producto.disabled" (click)="addProducto(producto, i)">
+                <button class="btn btn-outline-primary" [disabled]="notapedido.estado" (click)="addNotaPedido(notapedido, i)">
                     Agregar
                 </button>
             </td>
@@ -165,12 +228,13 @@
     </div>
 </ng-template>
 
-<!--Modal de Proveedores-->
-<ng-template #transportistaModal let-d="dismiss" let-c="close">
+
+<!--Modal de Transporte-->
+<ng-template #transporteModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Transportistas</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
@@ -179,28 +243,26 @@
             <div class="input-group mb-2 mb-sm-0">
                 <div class="input-group-addon">Buscar</div>
                 <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                        placeholder="Ingrese nombre del transportista">
+                        placeholder="Ingrese nombre de transportista">
             </div>
         </div>
         <table class="table">
         <thead>
             <tr>
             <th>Código</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
             <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let transportista of proveedores | search:'name':query; let i = index">
-                <td>{{ transportista.uuid }}</td>
-                <td>{{ transportista.name }}</td>
-                <td>{{ transportista.last_name }}</td>
-                <td>
-                    <button class="btn btn-outline-primary" [disabled]="proveedor.disabled" (click)="addProveedor(proveedor, i)">
-                        Agregar
-                    </button>
-                </td>
+            <tr *ngFor="let carrier of transportistas | search:'name,last_name':query; let i = index">
+            <td>{{ carrier.uuid }}</td>
+            <td>{{ carrier.name }}</td>
+            <td>{{ carrier.last_name }}</td>
+            <td>
+                <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
+            </td>
             </tr>
         </tbody>
         </table>
@@ -212,7 +274,7 @@
     </div>
 </ng-template>
 
-<!--Confirmacion de registro-->
+<!--Confirmacion de registro
 <ng-template #guardarModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Guardar Guía de Remisión</h4>
@@ -232,3 +294,4 @@
         </button>
     </div>
 </ng-template>
+-->

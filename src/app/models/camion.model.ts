@@ -1,7 +1,7 @@
 export class Camion {
-    public uuid: String;
-    public license_plate: String;
-    public brand: String;
+    public uuid: string;
+    public license_plate: string;
+    public brand: string;
 
     constructor() {
 
