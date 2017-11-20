@@ -7,10 +7,11 @@ import { error } from 'util';
 
 @Component({
     selector: 'app-guia-remision',
-    templateUrl: 'guia-remision.component.html'
+    templateUrl: 'guia-remision.component.html',
+    providers: [GuiaRemision]
 })
 export class GuiaRemisionComponent implements OnInit {
-    guias: GuiaRemision[];
+    guias: Array<any>;
     guiaNumero: String;
     guiaIndex: number;
     private modalNotaRef: NgbModalRef;
@@ -21,11 +22,16 @@ export class GuiaRemisionComponent implements OnInit {
                 private route: ActivatedRoute,
                 private api: GuiaRemisionService,
                 private modalService: NgbModal) {
-                    this.getAllGuias();
     }
 
     ngOnInit() {
         this.guiaNumero = this.route.snapshot.queryParams['id'];
+        this.getAllGuias().then( (data) => {
+            this.guias = data;
+        // tslint:disable-next-line:no-shadowed-variable
+        }).catch( (error) => {
+            console.log(error);
+        });
     }
 
     goToForm(): void {
@@ -33,10 +39,14 @@ export class GuiaRemisionComponent implements OnInit {
     }
 
     getAllGuias() {
-        this.api.getAll()
-                .subscribe(data => {
-                    this.guias = data['data'];
-                });
+        return this.api.getAll()
+                .then(
+                    (data) => data,
+                    // tslint:disable-next-line:no-shadowed-variable
+                    (error) => {
+                        console.log('Error: ' + JSON.stringify(error));
+                    }
+                );
     }
 
     openAnularModal(content, index) {

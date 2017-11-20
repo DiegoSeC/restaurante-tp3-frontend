@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpModule, Response, RequestOptions, Headers } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AlmacenService } from './providers/almacen.service';
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app.route';
   ],
   imports: [
     HttpClientModule,
+    HttpModule,
     BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
@@ -36,6 +38,7 @@ import { AppRoutingModule } from './app.route';
     AppRoutingModule
   ],
   providers: [
+    HttpModule,
     AlmacenService,
     ProductoService,
     NotaPedidoService,

@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+import { Http, HttpModule, Response, RequestOptions, Headers } from '@angular/http';
 import { GuiaRemision } from '../models/guia-remision.model';
+import 'rxjs/add/operator/map';
+import 'rxjs/RX';
 
 @Injectable()
 export class GuiaRemisionService {
-    private endpoint = 'guia-remision.array.json';
 
-    constructor(private api: ApiService) {}
+    constructor(private http: Http) {}
+    // tslint:disable-next-line:prefer-const
+    _data: any;
 
     getAll() {
-        return this.api.get(this.endpoint);
-    }
-
-    save(object: GuiaRemision) {
-        return this.api.post(this.endpoint, object);
-    }
-
-    update(object: GuiaRemision) {
-        return this.api.put(this.endpoint, object);
-    }
-
-    cancel(id: String) {
-        return this.api.put(this.endpoint, {
-            uuid: id,
-            status: 'Anulado'
+        // tslint:disable-next-line:prefer-const
+        let url = `http://190.85.228.7/rest-backend/public/api/waybills`;
+        // tslint:disable-next-line:no-shadowed-variable
+        return new Promise((resolve, reject) => {
+            this.http.get(url).subscribe(
+                res => {
+                    resolve(res.json());
+                },
+                error => {
+                    reject(error);
+                }
+            );
         });
     }
 
-    getOne(id: String) {
-        const endpoint2 = 'solicitud-cotizacion.json';
-        return this.api.get(endpoint2);
+    cancel(id: String) {
+        // tslint:disable-next-line:prefer-const
+        let url = `http://190.85.228.7/rest-backend/public/api/waybills/`;
+        return this.http.put(url + id, {
+            uuid: id,
+            status: 'Anulado'
+        });
     }
 }

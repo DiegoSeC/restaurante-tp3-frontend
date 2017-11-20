@@ -13,14 +13,14 @@
 </div>
 
 <!--Para alertas-->
-<h5 class="alert alert-secondary" *ngIf="guiaNumero" style="margin: 15px 0;">
+<!--<h5 class="alert alert-secondary" *ngIf="guiaNumero" style="margin: 15px 0;">
     Se actualizó exitosamente la gu&iacute;a de Remisión {{ guiaNumero }}
 </h5>
 
 <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
     Se anuló correctamente
 </h5>
-
+-->
 <div class="row" style="margin-top: 25px;">
     <div class="col-sm-6">
         <button type="button" class="btn btn-sm" name="new" (click)="goToForm()">Nuevo</button>
@@ -30,7 +30,7 @@
         <div class="input-group mb-2 mb-sm-0">
             <div class="input-group-addon">Buscar</div>
             <input type="text" class="form-control" id="search" 
-                   placeholder="Ingrese numero de guia de remision" [(ngModel)]="query">
+                   placeholder="Ingrese numero de guia de remision">
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let guia of guias | search:'document_number':query; let i = index">
+            <tr *ngFor="let guia of guias; let i = index">
                 <td>
                     <input type="checkbox" name="test">
                 </td>
