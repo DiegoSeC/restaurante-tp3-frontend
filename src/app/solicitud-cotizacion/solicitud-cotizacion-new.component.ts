@@ -52,14 +52,11 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(
             params => {
                 if (typeof params['id'] === 'undefined') {
-                    console.log('params => undefined');
                     this.setSolicitudDefault();
                 } else {
-                    console.log('id => ' + params['id']);
                     this.getSolicitud(params['id']);
                 }
           });
-          console.log('ngOnInit');
     }
 
     setSolicitudDefault() {

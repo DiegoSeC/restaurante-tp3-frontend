@@ -57,9 +57,8 @@ export class GuiaRemisionComponent implements OnInit {
         this.api.cancel(guia.uuid)
             .subscribe(data => {
                 this.modalNotaRef.close();
-            },
             // tslint:disable-next-line:no-shadowed-variable
-            error => {
+            }, error => {
                 this.modalNotaRef.close();
             });
     }
