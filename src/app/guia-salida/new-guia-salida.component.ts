@@ -81,7 +81,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
 
   getNotaPedido(notaPedido: NotaPedidoInterface) {
     this.guiasalida.nota_pedido= notaPedido.document_number;
-    this.guiasalida.almacen_destino = notaPedido.warehouse.name;
+    
     this.guiasalida.direccion = notaPedido.direccion;
     this.modalNotaRef.close();
   }
