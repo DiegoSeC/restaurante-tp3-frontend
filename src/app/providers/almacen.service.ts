@@ -3,9 +3,10 @@ import { ApiService } from './api.service';
 
 @Injectable()
 export class AlmacenService {
+  private endpoint = 'warehouses';
   constructor(private api: ApiService) {}
 
   getAlmacenes() {
-    return this.api.get('almacen.array.json');
+    return this.api.get(this.endpoint);
   }
 }
