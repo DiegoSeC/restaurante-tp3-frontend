@@ -18,9 +18,9 @@
             <div class="form-group row">
                 <label for="date" class="col-sm-2 col-form-label">Fecha:</label>
                 <div class="col-sm-10">
-                <input type="text" class="form-control-plaintext" id="date" name="date"
+                <input type="text" class="form-control-plaintext" 
                         required readonly
-                        placeholder="Ingrese Fecha" [(ngModel)]="solicitud.date">
+                        placeholder="Ingrese Fecha" [(ngModel)]="solicitud.date"><!--id="date" name="date"-->
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let producto of solicitud.productos; let i = index">
+                    <tr *ngFor="let producto of solicitud.products; let i = index">
                         <td>{{ producto.sku }}</td>
                         <td>{{ producto.name }}</td>
                         <td>
@@ -65,7 +65,7 @@
                             </button>
                         </td>
                     </tr>
-                    <tr *ngIf="solicitud.productos.length === 0">
+                    <tr *ngIf="solicitud.products.length === 0">
                         <td colspan="5" class="text-center">Seleccione productos</td>
                     </tr>
                 </tbody>
@@ -92,7 +92,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let proveedor of solicitud.proveedores; let i = index">
+                    <tr *ngFor="let proveedor of solicitud.suppliers; let i = index">
                             <td>{{ proveedor.codigo }}</td>
                             <td>{{ proveedor.razon_social }}</td>
                             <td>
@@ -101,7 +101,7 @@
                                 </button>
                             </td>
                     </tr>
-                    <tr *ngIf="solicitud.proveedores.length === 0">
+                    <tr *ngIf="solicitud.suppliers.length === 0">
                         <td colspan="5" class="text-center">Seleccione proveedores</td>
                     </tr>
                 </tbody>

@@ -33,16 +33,15 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute) {
         /*Inicializar el objeto solicitud*/
-        console.log(this.today);
+        /*console.log(this.today);
         console.log(this.today.getDate());
         console.log(this.today.getMonth());
-        console.log(this.today.getFullYear());
+        console.log(this.today.getFullYear());*/
         this.solicitud = <SolicitudCotizacion> {
-            productos: [],
-            proveedores: [],
+            products: [],
+            suppliers: [],
             date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
         };
-
         this.getProductos();
         this.getProveedores();
         console.log('constructor');
@@ -118,18 +117,18 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
 
     addProducto(producto: Producto, index: number) {
         this.productos[index].disabled = true;
-        this.solicitud.productos.push(producto);
+        this.solicitud.products.push(producto);
         this.modalProductoRef.close();
     }
 
     addProveedor(proveedor: Proveedor, index: number) {
         this.proveedores[index].disabled = true;
-        this.solicitud.proveedores.push(proveedor);
+        this.solicitud.suppliers.push(proveedor);
         this.modalProveedoresRef.close();
     }
 
     quitarProducto(producto: Producto, index: number) {
-        this.solicitud.productos.splice(index, 1);
+        this.solicitud.products.splice(index, 1);
         this.productos.filter(p => {
             if (p.uuid === producto.uuid) {
                 p.disabled = false;
@@ -138,7 +137,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     }
 
     quitarProveedor(proveedor: Proveedor, index: number) {
-        this.solicitud.proveedores.splice(index, 1);
+        this.solicitud.suppliers.splice(index, 1);
         this.proveedores.filter(p => {
             if (p.uuid === proveedor.uuid) {
                 p.disabled = false;
@@ -156,7 +155,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         action.subscribe(
             data => {
                 if (this.action !== 'actualizar') {
-                    this.solicitud.numero = data['data']['numero'];
+                    this.solicitud.document_number = data['data']['document_number'];
                 }
 
                 this.modalSolicitudes.close();
@@ -167,7 +166,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         );
 
         this.modalSolicitudes.result.then(data => {
-            this.router.navigateByUrl(`solicitud-cotizacion?id=${this.solicitud.numero}`);
+            this.router.navigateByUrl(`solicitud-cotizacion?id=${this.solicitud.document_number}`);
         });
     }
 

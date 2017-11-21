@@ -47,7 +47,7 @@ export class SolicitudCotizacionComponent implements OnInit {
     anular() {
         const solicitud = this.solicitudes[this.solicitudIndex];
 
-        this.solicitudes[this.solicitudIndex].estado = 'Anulado';
+        this.solicitudes[this.solicitudIndex].status = 'Anulado';
         this.anularAction = true;
 
         this.api.cancel(solicitud.uuid)
@@ -58,5 +58,7 @@ export class SolicitudCotizacionComponent implements OnInit {
                                 this.modalNotaRef.close();
                         }
                         );
+
+        this.getAllSolicitudes();
     }
 }
