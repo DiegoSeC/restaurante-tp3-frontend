@@ -4,6 +4,7 @@ export class GuiaSalida {
     constructor(
       public numero: string,
       public uuid: string,
+      public nota_pedido: string,
       public date: string,
       public almacen_origen: string,
       public almacen_destino: string,

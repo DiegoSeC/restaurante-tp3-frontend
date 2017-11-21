@@ -56,10 +56,10 @@
           </td>
           <td>{{ nota.document_number }}</td>
           <td>{{ nota.fecha | date:'d/M/y' }}</td>
-          <td>{{ nota.status }}</td>
-          <td>{{ nota.warehouse.name }}</td>
+          <td>{{ nota.estado }}</td>
+          <td>{{ nota.almacen }}</td>
           <td>
-            <button class="btn btn-light" [disabled]="nota.status !== 'pending'" [routerLink]="['/nota-pedido/edit/', nota.uuid]">
+            <button class="btn btn-light" [disabled]="nota.estado !== 'pending'" [routerLink]="['/nota-pedido/edit/', nota.uuid]">
               Editar
             </button>
             <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">Anular</button>

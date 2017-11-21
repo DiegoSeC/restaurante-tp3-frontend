@@ -38,8 +38,20 @@ export class GuiaSalidaComponent implements OnInit   {
           this.guiaSalidas = data['data'];
         });
       }
-      openAnularModal(content, index) {
+    openAnularModal(content, index) {
         this.guiaIndex = index;
         this.modalGuiaRef = this.modalService.open(content);
-      }    
+    }
+
+    anular() {
+        const nota = this.guiaSalidas[this.guiaIndex];
+        this.guiaSalidas[this.guiaIndex].estado = 'Anulado';
+        this.anularAction = true;
+    
+        this.guiaApi.anularGuiaSalida(nota.uuid).subscribe(data => {
+          this.modalGuiaRef.close();
+        }, error => {
+          this.modalGuiaRef.close();
+        });
+      }
 }
