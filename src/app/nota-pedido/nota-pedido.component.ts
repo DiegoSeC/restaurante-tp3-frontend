@@ -33,9 +33,11 @@ export class NotaPedidoComponent implements OnInit {
   }
 
   getNotaPedidos() {
-    this.notaApi.getNotaPedidos().subscribe(data => {
-      this.notaPedidos = data['data'];
-    });
+    this.notaApi.getNotaPedidos()
+                .subscribe(data => {
+                  /*console.log(data);*/
+                  this.notaPedidos = data['data'];
+                });
   }
 
   openAnularModal(content, index) {
@@ -45,7 +47,7 @@ export class NotaPedidoComponent implements OnInit {
 
   anular() {
     const nota = this.notaPedidos[this.notaIndex];
-    this.notaPedidos[this.notaIndex].estado = 'Anulado';
+    this.notaPedidos[this.notaIndex].status = 'Anulado';
     this.anularAction = true;
 
     this.notaApi.anularNotaPedido(nota.uuid).subscribe(data => {

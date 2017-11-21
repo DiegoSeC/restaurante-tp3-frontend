@@ -50,7 +50,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let guia of guias | search:'document_number':query; let i = index">
+            <tr *ngFor="let guia of guias  | search:'document_number':query; let i = index">
                 <td>
                     <input type="checkbox" name="test">
                 </td>
@@ -60,7 +60,7 @@
                 <td>{{ guia.warehouse_from.code }}</td>
                 <td>{{ guia.warehouse_to.code }}</td>
                 <td>
-                    <button class="btn btn-primary" [disabled]="guia.status !== 'pending'" [routerLink]="['/guia-remision/edit/', guia.uuid]">
+                    <button class="btn btn-primary" [disabled]="guia.status == 'pending'" [routerLink]="['/guia-remision/edit/', guia.uuid]">
                         Editar
                     </button>
                     <button class="btn btn-secondary" (click)="openAnularModal(anularModal, i)">

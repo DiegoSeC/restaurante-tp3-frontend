@@ -1,14 +1,16 @@
 import { Producto } from '../models/producto.model';
+import { Almacen } from './almacen.model';
 
 export class NotaPedido {
+
   constructor(
-    public numero: string,
     public uuid: string,
+    public document_number: string,
     public date: string,
-    public almacen: string,
+    public warehouse: Almacen,
     public direccion: string,
     public productos: Producto[],
-    public estado: string,
+    public status: string,
     public contacto: string,
     public observacion: string
   ) {}

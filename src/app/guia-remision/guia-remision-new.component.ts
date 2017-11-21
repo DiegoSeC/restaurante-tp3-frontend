@@ -59,15 +59,14 @@ export class GuiaRemisionNewcomponent implements OnInit {
     getGuia(id: string) {
         this.action = 'actualizar';
         this.guiaremisionService.getOne(id)
-                                            .subscribe(
-                                                data => {
-                                                    console.log('getOne => ' + JSON.stringify(data));
-                                                    this.guia = data['data'];
-                                                },
-                                                error => {
-                                                    console.log(error);
-                                                }
-                                            );
+                .subscribe(
+                    data => {
+                        this.guia = data['data'];
+                    },
+                    error => {
+                        console.log(error);
+                    }
+                );
     }
 
     getNotas() {

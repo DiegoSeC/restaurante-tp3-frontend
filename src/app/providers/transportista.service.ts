@@ -7,7 +7,8 @@ export class TransportistaService {
     constructor(private api: ApiService) {}
 
     getAll() {
-        return this.api.get('transportista.array.json');
+        const url = `carriers`;
+        return this.api.get(url);
     }
 
 }
