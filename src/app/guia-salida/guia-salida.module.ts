@@ -9,10 +9,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { GuiaSalidaService } from '../providers/guia-salida.service';
 
 import { GuiaSalidaComponent } from './guia-salida.component';
-
+import {NewGuiaSalidaComponent} from './new-guia-salida.component';
 @NgModule({
     declarations: [
-        GuiaSalidaComponent
+        GuiaSalidaComponent,
+        NewGuiaSalidaComponent
     ],
     imports: [
         CommonModule,

@@ -1,1 +1,161 @@
-hola
+<div class="row" style="padding-top: 15px;">
+    <div class="col-sm-8">
+      <h1>Guia de Salida</h1>
+    </div>
+    <div class="col-sm-4">
+      <div class="media">
+        <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+        <div class="media-body">
+          <h1 class="mt-0">Juan Crespo</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form #f="ngForm" (ngSubmit)="f.valid && openGuardarModal(guardarModal)">
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-sm-7">
+        <div class="form-group row">
+          <label for="numero" class="col-sm-2 col-form-label">Nota de Pedido:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="numero" name="numero"
+                   required readonly  [(ngModel)]="guiasalida.nota_pedido"
+                   placeholder="Ingrese Nota de Pedido">
+           
+          </div>
+          <div class="col-sm-2">
+            <button type="button" name="search" style="margin-top: 3px;"
+                    (click)="openNotaPedidoModal(notaPedidoModal)"
+                    class="btn btn-outline-secondary btn-sm">Buscar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <div class="form-group row">
+          <label for="almacen_destino" class="col-sm-2 col-form-label">Almacen:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="almacen_destino" name="almacen_destino" 
+            [(ngModel)]="guiasalida.almacen_destino" required readonly
+                   placeholder="Ingrese Almacen">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label for="direccion" class="col-sm-1 col-form-label">Dirección:</label>
+          <div class="col-sm-11">
+            <input type="text" class="form-control" id="direccion" name="direccion"
+            [(ngModel)]="guiasalida.direccion" required readonly 
+                   placeholder="Ingrese una Dirección">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="date" class="col-sm-2 col-form-label">Fecha:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="date" name="date"
+          [(ngModel)]="guiasalida.date" required readonly
+                 placeholder="Ingrese Fecha">
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Unidad de Medida</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="direccion">Contacto:</label>
+          <input type="text" class="form-control" id="contacto" name="contacto"
+                 required
+                 placeholder="Ingrese nombre de Contacto">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="observacion">Observaciones</label>
+          <textarea name="observacion" id="observacion" 
+                    rows="3" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/guia-salida']">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+<ng-template #notaPedidoModal let-d="dismiss" let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Nota Pedido</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Fecha</th>
+          <th>Almacén</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notapedido of notapedidos">
+          <td>{{ notapedido.numero }}</td>
+          <td>{{ notapedido.fecha | date:'d/M/y' }}</td>
+          <td>{{ notapedido.almacen }}</td>
+          <td>
+            <button class="btn btn-outline-primary" (click)="getNotaPedido(notapedido)">
+              Seleccionar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+      Close
+    </button>
+  </div>
+</ng-template>
+
+  </form>
+  
