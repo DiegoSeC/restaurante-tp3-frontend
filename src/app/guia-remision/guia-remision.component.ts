@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GuiaRemision } from '../models/guia-remision.model';
 import { error } from 'util';
+import 'rxjs/RX';
 
 @Component({
     selector: 'app-guia-remision',
@@ -11,7 +13,7 @@ import { error } from 'util';
     providers: [GuiaRemision]
 })
 export class GuiaRemisionComponent implements OnInit {
-    guias: Array<any>;
+    guias: Array<any>= [];
     guiaNumero: String;
     guiaIndex: number;
     private modalNotaRef: NgbModalRef;
@@ -26,12 +28,7 @@ export class GuiaRemisionComponent implements OnInit {
 
     ngOnInit() {
         this.guiaNumero = this.route.snapshot.queryParams['id'];
-        this.getAllGuias().then( (data) => {
-            this.guias = data;
-        // tslint:disable-next-line:no-shadowed-variable
-        }).catch( (error) => {
-            console.log(error);
-        });
+        this.getAllGuias();
     }
 
     goToForm(): void {
@@ -39,14 +36,11 @@ export class GuiaRemisionComponent implements OnInit {
     }
 
     getAllGuias() {
-        return this.api.getAll()
-                .then(
-                    (data) => data,
-                    // tslint:disable-next-line:no-shadowed-variable
-                    (error) => {
-                        console.log('Error: ' + JSON.stringify(error));
-                    }
-                );
+        this.api.getAll()
+        .subscribe(data => {
+                    this.guias = data['data'];
+                }
+        );
     }
 
     openAnularModal(content, index) {
