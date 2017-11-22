@@ -35,8 +35,11 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
     const date = new Date();
     this.nota = <NotaPedidoInterface> {
       productos: [],
-      date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+      date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+      warehouse : <AlmacenInterface> {}
     };
+
+    this.nota.warehouse = <AlmacenInterface> {};
 
     this.getAlmacenes();
     this.getProductos();
@@ -89,6 +92,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
   }
 
   getAlmacen(almacen: AlmacenInterface) {
+    
     this.nota.warehouse.name = almacen.name;
     this.nota.direccion = almacen.address;
     this.nota.contacto = almacen.contact_name;

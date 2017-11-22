@@ -18,7 +18,7 @@
           <label for="numero" class="col-sm-2 col-form-label">Nota de Pedido:</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" id="numero" name="numero"
-                   required readonly  [(ngModel)]="guiasalida.nota_pedido"
+                   required readonly  [(ngModel)]="guiasalida.order.document_number"
                    placeholder="Ingrese Nota de Pedido">
            
           </div>
@@ -139,8 +139,8 @@
       <tbody>
         <tr *ngFor="let notapedido of notapedidos">
           <td>{{ notapedido.document_number }}</td>
-          <td>{{ notapedido.fecha | date:'d/M/y' }}</td>
-          <td>{{ notapedido.almacen }}</td>
+          <td>{{ notapedido.date | date:'d/M/y' }}</td>
+          <td>{{ notapedido.warehouse.name }}</td>
           <td>
             <button class="btn btn-outline-primary" (click)="getNotaPedido(notapedido)">
               Seleccionar

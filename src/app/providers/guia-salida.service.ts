@@ -10,11 +10,11 @@ export class GuiaSalidaService {
     constructor(private api: ApiService) {}
 
     getAll() {
-        return this.api.get(this.endpoint);
+        return this.api.get('transfer-guides');
     }
 
     getGuiaSalidas() {
-        return this.api.get(this.endpoint);
+        return this.api.get('transfer-guides');
     }
 
     anularGuiaSalida(guiaId: string) {

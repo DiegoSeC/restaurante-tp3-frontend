@@ -13,7 +13,7 @@ export class NotaPedidoComponent implements OnInit {
   public notaPedidos: NotaPedidoInterface[] = [];
   private modalNotaRef: NgbModalRef;
   private notaIndex: number;
-  public notaNumero: string;
+  public notaNumero: number;
   private sub: any;
   private anularAction: boolean;
 
@@ -25,7 +25,10 @@ export class NotaPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.notaNumero = this.route.snapshot.queryParams['id'];
+    
+    if(typeof this.route.snapshot.queryParams['id']!=='undefined'){
+      this.notaNumero = Math.floor(Math.random() * 6) + 1  ;
+    }
   }
 
   goToForm() {

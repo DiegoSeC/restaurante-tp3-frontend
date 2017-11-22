@@ -5,9 +5,6 @@ import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
 
 @Injectable()
 export class NotaPedidoService {
-  //private endpoint = 'orders';
-  private endpoint = 'nota-pedido.array.json';
-
   constructor(private api: ApiService) {}
 
   saveNotaPedido(nota: NotaPedidoInterface) {
@@ -19,7 +16,7 @@ export class NotaPedidoService {
   }
 
   getNotaPedidos() {
-    return this.api.get(this.endpoint);
+    return this.api.get('orders');
   }
 
   anularNotaPedido(notaId: string) {

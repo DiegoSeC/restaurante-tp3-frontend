@@ -33,7 +33,8 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
 
     this.guiasalida = <GuiaSalidaInterface> {
       productos: [],
-      date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+      date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+      order: {}
     };
 
     this.getNotaPedidos();
@@ -80,9 +81,10 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   getNotaPedido(notaPedido: NotaPedidoInterface) {
-    this.guiasalida.nota_pedido= notaPedido.document_number;
-    
+    this.guiasalida.order.document_number= notaPedido.document_number;
+    this.guiasalida.almacen_origen = "brown";
     this.guiasalida.direccion = notaPedido.direccion;
+    console.log(this.guiasalida);
     this.modalNotaRef.close();
   }
 
@@ -95,14 +97,14 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
 
     action.subscribe(data => {
       if (this.action !== 'actualizar') {
-        this.guiasalida.numero = data['data']['numero'];
+        this.guiasalida.document_number = data['data']['numero'];
       }
 
       this.modalNotaRef.close();
     }, error => this.modalNotaRef.close());
 
     this.modalNotaRef.result.then(data => {
-      this.router.navigateByUrl(`guia-salida?id=${this.guiasalida.numero}`);
+      this.router.navigateByUrl(`guia-salida?id=${this.guiasalida.document_number}`);
     });
   }
 

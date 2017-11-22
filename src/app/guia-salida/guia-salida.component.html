@@ -51,17 +51,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let guia of guiaSalidas | search:'numero':query; let i = index">
+          <tr *ngFor="let guia of guiaSalidas | search:'document_number':query; let i = index">
             <td>
               <input type="checkbox" name="test" [(ngModel)]="checked">
             </td>
-            <td>{{ guia.numero }}</td>
-            <td>{{ guia.fecha | date:'d/M/y' }}</td>
-            <td>{{ guia.estado }}</td>
-            <td>{{ guia.almacen_origen }}</td>
-            <td>{{ guia.almacen_destino }}</td>
+            <td>{{ guia.document_number }}</td>
+            <td>{{ guia.date | date:'d/M/y' }}</td>
+            <td>{{ guia.status }}</td>
+            <td>Almacen 2</td>
+            <td>Almacen 3</td>
             <td>
-              <button class="btn btn-light" [disabled]="guia.estado !== 'pending'" [routerLink]="['/nota-pedido/edit/', guia.uuid]">
+              <button class="btn btn-light" [disabled]="guia.status !== 'pending'" [routerLink]="['/nota-pedido/edit/', guia.uuid]">
                 Editar
               </button>
               <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">Anular</button>
