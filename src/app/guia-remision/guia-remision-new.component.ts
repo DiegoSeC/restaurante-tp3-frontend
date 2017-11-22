@@ -8,6 +8,7 @@ import { Transportista } from '../models/transportista.model';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { TransportistaService } from '../providers/transportista.service';
+//import { CamionService } from '../providers/camion.service';
 
 @Component({
     selector: 'app-guia-remision-new',
@@ -21,6 +22,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     transportistas: Transportista[];
     private modalNotasRef: NgbModalRef;
     private modalTranspRef: NgbModalRef;
+    private modalCamionRef: NgbModalRef;
     public query: string;
     private sub: any;
     private today: any = new Date();
@@ -107,6 +109,10 @@ export class GuiaRemisionNewcomponent implements OnInit {
 
     addTransportista(transportista: Transportista, index: number) {
         console.log('agregando');
+    }
+
+    openCamionModal(content) {
+        this.modalCamionRef = this.modalService.open(content);
     }
 
 }

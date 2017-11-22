@@ -208,8 +208,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let notapedido of notaspedidos | search:'numero,uuid':query; let i = index">
-            <td>{{ notapedido.numero }}</td>
+            <tr *ngFor="let notapedido of notaspedidos | search:'document_number':query; let i = index">
+            <td>{{ notapedido.document_number }}</td>
             <td>{{ notapedido.fecha }}</td>
             <td>{{ notapedido.almacen }}</td>
             <td>
@@ -256,10 +256,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let carrier of transportistas | search:'name,last_name':query; let i = index">
-            <td>{{ carrier.uuid }}</td>
-            <td>{{ carrier.name }}</td>
-            <td>{{ carrier.last_name }}</td>
+            <tr *ngFor="let carrier of transportistas | search:'driver_license':query; let i = index">
+            <td>{{ carrier.driver_license }}</td>
+            <td>{{ carrier.employee.name }}</td>
+            <td>{{ carrier.employee.lastname }}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
             </td>
@@ -273,6 +273,52 @@
         </button>
     </div>
 </ng-template>
+
+<!--Modal de Camion
+<ng-template #camionModal let-d="dismiss" let-c="close">
+    <div class="modal-header">
+        <h4 class="modal-title">Camion</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon">Buscar</div>
+                <input type="text" class="form-control" id="search" [(ngModel)]="query"
+                        placeholder="Ingrese nombre del auto">
+            </div>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Código</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let carrier of transportistas | search:'driver_license':query; let i = index">
+            <td>{{ carrier.driver_license }}</td>
+            <td>{{ carrier.employee.name }}</td>
+            <td>{{ carrier.employee.lastname }}</td>
+            <td>
+                <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+            Cancelar
+        </button>
+    </div>
+</ng-template>
+-->
 
 <!--Confirmacion de registro
 <ng-template #guardarModal let-d="dismiss" let-c="close">

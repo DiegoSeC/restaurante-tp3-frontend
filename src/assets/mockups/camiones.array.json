@@ -1,0 +1,14 @@
+{
+    "data":
+    [
+        {
+            "uuid":"8b000fd0-b30f-3f61-9dc8-02a1a2f91d4b",
+            "license_plate":"FCT122",
+            "brand":"dolorem"
+        },
+        {
+            "uuid":"e8591c5d-f0c4-3a48-879b-f44f20216b14",
+            "license_plate":"ODC634",
+            "brand":"repellat"
+        },
+        {"uuid":"22f8c3f2-0e4d-3c24-8ff9-4b9b94fc19f1","license_plate":"JVJ585","brand":"adipisci"},{"uuid":"8c5f5c71-01cf-3dfb-a38a-a098fbd356bd","license_plate":"NSO250","brand":"excepturi"},{"uuid":"b4930431-bb92-31b4-b6ae-db5de584b415","license_plate":"XWZ835","brand":"molestiae"},{"uuid":"cc249ddc-82a8-37f3-8084-dd8695be8605","license_plate":"SZF223","brand":"ex"},{"uuid":"40c027f9-234f-358b-8f93-3e9587fd04c4","license_plate":"LGW484","brand":"rerum"},{"uuid":"aab80b68-c193-366b-a6e9-b43f0f6fcc02","license_plate":"MXH254","brand":"omnis"},{"uuid":"8c618e3e-3ae8-3cee-b47c-a10136faba88","license_plate":"LMV872","brand":"ea"},{"uuid":"ea92359d-fba4-3821-b169-0a96dab4ed17","license_plate":"YPW938","brand":"repudiandae"}]}
