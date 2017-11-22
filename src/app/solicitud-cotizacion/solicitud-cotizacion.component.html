@@ -1,12 +1,12 @@
 <div class="row" style="padding-top: 15px;">
     <div class="col-sm-8">
-        <h2>Solicitud de Cotizacion</h2>
+        <h3>Solicitud de Cotizacion</h3>
     </div>
     <div class="col-sm-4">
         <div class="media">
           <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
           <div class="media-body">
-            <h2 class="mt-0">Jorge Ortiz</h2>
+            <h3 class="mt-0">Jorge Ortiz</h3>
           </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
             <tbody>
             <tr *ngFor="let solicitud of solicitudes | search:'document_number':query; let i = index">
                 <td>
-                    <input type="checkbox" name="test" [(ngModel)]="checked">>
+                    <input type="checkbox" name="test" [(ngModel)]="checked">
                 </td>
                 <td>{{ solicitud.document_number }}</td>
                 <td>{{ solicitud.date | date:'d/M/y' }}</td>

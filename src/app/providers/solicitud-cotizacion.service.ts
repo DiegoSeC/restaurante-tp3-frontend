@@ -4,12 +4,18 @@ import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
 
 @Injectable()
 export class SolicitudCotizacionService {
-    private endpoint = 'solicitud-cotizacion.array.json';
+    /*private endpoint = 'solicitud-cotizacion.array.json';*/
+    private endpoint = 'quotation-requests';
 
     constructor(private api: ApiService) {}
 
     getAll() {
         return this.api.get(this.endpoint);
+    }
+
+    getOne(id: string) {
+        /*const endpoint2 = 'solicitud-cotizacion.json';*/
+        return this.api.get(this.endpoint + '/' + id);
     }
 
     save(object: SolicitudCotizacion) {
@@ -28,8 +34,4 @@ export class SolicitudCotizacionService {
                             );
     }
 
-    getOne(id: string) {
-        const endpoint2 = 'solicitud-cotizacion.json';
-        return this.api.get(endpoint2);
-    }
 }
