@@ -9,14 +9,12 @@ export class GuiaRemisionService {
     constructor(private api: ApiService) {}
 
     getAll() {
-        //const url = `waybills`;
-        const url = `guia-remision.array.json`;
+        const url = `waybills`;
         return this.api.get(url);
     }
 
     cancel(id: String) {
-        //const url = `waybills/`;
-        const url = `guia-remision.json/`;
+        const url = `waybills/`;
         return this.api.put(url + id, {
             uuid: id,
             status: 'Anulado'
@@ -24,9 +22,7 @@ export class GuiaRemisionService {
     }
 
     getOne(id: String) {
-        //const url = `waybills/`;
-        const url = `guia-remision.json`;
-        ///return this.api.get(url + id);
-        return this.api.get(url);
+        const url = `waybills/`;
+        return this.api.get(url + id);
     }
 }

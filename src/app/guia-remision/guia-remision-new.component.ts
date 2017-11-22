@@ -8,6 +8,7 @@ import { Transportista } from '../models/transportista.model';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { TransportistaService } from '../providers/transportista.service';
+import { Almacen } from '../models/almacen.model';
 //import { CamionService } from '../providers/camion.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     private modalNotasRef: NgbModalRef;
     private modalTranspRef: NgbModalRef;
     private modalCamionRef: NgbModalRef;
+    private modalSubmit : NgbModalRef;
     public query: string;
     private sub: any;
     private today: any = new Date();
@@ -34,8 +36,11 @@ export class GuiaRemisionNewcomponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute) {
         this.guia = <GuiaRemision> {
-            carrier: [],
-            date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
+            carrier: {},
+            order: {},
+            date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`,
+            warehouse_from: {},
+            warehouse_to: {}
         };
 
         this.getNotas();
@@ -100,7 +105,9 @@ export class GuiaRemisionNewcomponent implements OnInit {
     }
 
     addNotaPedido(nota: NotaPedido, index: number) {
-        console.log('agregando');
+        this.guia.order.document_number = nota.document_number;
+        this.guia.warehouse_from.code = nota.warehouse.name;
+        this.modalNotasRef.dismiss();
     }
 
     openTransportistaModal(content) {
@@ -108,11 +115,24 @@ export class GuiaRemisionNewcomponent implements OnInit {
     }
 
     addTransportista(transportista: Transportista, index: number) {
-        console.log('agregando');
+        this.guia.carrier.name = transportista.employee.name;
+        this.guia.carrier.driver_license = transportista.driver_license;
+        this.modalTranspRef.dismiss();
     }
 
     openCamionModal(content) {
         this.modalCamionRef = this.modalService.open(content);
     }
+
+    openGuardarModal(content) {
+        this.modalSubmit = this.modalService.open(content);
+    }
+
+    onSubmit() {
+        this.modalSubmit.close();
+        this.modalSubmit.result.then(data => {
+          this.router.navigateByUrl(`guia-remision`);
+        });
+      }
 
 }
