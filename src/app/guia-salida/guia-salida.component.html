@@ -29,7 +29,7 @@
       <div class="input-group mb-2 mb-sm-0">
         <div class="input-group-addon">Buscar</div>
         <input type="text" class="form-control" id="search" [(ngModel)]="query"
-               placeholder="Ingrese numero de nota de pedido o estado">
+               placeholder="Ingrese numero de guia de salida">
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let guia of guiaSalidas | search:'document_number, status':query; let i = index">
+          <tr *ngFor="let guia of guiaSalidas | search:'document_number':query; let i = index">
             <td>
               <input type="checkbox" name="test" [(ngModel)]="checked">
             </td>
