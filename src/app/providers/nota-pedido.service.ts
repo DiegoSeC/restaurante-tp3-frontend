@@ -27,6 +27,6 @@ export class NotaPedidoService {
   }
 
   getNotaPedido(uuid: string) {
-    return this.api.get('nota-pedido.json');
+    return this.api.get('orders/' + uuid);
   }
 }

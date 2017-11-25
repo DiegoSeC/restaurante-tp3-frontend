@@ -34,7 +34,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
     const date = new Date();
     this.nota = <NotaPedidoInterface> {
-      productos: [],
+      products: [],
       date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
       warehouse : <AlmacenInterface> {}
     };
@@ -101,12 +101,12 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
   getProducto(producto: ProductoInterface, index: number) {
     this.productos[index].disabled = true;
-    this.nota.productos.push(producto);
+    this.nota.products.push(producto);
     this.modalProductoRef.close();
   }
 
   quitarProducto(producto: ProductoInterface, index: number) {
-    this.nota.productos.splice(index, 1);
+    this.nota.products.splice(index, 1);
     this.productos.filter(p => {
       if (p.uuid === producto.uuid) {
         p.disabled = false;

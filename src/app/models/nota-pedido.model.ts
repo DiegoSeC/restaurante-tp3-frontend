@@ -9,7 +9,7 @@ export class NotaPedido {
     public date: string,
     public warehouse: Almacen,
     public direccion: string,
-    public productos: Producto[],
+    public products: Producto[],
     public status: string,
     public contacto: string,
     public observacion: string

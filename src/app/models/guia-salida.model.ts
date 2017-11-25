@@ -10,7 +10,7 @@ export class GuiaSalida {
       public almacen_origen: string,
       public almacen_destino: string,
       public direccion: string,
-      public productos: Producto[],
+      public products: Producto[],
       public status: string,
       public contacto: string,
       public observacion: string

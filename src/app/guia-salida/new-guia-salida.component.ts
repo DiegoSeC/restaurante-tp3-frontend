@@ -32,7 +32,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     const date = new Date();
 
     this.guiasalida = <GuiaSalidaInterface> {
-      productos: [],
+      products: [],
       date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
       order: {}
     };
@@ -67,6 +67,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   openNotaPedidoModal(content) {
+    this.query = '';
     this.modalNotaRef = this.modalService.open(content);
   }
 
@@ -81,12 +82,18 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   getNotaPedido(notaPedido: NotaPedidoInterface) {
-    this.guiasalida.order.document_number= notaPedido.document_number;
-    this.guiasalida.almacen_origen = notaPedido.warehouse.name;
-    this.guiasalida.direccion =  notaPedido.warehouse.address;
-    console.log(this.guiasalida);
-    this.modalNotaRef.close();
+    this.notaPedido.getNotaPedido(notaPedido.uuid).subscribe(data => {
+      const np = data['data'];
+      this.guiasalida.order.document_number= np.document_number;
+      this.guiasalida.almacen_origen = np.warehouse.name;
+      this.guiasalida.direccion =  np.warehouse.address;
+      this.guiasalida.products =np.products;
+      this.modalNotaRef.close();
+
+    });
   }
+
+
 
   onSubmit() {
     let action = this.createGuiaSalida();
