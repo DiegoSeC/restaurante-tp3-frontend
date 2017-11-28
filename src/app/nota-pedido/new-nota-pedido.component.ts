@@ -91,6 +91,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
   getAlmacen(almacen) {
     this.nota.warehouse = almacen;
+    this.nota.warehouse.contact = almacen.contact_name;
     this.modalAlmacenRef.close();
   }
 

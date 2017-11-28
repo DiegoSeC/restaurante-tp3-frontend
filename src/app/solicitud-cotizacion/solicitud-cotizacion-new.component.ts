@@ -75,16 +75,10 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
 
     getSolicitud(id: string) {
         this.action = 'actualizar';
-        this.solicitudService.getOne(id)
-                            .subscribe(
-                                data => {
-                                    console.log('getOne => ' + JSON.stringify(data));
-                                    this.solicitud = data['data'];
-                                },
-                                error => {
-                                    console.log(error);
-                                }
-                            );
+        this.solicitudService.getOne(id).subscribe(data => {
+            this.solicitud = data['data'];
+            this.solicitud.suppliers = [];
+        });
     }
 
     getProductos() {
