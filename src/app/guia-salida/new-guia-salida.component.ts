@@ -17,7 +17,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   public action: string;
   public guiasalida: GuiaSalidaInterface;
   public notapedidos: NotaPedidoInterface[];
-  private modalNotaRef: NgbModalRef;
+  private modalGuiaRef: NgbModalRef;
 
   public query: string;
   private sub: any;
@@ -69,7 +69,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
 
   openNotaPedidoModal(content) {
     this.query = '';
-    this.modalNotaRef = this.modalService.open(content);
+    this.modalGuiaRef = this.modalService.open(content);
   }
 
   openGuardarModal(content) {
@@ -91,7 +91,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       this.guiasalida.warehouse_from.code = np.warehouse.code;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
-      this.modalNotaRef.close();
+      this.modalGuiaRef.close();
 
     });
   }
@@ -110,10 +110,10 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
         this.guiasalida.document_number = data['data']['numero'];
       }
 
-      this.modalNotaRef.close();
-    }, error => this.modalNotaRef.close());
+      this.modalGuiaRef.close();
+    }, error => this.modalGuiaRef.close());
 
-    this.modalNotaRef.result.then(data => {
+    this.modalGuiaRef.result.then(data => {
       this.router.navigateByUrl(`guia-salida?id=${this.guiasalida.document_number}`);
     });
   }

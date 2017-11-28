@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 
 import { GuiaSalida as GuiaSalidaInterface } from '../models/guia-salida.model';
+import { Producto as ProductoInterface } from '../models/producto.model';
 
 @Injectable()
 export class GuiaSalidaService {
@@ -28,10 +29,23 @@ export class GuiaSalidaService {
     }
 
     saveGuiaSalida(guiasalida: GuiaSalidaInterface) {
-        return this.api.post('productos.array.json', guiasalida);
+        const guia = this.setNotaModel(guiasalida);
+        return this.api.post('transfer-guides', guia);
       }
     
       updateGuiaSalida(guiasalida: GuiaSalidaInterface) {
-        return this.api.put('productos.array.json', guiasalida);
+        const guia = this.setNotaModel(guiasalida);
+        return this.api.put(`transfer-guides/${guiasalida.uuid}`, guia);
+      }
+
+      private setNotaModel(guia: GuiaSalidaInterface) {
+        const products = guia.products.map((p: ProductoInterface) => {
+          return { uuid: p.uuid, quantity: p.quantity };
+        });
+        
+        return {
+          products: products,
+          comment: guia.comment
+        };
       }
 }
