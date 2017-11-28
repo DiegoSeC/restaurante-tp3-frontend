@@ -16,6 +16,10 @@ export class NotaPedidoComponent implements OnInit {
   public notaNumero: number;
   private sub: any;
   private anularAction: boolean;
+  // Pagination
+  public page = 1;
+  public totalItems = 0;
+  private localNotaPedidos: Array<NotaPedidoInterface[]> = [];
 
   constructor(private router: Router,
               private notaApi: NotaPedidoService,
@@ -36,11 +40,21 @@ export class NotaPedidoComponent implements OnInit {
   }
 
   getNotaPedidos() {
-    this.notaApi.getNotaPedidos()
-                .subscribe(data => {
-                  /*console.log(data);*/
-                  this.notaPedidos = data['data'];
-                });
+    this.notaApi.getNotaPedidos().subscribe(data => {
+      const notaPedidos = data['data'];
+      let i, j, temparray, chunk = 10;
+      for (i = 0, j = notaPedidos.length; i < j; i += chunk) {
+          temparray = notaPedidos.slice(i,i+chunk);
+          this.localNotaPedidos.push(temparray);
+      }
+
+      this.notaPedidos = this.localNotaPedidos[0];
+      this.totalItems = notaPedidos.length;
+    });
+  }
+
+  getPagination(e) {
+    this.notaPedidos = this.localNotaPedidos[e - 1];
   }
 
   openAnularModal(content, index) {

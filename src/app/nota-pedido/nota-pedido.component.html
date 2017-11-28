@@ -67,6 +67,8 @@
         </tr>
       </tbody>
     </table>
+
+    <ngb-pagination *ngIf="totalItems" [collectionSize]="totalItems" (pageChange)="getPagination($event)" [(page)]="page" aria-label="Nota pedido paginacion"></ngb-pagination>
   </div>
 </div>
 
