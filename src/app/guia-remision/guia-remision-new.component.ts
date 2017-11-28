@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GuiaRemision } from '../models/guia-remision.model';
 import { NotaPedido } from '../models/nota-pedido.model';
 import { Transportista } from '../models/transportista.model';
+import { Almacen } from '../models/almacen.model';
 
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { TransportistaService } from '../providers/transportista.service';
-import { Almacen } from '../models/almacen.model';
-//import { CamionService } from '../providers/camion.service';
+import { AlmacenService } from '../providers/almacen.service';
 
 @Component({
     selector: 'app-guia-remision-new',
@@ -21,10 +21,11 @@ export class GuiaRemisionNewcomponent implements OnInit {
     guia: GuiaRemision;
     notaspedidos: NotaPedido[];
     transportistas: Transportista[];
+    almacenes: Almacen[];
     private modalNotasRef: NgbModalRef;
     private modalTranspRef: NgbModalRef;
-    private modalCamionRef: NgbModalRef;
-    private modalSubmit : NgbModalRef;
+    private modalAlmacenRef: NgbModalRef;
+    private modalSubmit: NgbModalRef;
     public query: string;
     private sub: any;
     private today: any = new Date();
@@ -32,6 +33,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     constructor(private modalService: NgbModal,
                 private notapedidoService: NotaPedidoService,
                 private transpService: TransportistaService,
+                private almService: AlmacenService,
                 private guiaremisionService: GuiaRemisionService,
                 private router: Router,
                 private route: ActivatedRoute) {
@@ -45,6 +47,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
 
         this.getNotas();
         this.getTransportistas();
+        this.getAlmacenes();
     }
 
     ngOnInit() {
@@ -100,6 +103,18 @@ export class GuiaRemisionNewcomponent implements OnInit {
                                     );
     }
 
+    getAlmacenes() {
+        this.almService.getAlmacenes()
+                                        .subscribe(
+                                            data => {
+                                                this.almacenes = data['data'];
+                                            },
+                                            error => {
+                                                console.log(error);
+                                            }
+                                        );
+    }
+
     openNotaPedidoModal(content) {
         this.modalNotasRef = this.modalService.open(content);
     }
@@ -120,8 +135,13 @@ export class GuiaRemisionNewcomponent implements OnInit {
         this.modalTranspRef.dismiss();
     }
 
-    openCamionModal(content) {
-        this.modalCamionRef = this.modalService.open(content);
+    openAlmacenModal(content) {
+        this.modalAlmacenRef = this.modalService.open(content);
+    }
+
+    addAlmacen(almacen: Almacen, index: number) {
+        this.guia.warehouse_to.code = almacen.code;
+        this.modalAlmacenRef.dismiss();
     }
 
     openGuardarModal(content) {

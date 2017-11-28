@@ -1,7 +1,7 @@
 export class Almacen {
   constructor(
     public uuid: string,
-    public code: number,
+    public code: string,
     public name: string,
     public address: string,
     public contact_name: string,

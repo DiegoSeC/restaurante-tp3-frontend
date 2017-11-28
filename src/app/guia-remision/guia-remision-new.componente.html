@@ -62,17 +62,17 @@
             <div class="col-sm-6">
                 <div class="form-group row">
                   <label for="direccion2" class="col-sm-2 col-form-label">Almac&eacute;n Destino:</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-8">
                     <input type="text" class="form-control" id="direccion2" name="direccion2"
-                           [(ngModel)]="guia.warehouse_to.code" required #direccion2="ngModel"
-                           placeholder="Ingrese una Dirección">
-                    <div *ngIf="direccion2.invalid && f.submitted"
-                        class="alert alert-danger" style="margin-top: 5px">
-                       Dirección Obligatorio
+                           [(ngModel)]="guia.warehouse_to.code" required readonly #direccion2="ngModel"
+                           placeholder="Ingrese un almacen destino">
+                    <div class="col-sm-1">
+                        <button type="button" name="search" 
+                        (click)="openAlmacenModal(AlmacenModal)" class="btn btn-outline-secondary btn-sm">Buscar</button>
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
      </div>
     
     <!--<div class="row" style="margin-top: 15px;">
@@ -178,7 +178,7 @@
 </form>
       
 <!-- Modales -->
-<!--Modal de Productos-->
+<!--Modal de Nota de Pedidos-->
 <ng-template #notaPedidoModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Nota de Pedidos</h4>
@@ -265,16 +265,14 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
-            Cancelar
-        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancelar</button>
     </div>
 </ng-template>
 
-<!--Modal de Camion
-<ng-template #camionModal let-d="dismiss" let-c="close">
+<!--Modal de Almacen -->
+<ng-template #AlmacenModal let-d="dismiss" let-c="close">
     <div class="modal-header">
-        <h4 class="modal-title">Camion</h4>
+        <h4 class="modal-title">Almacen</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -292,18 +290,16 @@
         <thead>
             <tr>
             <th>Código</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
+            <th>Dirección</th>
             <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let carrier of transportistas | search:'driver_license':query; let i = index">
-            <td>{{ carrier.driver_license }}</td>
-            <td>{{ carrier.employee.name }}</td>
-            <td>{{ carrier.employee.lastname }}</td>
+            <tr *ngFor="let almacen of almacenes | search:'code':query; let i = index">
+            <td>{{ almacen.code }}</td>
+            <td>{{ almacen.address }}</td>
             <td>
-                <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
+                <button class="btn btn-outline-primary" (click)="addAlmacen(almacen, i)">Agregar</button>
             </td>
             </tr>
         </tbody>
@@ -315,7 +311,6 @@
         </button>
     </div>
 </ng-template>
--->
 
 
 <ng-template #guardarModal let-d="dismiss" let-c="close">

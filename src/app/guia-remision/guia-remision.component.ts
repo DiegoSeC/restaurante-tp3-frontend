@@ -51,7 +51,7 @@ export class GuiaRemisionComponent implements OnInit {
 
     anular() {
         const guia = this.guias[this.guiaIndex];
-        this.guias[this.guiaIndex].status = 'Anulado';
+        this.guias[this.guiaIndex].status = 'canceled';
         this.anularAction = true;
 
         this.api.cancel(guia.uuid)

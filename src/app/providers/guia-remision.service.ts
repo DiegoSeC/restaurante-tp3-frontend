@@ -7,22 +7,28 @@ import 'rxjs/RX';
 export class GuiaRemisionService {
 
     constructor(private api: ApiService) {}
+    private url = `waybills`;
 
     getAll() {
-        const url = `waybills`;
-        return this.api.get(url);
+        return this.api.get(this.url);
     }
 
     cancel(id: String) {
-        const url = `waybills/`;
-        return this.api.put(url + id, {
-            uuid: id,
-            status: 'Anulado'
+        return this.api.put(this.url + '/batch-update', {
+            waybills: {
+                uuid: id,
+                status: 'canceled',
+                delivery_status: 'canceled'
+            }
         });
     }
 
     getOne(id: String) {
-        const url = `waybills/`;
-        return this.api.get(url + id);
+        return this.api.get(this.url + '/' + id);
     }
+
+    save(object: GuiaRemision) {
+        return this.api.put(this.url + `batch-update`, GuiaRemision);
+    }
+
 }
