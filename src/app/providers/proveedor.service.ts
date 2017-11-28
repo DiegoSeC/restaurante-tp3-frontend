@@ -9,6 +9,6 @@ export class ProveedorService {
     constructor(private api: ApiService) {}
 
     getAll() {
-        return this.api.get(this.endpoint);
+        return this.api.get('suppliers');
     }
 }
