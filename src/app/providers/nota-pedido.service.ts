@@ -40,7 +40,7 @@ export class NotaPedidoService {
     return {
       warehouse: nota.warehouse.uuid,
       products: products,
-      observation: nota.comment
+      comment: nota.comment
     };
   }
 }
