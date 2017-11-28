@@ -83,7 +83,8 @@ export class GuiaRemisionNewcomponent implements OnInit {
         this.notapedidoService.getNotaPedidos()
                                 .subscribe(
                                     data => {
-                                        this.notaspedidos = data['data'];
+                                        const n = data['data'];
+                                        this.notaspedidos = n.filter(nota => nota.status === 'completed');
                                     },
                                     error => {
                                         console.log(error);

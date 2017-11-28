@@ -27,11 +27,7 @@ export class SolicitudCotizacionService {
     }
 
     cancel(id: string) {
-        return this.api.put(this.endpoint, {
-                                            uuid: id,
-                                            estado: 'Anulado'
-                                            }
-                            );
+        return this.api.patch(`${this.endpoint}/${id}`, { status: 'canceled' });
     }
 
 }

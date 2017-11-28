@@ -47,7 +47,7 @@ export class SolicitudCotizacionComponent implements OnInit {
     anular() {
         const solicitud = this.solicitudes[this.solicitudIndex];
 
-        this.solicitudes[this.solicitudIndex].status = 'cancel';
+        this.solicitudes[this.solicitudIndex].status = 'canceled';
         this.anularAction = true;
 
         this.api.cancel(solicitud.uuid)
