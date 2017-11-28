@@ -35,7 +35,7 @@
           <label for="almacen_destino" class="col-sm-2 col-form-label">Almacen:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="almacen_destino" name="almacen_destino" 
-            [(ngModel)]="guiasalida.almacen_origen" required readonly
+            [(ngModel)]="guiasalida.warehouse_from.code" required readonly
                    placeholder="Ingrese Almacen">
           </div>
         </div>
@@ -122,7 +122,7 @@
 
 <ng-template #notaPedidoModal let-d="dismiss" let-c="close">
   <div class="modal-header">
-    <h4 class="modal-title">Nota Pedido</h4>
+    <h4 class="modal-title">Notas Pedidos Pendientes</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -149,7 +149,7 @@
         <tr *ngFor="let notapedido of notapedidos | search:'document_number':query; let i = index">
           <td>{{ notapedido.document_number }}</td>
           <td>{{ notapedido.date | date:'d/M/y' }}</td>
-          <td>{{ notapedido.warehouse.name }}</td>
+          <td>{{ notapedido.warehouse.code }}</td>
           <td>
             <button class="btn btn-outline-primary" (click)="getNotaPedido(notapedido)">
               Seleccionar

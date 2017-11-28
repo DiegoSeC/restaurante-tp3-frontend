@@ -34,7 +34,8 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     this.guiasalida = <GuiaSalidaInterface> {
       products: [],
       date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
-      order: {}
+      order: {},
+      warehouse_from: {}
     };
 
     this.getNotaPedidos();
@@ -84,8 +85,9 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   getNotaPedido(notaPedido: NotaPedidoInterface) {
     this.notaPedido.getNotaPedido(notaPedido.uuid).subscribe(data => {
       const np = data['data'];
+      console.info(np);
       this.guiasalida.order.document_number= np.document_number;
-      this.guiasalida.almacen_origen = np.warehouse.name;
+      this.guiasalida.warehouse_from.code = np.warehouse.code;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
       this.modalNotaRef.close();

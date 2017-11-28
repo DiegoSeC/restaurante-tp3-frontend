@@ -58,8 +58,8 @@
             <td>{{ guia.document_number }}</td>
             <td>{{ guia.date | date:'d/M/y' }}</td>
             <td>{{ guia.status }}</td>
-            <td>Almacen 2</td>
-            <td>Almacen 3</td>
+            <td>{{ guia.warehouse_from.code }}</td>
+            <td>{{ guia.warehouse_to.code }}</td>
             <td>
               <button class="btn btn-light" [disabled]="guia.status !== 'pending'" [routerLink]="['/nota-pedido/edit/', guia.uuid]">
                 Editar
