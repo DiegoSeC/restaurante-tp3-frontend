@@ -1,5 +1,5 @@
 import { Producto } from '../models/producto.model';
-import {NotaPedido} from '../models/nota-pedido.model'
+import {NotaPedido} from '../models/nota-pedido.model';
 import { Almacen } from './almacen.model';
 
 export class GuiaSalida {
