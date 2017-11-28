@@ -62,7 +62,7 @@
             <button class="btn btn-light" [disabled]="nota.status !== 'pending'" [routerLink]="['/nota-pedido/edit/', nota.uuid]">
               Editar
             </button>
-            <button class="btn btn-danger" (click)="openAnularModal(anularModal, i)">Anular</button>
+            <button class="btn btn-danger" [disabled]="nota.status !== 'pending'" (click)="openAnularModal(anularModal, i)">Anular</button>
           </td>
         </tr>
       </tbody>

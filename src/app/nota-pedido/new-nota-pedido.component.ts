@@ -92,10 +92,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
   }
 
   getAlmacen(almacen: AlmacenInterface) {
-    
-    this.nota.warehouse.name = almacen.name;
-    this.nota.direccion = almacen.address;
-    this.nota.contacto = almacen.contact_name;
+    this.nota.warehouse = almacen;
     this.modalAlmacenRef.close();
   }
 
@@ -123,7 +120,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
     action.subscribe(data => {
       if (this.action !== 'actualizar') {
-        this.nota.document_number = data['data']['numero'];
+        this.nota.document_number = data['data']['document_number'];
       }
 
       this.modalNotaRef.close();

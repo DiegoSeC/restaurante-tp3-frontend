@@ -55,7 +55,7 @@
         <label for="direccion" class="col-sm-1 col-form-label">Dirección:</label>
         <div class="col-sm-11">
           <input type="text" class="form-control" id="direccion" name="direccion"
-                 [(ngModel)]="nota.direccion" required readonly #direccion="ngModel"
+                 [(ngModel)]="nota.warehouse.address" required readonly #direccion="ngModel"
                  placeholder="Ingrese una Dirección">
           <div *ngIf="direccion.invalid && f.submitted"
               class="alert alert-danger" style="margin-top: 5px">
@@ -86,15 +86,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let producto of nota.productos; let i = index">
+          <tr *ngFor="let producto of nota.products; let i = index">
             <td>{{ producto.sku }}</td>
             <td>{{ producto.name }}</td>
             <td>
-              <input type="number" name="cantidad[{{ i }}]" min="1"
+              <input type="number" name="cantidad[{{ i }}]" pattern="^[1-9][0-9]*$"
                      [(ngModel)]="producto.quantity" #cantidad="ngModel" required>
               <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched || f.submitted)"
                   class="alert alert-danger" style="margin-top: 5px">
-                  Cantidad de Producto Obligatorio
+                  <span>Cantidad de Producto erróneo</span>
               </div>
             </td>
             <td>{{ producto.unit_of_measurement }}</td>
@@ -102,7 +102,7 @@
               <button class="btn btn-warning" (click)="quitarProducto(producto, i)">Quitar</button>
             </td>
           </tr>
-          <tr *ngIf="nota.productos.length === 0">
+          <tr *ngIf="nota.products.length === 0">
             <td colspan="5" class="text-center">Seleccione productos</td>
           </tr>
         </tbody>
@@ -115,7 +115,7 @@
       <div class="form-group">
         <label for="direccion">Contacto:</label>
         <input type="text" class="form-control" id="contacto" name="contacto"
-               [(ngModel)]="nota.contacto" required #contacto="ngModel"
+               [(ngModel)]="nota.warehouse.contact" required #contacto="ngModel"
                placeholder="Ingrese nombre de Contacto">
         <div *ngIf="contacto.invalid && (contacto.dirty || contacto.touched || f.submitted)"
              class="alert alert-danger" style="margin-top: 5px">
@@ -129,7 +129,7 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label for="observacion">Observaciones</label>
-        <textarea name="observacion" id="observacion" [(ngModel)]="nota.observacion"
+        <textarea name="observacion" id="observacion" [(ngModel)]="nota.observation"
                   rows="3" class="form-control"></textarea>
       </div>
     </div>

@@ -29,9 +29,8 @@ export class NotaPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    if(typeof this.route.snapshot.queryParams['id']!=='undefined'){
-      this.notaNumero = Math.floor(Math.random() * 6) + 1  ;
+    if(typeof this.route.snapshot.queryParams['id'] !== 'undefined') {
+      this.notaNumero = this.route.snapshot.queryParams['id'];
     }
   }
 
@@ -64,7 +63,7 @@ export class NotaPedidoComponent implements OnInit {
 
   anular() {
     const nota = this.notaPedidos[this.notaIndex];
-    this.notaPedidos[this.notaIndex].status = 'Anulado';
+    this.notaPedidos[this.notaIndex].status = 'canceled';
     this.anularAction = true;
 
     this.notaApi.anularNotaPedido(nota.uuid).subscribe(data => {
