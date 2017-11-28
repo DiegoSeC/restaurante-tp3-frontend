@@ -18,9 +18,8 @@ export class GuiaSalidaService {
     }
 
     anularGuiaSalida(guiaId: string) {
-        return this.api.put(this.endpoint, {
-          uuid: guiaId,
-          estado: 'Anulado'
+        return this.api.patch(`transfer-guides/${guiaId}`, {
+          status: 'inactive'
         });
       }
     
