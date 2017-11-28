@@ -13,7 +13,7 @@ export class GuiaSalida {
       public direccion: string,
       public products: Producto[],
       public status: string,
-      public contacto: string,
-      public observacion: string
+      public contact: string,
+      public comment: string
     ) {}
   }
