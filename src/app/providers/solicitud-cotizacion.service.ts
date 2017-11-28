@@ -26,8 +26,8 @@ export class SolicitudCotizacionService {
         return this.api.put(this.endpoint, object);
     }
 
-    cancel(id: string) {
-        return this.api.patch(`${this.endpoint}/${id}`, { status: 'canceled' });
+    cancel(object: SolicitudCotizacion) {
+        return this.api.patch(`${this.endpoint}/${object.uuid}`, { status: object.status });
     }
 
 }

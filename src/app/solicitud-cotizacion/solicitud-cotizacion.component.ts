@@ -45,7 +45,7 @@ export class SolicitudCotizacionComponent implements OnInit {
                 temparray = solicitudes.slice(i,i+chunk);
                 this.localSolicitudes.push(temparray);
             }
-      
+
             this.solicitudes = this.localSolicitudes[0];
             this.totalItems = solicitudes.length;
         });
@@ -61,20 +61,19 @@ export class SolicitudCotizacionComponent implements OnInit {
     }
 
     anular() {
-        const solicitud = this.solicitudes[this.solicitudIndex];
-
-        this.solicitudes[this.solicitudIndex].status = 'canceled';
+        const solicitudToCancel = this.solicitudes[this.solicitudIndex];
+        //this.solicitudes[this.solicitudIndex].status = 'canceled';
+        solicitudToCancel.status = 'canceled';
         this.anularAction = true;
 
-        this.api.cancel(solicitud.uuid)
+        this.api.cancel(solicitudToCancel)
                 .subscribe(data => {
                                 this.modalNotaRef.close();
+                                this.getAllSolicitudes();
                             },
                             error => {
                                 this.modalNotaRef.close();
                         }
                         );
-
-        //this.getAllSolicitudes();
     }
 }
