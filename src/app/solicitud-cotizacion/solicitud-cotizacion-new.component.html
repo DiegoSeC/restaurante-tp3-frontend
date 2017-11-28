@@ -27,10 +27,10 @@
 
         <div class="col-sm-8">
             <div class="form-group row">
-              <label for="almacen" class="col-sm-4 col-form-label">Nota de Pedido:</label>
+              <label for="nota" class="col-sm-4 col-form-label">Nota de Pedido:</label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" id="nota" name="nota"
-                       [(ngModel)]="notaPedido.document_number" required readonly #nota="ngModel"
+                       [(ngModel)]="solicitud.order.document_number" required readonly #nota="ngModel"
                        placeholder="Ingrese una nota de pedido">
                 <div *ngIf="nota.invalid && f.submitted"
                     class="alert alert-danger" style="margin-top: 5px">
@@ -92,6 +92,7 @@
             </table>
         </div>
     </div>
+    <!--
     <div class="row">
         <div class="col-sm-12 text-right">
             <button type="button" name="add" class="btn btn-primary" (click)="openProveedoresModal(proveedoresModal)">
@@ -99,7 +100,6 @@
             </button>
         </div>
     </div>
-
     <div class="row" style="margin-top: 15px;">
         <div class="col-sm-12">
             <table class="table">
@@ -126,9 +126,8 @@
                 </tbody>
             </table>
         </div>
-        
     </div>
-        
+    -->
     <div class="row">
         <div class="col-sm-12 text-right">
         <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
@@ -186,6 +185,7 @@
 </ng-template>
 
 <!--Modal de Proveedores-->
+<!--
 <ng-template #proveedoresModal let-d="dismiss" let-c="close">
     <div class="modal-header">
         <h4 class="modal-title">Almacén</h4>
@@ -229,7 +229,7 @@
         </button>
     </div>
 </ng-template>
-
+-->
 <!--Confirmacion de registro-->
 <ng-template #guardarModal let-d="dismiss" let-c="close">
     <div class="modal-header">
@@ -250,7 +250,7 @@
         </button>
     </div>
 </ng-template>
-
+<!--Buscar Nota de Pedido-->
 <ng-template #notaModal let-d="dismiss" let-c="close">
     <div class="modal-header">
       <h4 class="modal-title">Nota de Pedidos</h4>
@@ -264,7 +264,7 @@
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">Buscar</div>
           <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                 placeholder="Ingrese su criterio de búsqueda">
+                 placeholder="Ingrese numero de nota de pedido">
         </div>
       </div>
       <table class="table">

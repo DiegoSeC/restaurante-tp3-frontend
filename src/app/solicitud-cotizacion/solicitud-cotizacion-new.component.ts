@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
-import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
+import { NotaPedido } from '../models/nota-pedido.model';
 import { Producto } from '../models/producto.model';
 import { Proveedor } from '../models/proveedor.model';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
@@ -20,8 +20,8 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     solicitud: SolicitudCotizacion;
     productos: Producto[];
     proveedores: Proveedor[];
-    notaPedidos: NotaPedidoInterface[];
-    notaPedido: NotaPedidoInterface = <NotaPedidoInterface> { document_number: '' };
+    notaPedidos: NotaPedido[];
+    notaPedido: NotaPedido = <NotaPedido> { document_number: '' };
 
     private modalProductoRef: NgbModalRef;
     private modalProveedoresRef: NgbModalRef;
@@ -38,9 +38,12 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
                 private solicitudService: SolicitudCotizacionService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private notaApi: NotaPedidoService) {
+                private notaService: NotaPedidoService) {
         /*Inicializar el objeto solicitud*/
         this.solicitud = <SolicitudCotizacion> {
+            order: {
+                document_number: ''
+            },
             products: [],
             suppliers: [],
             date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`
@@ -67,7 +70,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     }
 
     getNotaPedidos() {
-        this.notaApi.getNotaPedidos().subscribe(data => {
+        this.notaService.getNotaPedidos().subscribe(data => {
             const n = data['data'];
             this.notaPedidos = n.filter(nota => nota.status === 'pending');
         });
@@ -136,13 +139,26 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         this.modalProveedoresRef.close();
     }
 
-    getNotaPedido(nota: NotaPedidoInterface, index: number) {
-        this.notaApi.getNotaPedido(nota.uuid).subscribe(data => {
-            this.notaPedido = <NotaPedidoInterface> data['data'];
-            this.solicitud.products = this.notaPedido.products;
-            this.disableProducts();
-            this.modalNota.close();
-        });
+    getNotaPedido(nota: NotaPedido, index: number) {
+        this.notaService.getNotaPedido(nota.uuid)
+                        .subscribe(
+                            data => {
+                                this.notaPedido = <NotaPedido> data['data'];
+                                this.setDatosNotaPedido(this.notaPedido);
+                                this.disableProducts();
+                                this.modalNota.close();
+                            },
+                            error => {
+                                console.log(error);
+                            }
+                        );
+    }
+
+    setDatosNotaPedido(object: NotaPedido) {
+        this.solicitud.order = object;
+        this.solicitud.products = this.solicitud.order.products;
+        /*this.solicitud.order = <NotaPedido> {
+        };*/
     }
 
     quitarProducto(producto: Producto, index: number) {
@@ -165,7 +181,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         let action = this.createSolicitud();
-
+        console.log('action => ' + JSON.stringify(action));
         if (this.action === 'actualizar') {
             action = this.updateSolicitud();
         }
@@ -189,6 +205,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     }
 
     createSolicitud() {
+        /*console.log(JSON.stringify(this.solicitud));*/
         return this.solicitudService.save(this.solicitud);
     }
 

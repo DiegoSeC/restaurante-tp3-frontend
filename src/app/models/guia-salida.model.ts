@@ -16,4 +16,4 @@ export class GuiaSalida {
       public contact: string,
       public comment: string
     ) {}
-  }
+}
