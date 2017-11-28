@@ -20,7 +20,8 @@ import { GuiaRemisionNewcomponent } from './guia-remision-new.component';
         CommonModule,
         FormsModule,
         RouterModule,
-        PipesModule
+        PipesModule,
+        NgbModule
      ],
     exports: [
         GuiaRemisionComponent,

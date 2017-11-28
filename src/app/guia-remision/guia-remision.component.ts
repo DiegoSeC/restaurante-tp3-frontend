@@ -20,6 +20,11 @@ export class GuiaRemisionComponent implements OnInit {
     private sub: any;
     anularAction: boolean;
 
+    // Pagination
+    public page = 1;
+    public totalItems = 0;
+    private localGuiaRemision: Array<GuiaRemision[]> = [];
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private api: GuiaRemisionService,
@@ -36,12 +41,22 @@ export class GuiaRemisionComponent implements OnInit {
     }
 
     getAllGuias() {
-        this.api.getAll()
-        .subscribe(data => {
-                    this.guias = data['data'];
-                }
-        );
+        this.api.getAll().subscribe(data => {
+            const guias = data['data'];
+            let i, j, temparray, chunk = 10;
+            for (i = 0, j = guias.length; i < j; i += chunk) {
+                temparray = guias.slice(i,i+chunk);
+                this.localGuiaRemision.push(temparray);
+            }
+      
+            this.guias = this.localGuiaRemision[0];
+            this.totalItems = guias.length;
+        });
     }
+
+    getPagination(e) {
+        this.guias = this.localGuiaRemision[e - 1];
+      }
 
     openAnularModal(content, index) {
         this.guiaIndex = index;
