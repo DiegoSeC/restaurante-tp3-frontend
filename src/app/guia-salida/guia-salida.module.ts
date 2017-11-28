@@ -16,6 +16,7 @@ import {NewGuiaSalidaComponent} from './new-guia-salida.component';
         NewGuiaSalidaComponent
     ],
     imports: [
+        NgbModule,
         CommonModule,
         FormsModule,
         RouterModule,

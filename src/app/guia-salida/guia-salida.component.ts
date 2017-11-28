@@ -18,6 +18,11 @@ export class GuiaSalidaComponent implements OnInit   {
     private sub: any;
     private anularAction: boolean;
 
+    // Pagination
+    public page = 1;
+    public totalItems = 0;
+    private localGuiaSalida: Array<GuiaSalidaInterface[]> = [];
+
     constructor(private router: Router,
         private guiaApi: GuiaSalidaService,
         private route: ActivatedRoute,
@@ -35,9 +40,22 @@ export class GuiaSalidaComponent implements OnInit   {
     
     getGuiaSalidas() {
         this.guiaApi.getGuiaSalidas().subscribe(data => {
-          this.guiaSalidas = data['data'];
+            const guias = data['data'];
+            let i, j, temparray, chunk = 10;
+            for (i = 0, j = guias.length; i < j; i += chunk) {
+                temparray = guias.slice(i,i+chunk);
+                this.localGuiaSalida.push(temparray);
+            }
+      
+            this.guiaSalidas = this.localGuiaSalida[0];
+            this.totalItems = guias.length;
         });
-      }
+    }
+
+    getPagination(e) {
+        this.guiaSalidas = this.localGuiaSalida[e - 1];
+    }
+
     openAnularModal(content, index) {
         this.guiaIndex = index;
         this.modalGuiaRef = this.modalService.open(content);
