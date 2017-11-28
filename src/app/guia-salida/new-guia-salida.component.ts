@@ -73,7 +73,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   openGuardarModal(content) {
-    
+    this.modalGuiaRef = this.modalService.open(content);
   }
 
   getNotaPedidos() {
@@ -88,9 +88,10 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       const np = data['data'];
       console.info(np);
       this.guiasalida.order.document_number= np.document_number;
-      this.guiasalida.warehouse_from.code = np.warehouse.code;
+      this.guiasalida.warehouse_from.name = np.warehouse.name;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
+      this.guiasalida.order.uuid= np.uuid;
       this.modalGuiaRef.close();
 
     });

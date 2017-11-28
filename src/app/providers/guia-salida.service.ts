@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 
 import { GuiaSalida as GuiaSalidaInterface } from '../models/guia-salida.model';
 import { Producto as ProductoInterface } from '../models/producto.model';
+import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
 
 @Injectable()
 export class GuiaSalidaService {
@@ -30,6 +31,8 @@ export class GuiaSalidaService {
 
     saveGuiaSalida(guiasalida: GuiaSalidaInterface) {
         const guia = this.setNotaModel(guiasalida);
+
+        console.info(guia);
         return this.api.post('transfer-guides', guia);
       }
     
@@ -44,7 +47,13 @@ export class GuiaSalidaService {
         });
         
         return {
+        //warehouse_from_uuid: guia.warehouse_from.uuid,
+        //warehouse_to_uuid: guia.warehouse_to.uuid,
+        order_uuid: guia.order.uuid,
+         // carrier: '1cb04144-12af-3490-a6ee-86280c149aa0',
+         // truck: '7d4e7c98-4906-3661-9a7c-6ed97529c96a',
           products: products,
+          contact: guia.contact,
           comment: guia.comment
         };
       }
