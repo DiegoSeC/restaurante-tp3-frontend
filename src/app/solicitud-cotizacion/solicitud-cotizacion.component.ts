@@ -16,6 +16,11 @@ export class SolicitudCotizacionComponent implements OnInit {
     private sub: any;
     anularAction: boolean;
 
+    // Pagination
+  public page = 1;
+  public totalItems = 0;
+  private localSolicitudes: Array<SolicitudCotizacion[]> = [];
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private api: SolicitudCotizacionService,
@@ -32,12 +37,23 @@ export class SolicitudCotizacionComponent implements OnInit {
     }
 
     getAllSolicitudes() {
-        this.api.getAll()
-                .subscribe(data => {
-                            this.solicitudes = data['data'];
-                        }
-                );
+        this.api.getAll().subscribe(data => {
+            this.solicitudes = data['data'];
+            const solicitudes = data['data'];
+            let i, j, temparray, chunk = 10;
+            for (i = 0, j = solicitudes.length; i < j; i += chunk) {
+                temparray = solicitudes.slice(i,i+chunk);
+                this.localSolicitudes.push(temparray);
+            }
+      
+            this.solicitudes = this.localSolicitudes[0];
+            this.totalItems = solicitudes.length;
+        });
     }
+
+    getPagination(e) {
+        this.solicitudes = this.localSolicitudes[e - 1];
+      }
 
     openAnularModal(content, index) {
         this.solicitudIndex = index;
