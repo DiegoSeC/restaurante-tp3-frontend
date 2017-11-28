@@ -13,11 +13,11 @@
   </div>
   
   <h5 class="alert alert-secondary" *ngIf="notaNumero" style="margin: 15px 0;">
-    Se actualizó exitosamente la Guia de Salida {{ notaNumero }}
+    Se actualizó exitosamente la Guia de Salida
   </h5>
   
   <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
-    Se anuló correctamente
+    Se anuló correctamente 
   </h5>
   
   <div class="row" style="margin-top: 25px;">
@@ -58,8 +58,8 @@
             <td>{{ guia.document_number }}</td>
             <td>{{ guia.date | date:'d/M/y' }}</td>
             <td>{{ guia.status }}</td>
-            <td>{{ guia.warehouse_from.code }}</td>
-            <td>{{ guia.warehouse_to.code }}</td>
+            <td>{{ guia.warehouse_from.name }}</td>
+            <td>{{ guia.warehouse_to.name }}</td>
             <td>
               <button class="btn btn-light" [disabled]="guia.status !== 'pending'" [routerLink]="['/nota-pedido/edit/', guia.uuid]">
                 Editar

@@ -45,13 +45,16 @@ export class GuiaSalidaComponent implements OnInit   {
 
     anular() {
         const nota = this.guiaSalidas[this.guiaIndex];
-        this.guiaSalidas[this.guiaIndex].status = 'Anulado';
+        //this.guiaSalidas[this.guiaIndex].status = 'inactive';
         this.anularAction = true;
     
+        
         this.guiaApi.anularGuiaSalida(nota.uuid).subscribe(data => {
           this.modalGuiaRef.close();
+          this.getGuiaSalidas();
         }, error => {
           this.modalGuiaRef.close();
+            console.info("error");
         });
       }
 }
