@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
+import { Producto } from '../models/producto.model';
 
 @Injectable()
 export class SolicitudCotizacionService {
     /*private endpoint = 'solicitud-cotizacion.array.json';*/
     private endpoint = 'quotation-requests';
+    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private api: ApiService) {}
 
@@ -19,7 +21,10 @@ export class SolicitudCotizacionService {
     }
 
     save(object: SolicitudCotizacion) {
-        return this.api.post(this.endpoint, object);
+        /*console.log(JSON.stringify(object));*/
+        const s = this.setDataModel(object);
+        /*console.log(JSON.stringify(s));*/
+        return this.api.post(this.endpoint, s);
     }
 
     update(object: SolicitudCotizacion) {
@@ -30,4 +35,18 @@ export class SolicitudCotizacionService {
         return this.api.patch(`${this.endpoint}/${object.uuid}`, { status: object.status });
     }
 
+    private setDataModel(solicitud: SolicitudCotizacion) {
+        const products = solicitud.products
+                                    .map(
+                                        (p: Producto) => {
+                                            return { uuid: p.uuid, quantity: p.quantity };
+                                        }
+                                    );
+        return {
+            /*date : solicitud.date,
+            document_number: solicitud.document_number,*/
+            order: solicitud.order.uuid,
+            products: products
+        };
+    }
 }
