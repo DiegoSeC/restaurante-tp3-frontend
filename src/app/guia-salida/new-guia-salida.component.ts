@@ -87,13 +87,11 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     this.notaPedido.getNotaPedido(notaPedido.uuid).subscribe(data => {
       const np = data['data'];
       console.info(np);
-      this.guiasalida.order.document_number= np.document_number;
-      this.guiasalida.warehouse_from.name = np.warehouse.name;
+      this.guiasalida.order= np;
+      this.guiasalida.warehouse_from = np.warehouse;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
-      this.guiasalida.order.uuid= np.uuid;
       this.modalGuiaRef.close();
-
     });
   }
 

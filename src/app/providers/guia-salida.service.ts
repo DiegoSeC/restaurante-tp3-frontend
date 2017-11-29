@@ -47,11 +47,11 @@ export class GuiaSalidaService {
         });
         
         return {
-        //warehouse_from_uuid: guia.warehouse_from.uuid,
-        //warehouse_to_uuid: guia.warehouse_to.uuid,
-        order_uuid: guia.order.uuid,
-         // carrier: '1cb04144-12af-3490-a6ee-86280c149aa0',
-         // truck: '7d4e7c98-4906-3661-9a7c-6ed97529c96a',
+          warehouse_from_uuid: '79ddd0ff-be9a-3822-a464-5b0b6485d219',
+          warehouse_to_uuid: guia.warehouse_from.uuid,
+          order_uuid: guia.order.uuid,
+          carrier: '1cb04144-12af-3490-a6ee-86280c149aa0',
+          truck: '7d4e7c98-4906-3661-9a7c-6ed97529c96a',
           products: products,
           contact: guia.contact,
           comment: guia.comment
