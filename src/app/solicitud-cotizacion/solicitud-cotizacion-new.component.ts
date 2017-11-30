@@ -31,6 +31,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     public query: string;
     private sub: any;
     private today: any = new Date();
+    bFlagEdicion: boolean;
 
     constructor(private modalService: NgbModal,
                 private productoService: ProductoService,
@@ -59,8 +60,10 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
             params => {
                 if (typeof params['id'] === 'undefined') {
                     this.setSolicitudDefault();
+                    this.bFlagEdicion = false;
                 } else {
                     this.getSolicitud(params['id']);
+                    this.bFlagEdicion = true;
                 }
           });
     }

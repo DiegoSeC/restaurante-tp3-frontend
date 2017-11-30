@@ -1,3 +1,5 @@
+import { Proveedor } from './proveedor.model';
+
 export class Producto {
   constructor(
     public uuid: string,
@@ -6,6 +8,7 @@ export class Producto {
     public description: string,
     public unit_of_measurement: string,
     public quantity: number,
+    public suppliers: Proveedor[],
     public disabled?: boolean
   ) {}
 }

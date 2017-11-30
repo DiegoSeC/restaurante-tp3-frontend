@@ -57,8 +57,8 @@
                 <td>{{ solicitud.date | date:'d/M/y' }}</td>
                 <td>{{ solicitud.status }}</td>
                 <td>
-                    <button class="btn btn-light" [disabled]="solicitud.status !== 'pending'" [routerLink]="['/solicitud-cotizacion/edit/', solicitud.uuid]">
-                        Editar
+                    <button class="btn btn-light" [routerLink]="['/solicitud-cotizacion/edit/', solicitud.uuid]"><!--[disabled]="solicitud.status !== 'pending'"-->
+                        Ver
                     </button>
                     <button class="btn btn-danger" [disabled]="solicitud.status !== 'pending'" (click)="openAnularModal(anularModal, i)">
                         Anular

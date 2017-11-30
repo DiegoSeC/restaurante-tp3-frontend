@@ -1,12 +1,12 @@
 <div class="row" style="padding-top: 15px;">
     <div class="col-sm-8">
-        <h2>Solicitud de Cotizacion</h2>
+        <h3>Solicitud de Cotizacion</h3>
     </div>
     <div class="col-sm-4">
         <div class="media">
         <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
         <div class="media-body">
-            <h2 class="mt-0">Juan Crespo</h2>
+            <h3 class="mt-0">Jorge Ortiz</h3>
         </div>
         </div>
     </div>
@@ -40,7 +40,8 @@
               <div class="col-sm-2">
                 <button type="button" name="search" style="margin-top: 3px;"
                         (click)="openNotaPedido(notaModal)"
-                        class="btn btn-outline-secondary btn-sm">Buscar</button>
+                        class="btn btn-outline-secondary btn-sm"
+                        [disabled]="bFlagEdicion">Buscar</button>
               </div>
             </div>
           </div>
@@ -48,7 +49,7 @@
     
     <div class="row">
         <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary" (click)="openProductosModal(productosModal)">
+            <button type="button" name="add" class="btn btn-primary" (click)="openProductosModal(productosModal)" [disabled]="bFlagEdicion">
                 Añadir Producto
             </button>
         </div>
@@ -59,11 +60,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Cantidad</th>
-                        <th>Unidad de Medida</th>
-                        <th>Acción</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-center">Unidad de Medida</th>
+                        <th *ngIf="bFlagEdicion" class="text-center">Proveedores</th>
+                        <th class="text-center">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,15 +74,21 @@
                         <td>{{ producto.name }}</td>
                         <td>
                             <input type="number" name="cantidad[{{ i }}]" pattern="^[1-9][0-9]*$"
-                                    [(ngModel)]="producto.quantity" #cantidad="ngModel" required>
+                                    [(ngModel)]="producto.quantity" #cantidad="ngModel" required
+                                    [disabled]="bFlagEdicion">
                             <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched || f.submitted)"
                                 class="alert alert-danger" style="margin-top: 5px">
                                 Cantidad de Producto erróneo
                             </div>
                         </td>
                         <td>{{ producto.unit_of_measurement }}</td>
+                        <td *ngIf="bFlagEdicion">
+                            <span *ngFor="let proveedor of producto.suppliers">
+                                {{proveedor.name}}<br>
+                            </span>
+                        </td>
                         <td>
-                            <button class="btn btn-warning" (click)="quitarProducto(producto, i)">
+                            <button class="btn btn-warning" (click)="quitarProducto(producto, i)" [disabled]="bFlagEdicion">
                                 Quitar
                             </button>
                         </td>
@@ -92,46 +100,15 @@
             </table>
         </div>
     </div>
-    <!--
     <div class="row">
         <div class="col-sm-12 text-right">
-            <button type="button" name="add" class="btn btn-primary" (click)="openProveedoresModal(proveedoresModal)">
-                Añadir Proveedores
-            </button>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 15px;">
-        <div class="col-sm-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Razon Social</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let proveedor of solicitud.suppliers; let i = index">
-                            <td>{{ proveedor.document_number }}</td>
-                            <td>{{ proveedor.name }}</td>
-                            <td>
-                                <button class="btn btn-warning" (click)="quitarProveedor(proveedor, i)">
-                                    Quitar
-                                </button>
-                            </td>
-                    </tr>
-                    <tr *ngIf="solicitud.suppliers.length === 0">
-                        <td colspan="5" class="text-center">Seleccione proveedores</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    -->
-    <div class="row">
-        <div class="col-sm-12 text-right">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+            <div *ngIf="bFlagEdicion">
+                <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Volver</button>
+            </div>
+            <div *ngIf="!bFlagEdicion">
+                <button type="button" class="btn btn-secondary" [routerLink]="['/solicitud-cotizacion']">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
         </div>
     </div>
 </form>
@@ -184,52 +161,6 @@
     </div>
 </ng-template>
 
-<!--Modal de Proveedores-->
-<!--
-<ng-template #proveedoresModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Almacén</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <div>
-            <label class="sr-only" for="search">Search</label>
-            <div class="input-group mb-2 mb-sm-0">
-                <div class="input-group-addon">Buscar</div>
-                <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                        placeholder="Ingrese nombre del proveedor">
-            </div>
-        </div>
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let proveedor of proveedores | search:'document_number':query; let i = index">
-                <td>{{ proveedor.document_number }}</td>
-                <td>{{ proveedor.name }}</td>
-                <td>
-                    <button class="btn btn-outline-primary" [disabled]="proveedor.disabled" (click)="addProveedor(proveedor, i)">
-                        Agregar
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
-            Cancelar
-        </button>
-    </div>
-</ng-template>
--->
 <!--Confirmacion de registro-->
 <ng-template #guardarModal let-d="dismiss" let-c="close">
     <div class="modal-header">
@@ -297,3 +228,4 @@
       </button>
     </div>
   </ng-template>
+  
