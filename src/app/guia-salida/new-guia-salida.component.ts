@@ -77,7 +77,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   getNotaPedidos() {
-    this.notaPedido.getNotaPedidos().subscribe(data => {
+    this.notaPedido.getNotaPedidosPendiente().subscribe(data => {
       const n = data['data'];
       this.notapedidos = n.filter(nota => nota.status === 'pending');
     });

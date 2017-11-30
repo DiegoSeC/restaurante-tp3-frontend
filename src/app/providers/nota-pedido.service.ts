@@ -22,6 +22,10 @@ export class NotaPedidoService {
     return this.api.get('orders');
   }
 
+  getNotaPedidosPendiente() {
+    return this.api.get('orders?status=pending');
+  }
+
   anularNotaPedido(notaId: string) {
     return this.api.patch(`orders/${notaId}`, {
       status: 'canceled'
