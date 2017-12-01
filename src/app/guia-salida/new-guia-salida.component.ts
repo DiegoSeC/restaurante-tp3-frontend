@@ -91,6 +91,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       this.guiasalida.warehouse_from = np.warehouse;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
+      this.guiasalida.contact= np.contact;
       this.modalGuiaRef.close();
     });
   }
