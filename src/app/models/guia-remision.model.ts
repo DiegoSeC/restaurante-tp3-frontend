@@ -1,6 +1,7 @@
 import { Transportista } from '../models/transportista.model';
 import { Camion } from '../models/camion.model';
 import { Almacen } from './almacen.model';
+import { Producto } from '../models/producto.model';
 
 export class GuiaRemision {
     public uuid: string;
@@ -39,7 +40,7 @@ export class GuiaRemision {
         uuid: string,
         document_number: string
     };
-
+    public products: Producto[];
     constructor() {
     }
 }

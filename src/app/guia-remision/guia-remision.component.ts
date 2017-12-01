@@ -29,11 +29,11 @@ export class GuiaRemisionComponent implements OnInit {
                 private route: ActivatedRoute,
                 private api: GuiaRemisionService,
                 private modalService: NgbModal) {
+                    this.getAllGuias();
     }
 
     ngOnInit() {
         this.guiaNumero = this.route.snapshot.queryParams['id'];
-        this.getAllGuias();
     }
 
     goToForm(): void {
@@ -66,12 +66,13 @@ export class GuiaRemisionComponent implements OnInit {
 
     anular() {
         const guia = this.guias[this.guiaIndex];
-        this.guias[this.guiaIndex].status = 'canceled';
+        // this.guias[this.guiaIndex].status = 'canceled';
         this.anularAction = true;
 
-        this.api.cancel(guia.uuid)
+        this.api.cancel(guia)
             .subscribe(data => {
                 this.modalNotaRef.close();
+                this.getAllGuias();
             // tslint:disable-next-line:no-shadowed-variable
             }, error => {
                 this.modalNotaRef.close();
