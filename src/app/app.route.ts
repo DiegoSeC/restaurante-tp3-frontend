@@ -21,7 +21,8 @@ export const routes: Routes = [
   { path: 'guia-remision/new', component: GuiaRemisionNewcomponent },
   { path: 'guia-remision/edit/:id', component: GuiaRemisionNewcomponent },
   { path: 'guia-salida', component: GuiaSalidaComponent },
-  { path: 'guia-salida/new', component: NewGuiaSalidaComponent }
+  { path: 'guia-salida/new', component: NewGuiaSalidaComponent },
+  { path: 'guia-salida/edit/:id', component: NewGuiaSalidaComponent }
 ];
 
 @NgModule({

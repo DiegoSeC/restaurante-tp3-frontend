@@ -35,7 +35,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       products: [],
       date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
       order: {},
-      warehouse_from: {}
+      warehouse_to: {}
     };
 
     this.getNotaPedidos();
@@ -88,7 +88,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       const np = data['data'];
       console.info(np);
       this.guiasalida.order= np;
-      this.guiasalida.warehouse_from = np.warehouse;
+      this.guiasalida.warehouse_to = np.warehouse;
       this.guiasalida.direccion =  np.warehouse.address;
       this.guiasalida.products =np.products;
       this.guiasalida.contact= np.contact;
