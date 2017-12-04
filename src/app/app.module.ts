@@ -20,6 +20,7 @@ import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
 import { SolicitudCotizacionModule } from './solicitud-cotizacion/solicitud-cotizacion.module';
 import { GuiaRemisionModule } from './guia-remision/guia-remision.module';
 import { GuiaSalidaModule } from './guia-salida/guia-salida.module';
+import { RecepcionPedidosModule } from './recepcion-pedidos/recepcion-pedidos.module';
 
 import { AppRoutingModule } from './app.route';
 
@@ -37,6 +38,7 @@ import { AppRoutingModule } from './app.route';
     SolicitudCotizacionModule,
     GuiaRemisionModule,
     GuiaSalidaModule,
+    RecepcionPedidosModule,
     AppRoutingModule
   ],
   providers: [

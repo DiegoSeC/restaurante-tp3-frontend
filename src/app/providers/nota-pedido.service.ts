@@ -36,6 +36,10 @@ export class NotaPedidoService {
     return this.api.get('orders/' + uuid);
   }
 
+  search(q: string) {
+    return this.api.get('orders', {q: q});
+  }
+
   private setNotaModel(nota: NotaPedidoInterface) {
     const products = nota.products.map((p: ProductoInterface) => {
       return { uuid: p.uuid, quantity: p.quantity };

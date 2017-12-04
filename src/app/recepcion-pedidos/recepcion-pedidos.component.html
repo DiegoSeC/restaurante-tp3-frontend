@@ -1,0 +1,119 @@
+<div class="row" style="padding-top: 15px;">
+  <div class="col-sm-8">
+    <h2>Cronograma de Recepción de Pedidos</h2>
+  </div>
+  <div class="col-sm-4">
+    <div class="media">
+      <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+      <div class="media-body">
+        <h2 class="mt-0">Juan Crespo</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 25px;">
+  <div class="col-sm-8">
+    <div class="form-group row">
+      <label for="date" class="col-sm-2 col-form-label">Fecha:</label>
+      <div class="col-sm-10 row">
+        <div class="input-group col-sm-6">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <button class="input-group-addon" (click)="d.toggle()" type="button">
+            <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          </button>
+        </div>
+
+        <div class="input-group col-sm-6">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <button class="input-group-addon" (click)="d.toggle()" type="button">
+            <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <label class="sr-only" for="search">Search</label>
+    <div class="input-group mb-2 mb-sm-0">
+      <div class="input-group-addon">Buscar</div>
+      <input type="text" class="form-control" id="search" [(ngModel)]="query"
+             placeholder="Ingrese búsqueda">
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 25px;">
+  <div class="col-sm-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" name="all" [(ngModel)]="checked">
+          </th>
+          <th>Número</th>
+          <th>Origen</th>
+          <th>Fecha</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input type="checkbox" name="test" [(ngModel)]="checked">
+          </td>
+          <td>asd</td>
+          <td>asd</td>
+          <td>asd</td>
+          <td>asd</td>
+          <td>asd</td>
+          <td>
+            <button class="btn btn-light" (click)="openNotaPedido(pedidoModal)">
+              Ver
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #pedidoModal let-d="dismiss" let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Nota de Pedido</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>NP000017</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Unidad de Medida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>asd</td>
+          <td>asd</td>
+          <td>asd</td>
+          <td>asd</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
