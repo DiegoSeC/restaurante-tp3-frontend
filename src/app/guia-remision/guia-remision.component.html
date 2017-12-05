@@ -1,100 +1,99 @@
 <div class="row" style="padding-top: 15px;">
-    <div class="col-sm-8">
-        <h2>Gu&iacute;a de Remisi&oacute;n</h2>
+  <div class="col-sm-8">
+    <h2>Gu&iacute;a de Remisi&oacute;n</h2>
+  </div>
+  <div class="col-sm-4">
+    <div class="media">
+      <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+      <div class="media-body">
+        <h2 class="mt-0">Gustavo Aquino</h2>
+      </div>
     </div>
-    <div class="col-sm-4">
-        <div class="media">
-          <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
-          <div class="media-body">
-            <h2 class="mt-0">Gustavo Aquino</h2>
-          </div>
-        </div>
-    </div>
+  </div>
 </div>
 
 <!--Para alertas-->
 <h5 class="alert alert-secondary" *ngIf="guiaNumero" style="margin: 15px 0;">
-    Se actualizó exitosamente la gu&iacute;a de Remisión {{ guiaNumero }}
+  Se actualizó exitosamente la gu&iacute;a de Remisión {{ guiaNumero }}
 </h5>
 
 <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
-    Se anuló correctamente
+  Se anuló correctamente
 </h5>
 
 <div class="row" style="margin-top: 25px;">
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-sm" name="new" (click)="goToForm()">Nuevo</button>
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-sm" name="new" (click)="goToForm()">Nuevo</button>
+  </div>
+  <div class="col-sm-6">
+    <label class="sr-only" for="search">Search</label>
+    <div class="input-group mb-2 mb-sm-0">
+      <div class="input-group-addon">Buscar</div>
+      <input type="text" class="form-control" id="search" placeholder="Ingrese numero de guia de remision" [(ngModel)]="query">
     </div>
-    <div class="col-sm-6">
-        <label class="sr-only" for="search">Search</label>
-        <div class="input-group mb-2 mb-sm-0">
-            <div class="input-group-addon">Buscar</div>
-            <input type="text" class="form-control" id="search" 
-                   placeholder="Ingrese numero de guia de remision" [(ngModel)]="query">
-        </div>
-    </div>
+  </div>
 </div>
 
 <div class="row" style="margin-top: 25px;">
-    <div class="col-sm-12">
-        <table class="table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Número</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Almac&eacute;n Origen</th>
-                <th>Almac&eacute;n Destino</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let guia of guias  | search:'document_number':query; let i = index">
-                <td>
-                    <input type="checkbox" name="test">
-                </td>
-                <td>{{ guia.document_number }}</td>
-                <td>{{ guia.date | date:'d/M/y' }}</td>
-                <td>{{ guia.status }}</td>
-                <td>{{ guia.warehouse_from.code }}</td>
-                <td>{{ guia.warehouse_to.code }}</td>
-                <td>
-                    <button class="btn btn-light" [disabled]="guia.status == 'pending'" [routerLink]="['/guia-remision/edit/', guia.uuid]">Editar</button>
-                    <button class="btn btn-danger" [disabled]="guia.status == 'canceled'" (click)="openAnularModal(anularModal, i)">Anular</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+  <div class="col-sm-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Número</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Almac&eacute;n Origen</th>
+          <th>Almac&eacute;n Destino</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guia of guias  | search:'document_number':query; let i = index">
+          <td>
+            <input type="checkbox" name="test">
+          </td>
+          <td>{{ guia.document_number }}</td>
+          <td>{{ guia.date | date:'d/M/y' }}</td>
+          <td>{{ guia.status }}</td>
+          <td>{{ guia.warehouse_from.name }}</td>
+          <td>{{ guia.warehouse_to.name }}</td>
+          <td>
+            <button class="btn btn-light" [disabled]="guia.status == 'pending'" [routerLink]="['/guia-remision/edit/', guia.uuid]">Editar</button>
+            <button class="btn btn-danger" [disabled]="guia.status == 'canceled'" (click)="openAnularModal(anularModal, i)">Anular</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <ngb-pagination *ngIf="totalItems" [collectionSize]="totalItems" (pageChange)="getPagination($event)" [(page)]="page" aria-label="Nota pedido paginacion"></ngb-pagination>
-    </div>
+    <ngb-pagination *ngIf="totalItems" [collectionSize]="totalItems" (pageChange)="getPagination($event)" [(page)]="page" aria-label="Nota pedido paginacion"></ngb-pagination>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-sm-6"></div>
-    <div class="col-sm-6 text-right">
-        <button type="button" class="btn btn-sm" name="imprimir">Imprimir</button>
-    </div>
+  <div class="col-sm-6"></div>
+  <div class="col-sm-6 text-right">
+    <button type="button" class="btn btn-sm" name="imprimir">Imprimir</button>
+  </div>
 </div>
 
 <ng-template #anularModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Anular Gu&iacute;a de remisi&oacute;n</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+  <div class="modal-header">
+    <h4 class="modal-title">Anular Gu&iacute;a de remisi&oacute;n</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
-    </div>
-    <div class="modal-body">
-        <p>¿Está seguro de anular esta gu&iacute;a de remisi&oacute;n?</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" (click)="anular()">
+  </div>
+  <div class="modal-body">
+    <p>¿Está seguro de anular esta gu&iacute;a de remisi&oacute;n?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="anular()">
             Anular
         </button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')"><!---->
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')"><!---->
             Cancelar
         </button>
-    </div>
+  </div>
 
 </ng-template>

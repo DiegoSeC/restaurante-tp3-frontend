@@ -1,85 +1,71 @@
 <div class="row" style="padding-top: 15px;">
-    <div class="col-sm-8">
-        <h2>Gu&iacute;a de Remisi&oacute;n</h2>
+  <div class="col-sm-8">
+    <h2>Gu&iacute;a de Remisi&oacute;n</h2>
+  </div>
+  <div class="col-sm-4">
+    <div class="media">
+      <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
+      <div class="media-body">
+        <h2 class="mt-0">GustavoAquino</h2>
+      </div>
     </div>
-    <div class="col-sm-4">
-        <div class="media">
-        <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
-        <div class="media-body">
-            <h2 class="mt-0">GustavoAquino</h2>
-        </div>
-        </div>
-    </div>
+  </div>
 </div>
 
 <form #f="ngForm" (ngSubmit)="f.valid && openGuardarModal(guardarModal)">
-    <div class="row" style="margin-top: 15px;">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label for="warehouse_from" class="col-sm-2 col-form-label">Gu&iacute;a de Salida:</label>
-                <div class="col-sm-8">
-                <input type="text" class="form-control" id="warehouse_from" name="warehouse_from"
-                        [(ngModel)]="guia.transfer_guide.document_number" required readonly #almacen="ngModel"
-                        placeholder="Nota de Pedido">
-                <div *ngIf="almacen.invalid && f.submitted"
-                    class="alert alert-danger" style="margin-top: 5px">Guia de Salida Obligatoria
-                </div>
-                </div>
-                <div class="col-sm-2">
-                <button type="button" name="search" style="margin-top: 3px;"
-                        (click)="openNotaPedidoModal(notaPedidoModal)"
-                        class="btn btn-outline-secondary btn-sm">Buscar</button>
-                </div>
-            </div>
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="warehouse_from" class="col-sm-3 col-form-label">Gu&iacute;a de Salida:</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="warehouse_from" name="warehouse_from" [(ngModel)]="guia.transfer_guide.document_number" required readonly #almacen="ngModel" placeholder="Nota de Pedido">
+          <div *ngIf="almacen.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">Guia de Salida Obligatoria</div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="date" name="date"
-                    [(ngModel)]="guia.date" required readonly
-                    placeholder="Ingrese Fecha">
-                </div>
-            </div>
+        <div class="col-sm-2">
+          <button type="button" name="search" style="margin-top: 3px;" (click)="openGuiaSalidaModal(guiaSalidaModal)" class="btn btn-outline-secondary btn-sm">Buscar</button>
         </div>
+      </div>
     </div>
-    
-      <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group row">
-                <label for="direccion" class="col-sm-2 col-form-label">Almac&eacute;n Origen:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="direccion" name="direccion"
-                         [(ngModel)]="guia.warehouse_from.code" required #direccion="ngModel"
-                         placeholder="Ingrese una Dirección">
-                  <div *ngIf="direccion.invalid && f.submitted"
-                      class="alert alert-danger" style="margin-top: 5px">
-                     Dirección Obligatorio
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group row">
-                  <label for="direccion2" class="col-sm-2 col-form-label">Almac&eacute;n Destino:</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="direccion2" name="direccion2"
-                           [(ngModel)]="guia.warehouse_to.code" required readonly #direccion2="ngModel"
-                           placeholder="Ingrese un almacen destino">
-                    <div class="col-sm-1">
-                        <button type="button" name="search" style="margin-top: 3px;"
-                        (click)="openAlmacenModal(AlmacenModal)" 
-                        class="btn btn-outline-secondary btn-sm">Buscar</button>
-                    </div>
-                    <div *ngIf="direccion2.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
-                        Almacén Obligatorio
-                    </div>
-                  </div>
-                </div>
-            </div>
-     </div>
-    
-    <!--<div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="fecha" class="col-sm-2 col-form-label">Fecha:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control-plaintext" id="date" name="date" [(ngModel)]="guia.date" required readonly placeholder="Ingrese Fecha">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="direccion" class="col-sm-3 col-form-label" style="font-size: 14px;">Almac&eacute;n Origen:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="guia.warehouse_from.name" required #direccion="ngModel" placeholder="Ingrese una Dirección">
+          <div *ngIf="direccion.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
+            Dirección Obligatorio
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="direccion2" class="col-sm-3 col-form-label" style="font-size: 13px;">Almac&eacute;n Destino:</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="direccion2" name="direccion2" [(ngModel)]="guia.warehouse_to.name" required readonly #direccion2="ngModel" placeholder="Ingrese un almacen destino">
+          <div *ngIf="direccion2.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
+            Almacén Obligatorio
+          </div>
+        </div>
+
+        <div class="col-sm-2">
+          <button type="button" name="search" style="margin-top: 3px;" (click)="openAlmacenModal(AlmacenModal)" class="btn btn-outline-secondary btn-sm">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="row" style="margin-top: 15px;">
         <div class="col-sm-12">
             <table class="table">
                 <thead>
@@ -117,40 +103,34 @@
             </table>
         </div>
     </div>-->
-    
 
-    <div class="row" style="margin-top: 15px;">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label for="transportistaId" class="col-sm-2 col-form-label">Transportista:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="transportistaId" name="transportistaId"
-                        [(ngModel)]="guia.carrier.name" required readonly #almacen="ngModel"
-                        placeholder="Transportista">
-                </div>
-                <div class="col-sm-1">
-                    <button type="button" name="search" style="margin-top: 3px;"
-                    (click)="openTransportistaModal(transporteModal)"
-                    class="btn btn-outline-secondary btn-sm">Buscar</button>
-                </div>
-            </div>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="transportistaId" class="col-sm-3 col-form-label">Transportista:</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="transportistaId" name="transportistaId" [(ngModel)]="guia.carrier.name" required readonly #almacen="ngModel" placeholder="Transportista">
         </div>
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label for="truckLicense" class="col-sm-2 col-form-label">Placa:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="truckLicense" name="truckLicense"
-                    [(ngModel)]="guia.carrier.driver_license" required
-                    placeholder="Ingrese Placa">
-                </div>
-            </div>
+        <div class="col-sm-2">
+          <button type="button" name="search" style="margin-top: 3px;" (click)="openTransportistaModal(transporteModal)" class="btn btn-outline-secondary btn-sm">Buscar</button>
         </div>
+      </div>
     </div>
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label for="truckLicense" class="col-sm-2 col-form-label">Placa:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="truckLicense" name="truckLicense" [(ngModel)]="guia.carrier.driver_license" required placeholder="Ingrese Placa">
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div class="row" style="margin-top: 15px;">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <!--<label for="licencia" class="col-sm-2 col-form-label">Licenca:</label>
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <!--<label for="licencia" class="col-sm-2 col-form-label">Licenca:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="licencia" name="licencia"
                     [(ngModel)]="nota.licencia" required #almacen="ngModel"
@@ -159,180 +139,176 @@
                 <div *ngIf="almacen.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
                     Campo Obligatorio
                 </div>-->
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-            <label for="observacion">Observaciones:</label>
-            <textarea name="observacion" id="observacion" [(ngModel)]="guia.comment"
-                        rows="3" class="form-control"></textarea>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="observacion">Observaciones:</label>
+        <textarea name="observacion" id="observacion" [(ngModel)]="guia.comment" rows="3" class="form-control"></textarea>
+      </div>
     </div>
-        
-    <div class="row">
-        <div class="col-sm-12 text-right">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/guia-remision']">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-right">
+      <button type="button" class="btn btn-secondary" [routerLink]="['/guia-remision']">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
+  </div>
 </form>
-      
+
 <!-- Modales -->
-<!--Modal de Nota de Pedidos-->
-<ng-template #notaPedidoModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Guias de Salida</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+<!--Modal de Guia de Salida-->
+<ng-template #guiaSalidaModal let-d="dismiss" let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Guias de Salida</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <label class="sr-only" for="search">Search</label>
+      <div class="input-group mb-2 mb-sm-0">
+        <div class="input-group-addon">Buscar</div>
+        <input type="text" class="form-control" id="search" [(ngModel)]="query" placeholder="Ingrese numero de Nota de Pedido">
+      </div>
     </div>
-    <div class="modal-body">
-        <div>
-            <label class="sr-only" for="search">Search</label>
-            <div class="input-group mb-2 mb-sm-0">
-                <div class="input-group-addon">Buscar</div>
-                <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                        placeholder="Ingrese numero de Nota de Pedido">
-            </div>
-        </div>
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Código</th>
-            <th>Fecha </th>
-            <th>Almacén</th>
-            <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let notapedido of guiassalida | search:'document_number':query; let i = index">
-            <td>{{ notapedido.document_number }}</td>
-            <td>{{ notapedido.date }}</td>
-            <td>{{ notapedido.warehouse_from.code }}</td>
-            <td>
-                <button class="btn btn-outline-primary" [disabled]="notapedido.estado" (click)="addNotaPedido(notapedido, i)">
-                    Agregar
-                </button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Fecha </th>
+          <th>Almacén</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of guiassalida | search:'document_number':query; let i = index">
+          <td>{{ g.document_number }}</td>
+          <td>{{ g.date }}</td>
+          <td>{{ g.warehouse_from.name }}</td>
+          <td>
+            <button class="btn btn-outline-primary" [disabled]="g.estado" (click)="addGuiaSalida(g, i)">
+              Agregar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
             Cancelar
         </button>
-    </div>
+  </div>
 </ng-template>
 
 
 <!--Modal de Transporte-->
 <ng-template #transporteModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Transportistas</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+  <div class="modal-header">
+    <h4 class="modal-title">Transportistas</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <label class="sr-only" for="search">Search</label>
+      <div class="input-group mb-2 mb-sm-0">
+        <div class="input-group-addon">Buscar</div>
+        <input type="text" class="form-control" id="search" [(ngModel)]="query" placeholder="Ingrese nombre de transportista">
+      </div>
     </div>
-    <div class="modal-body">
-        <div>
-            <label class="sr-only" for="search">Search</label>
-            <div class="input-group mb-2 mb-sm-0">
-                <div class="input-group-addon">Buscar</div>
-                <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                        placeholder="Ingrese nombre de transportista">
-            </div>
-        </div>
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Código</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let carrier of transportistas | search:'driver_license':query; let i = index">
-            <td>{{ carrier.driver_license }}</td>
-            <td>{{ carrier.employee.name }}</td>
-            <td>{{ carrier.employee.lastname }}</td>
-            <td>
-                <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancelar</button>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carrier of transportistas | search:'driver_license':query; let i = index">
+          <td>{{ carrier.driver_license }}</td>
+          <td>{{ carrier.employee.name }}</td>
+          <td>{{ carrier.employee.lastname }}</td>
+          <td>
+            <button class="btn btn-outline-primary" (click)="addTransportista(carrier, i)">Agregar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancelar</button>
+  </div>
 </ng-template>
 
 <!--Modal de Almacen -->
 <ng-template #AlmacenModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Almacen</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+  <div class="modal-header">
+    <h4 class="modal-title">Almacen</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <label class="sr-only" for="search">Search</label>
+      <div class="input-group mb-2 mb-sm-0">
+        <div class="input-group-addon">Buscar</div>
+        <input type="text" class="form-control" id="search" [(ngModel)]="query" placeholder="Ingrese nombre del auto">
+      </div>
     </div>
-    <div class="modal-body">
-        <div>
-            <label class="sr-only" for="search">Search</label>
-            <div class="input-group mb-2 mb-sm-0">
-                <div class="input-group-addon">Buscar</div>
-                <input type="text" class="form-control" id="search" [(ngModel)]="query"
-                        placeholder="Ingrese nombre del auto">
-            </div>
-        </div>
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Código</th>
-            <th>Dirección</th>
-            <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let almacen of almacenes | search:'code':query; let i = index">
-            <td>{{ almacen.code }}</td>
-            <td>{{ almacen.address }}</td>
-            <td>
-                <button class="btn btn-outline-primary" (click)="addAlmacen(almacen, i)">Agregar</button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Dirección</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let almacen of almacenes | search:'code':query; let i = index">
+          <td>{{ almacen.code }}</td>
+          <td>{{ almacen.address }}</td>
+          <td>
+            <button class="btn btn-outline-primary" (click)="addAlmacen(almacen, i)">Agregar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
             Cancelar
         </button>
-    </div>
+  </div>
 </ng-template>
 
 
 <ng-template #guardarModal let-d="dismiss" let-c="close">
-    <div class="modal-header">
-        <h4 class="modal-title">Guardar Guía de Remisión</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+  <div class="modal-header">
+    <h4 class="modal-title">Guardar Guía de Remisión</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
         </button>
-    </div>
-    <div class="modal-body">
-        <p>¿Está seguro que desea {{ action }} esta guía de remisión?</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">
+  </div>
+  <div class="modal-body">
+    <p>¿Está seguro que desea {{ action }} esta guía de remisión?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="onSubmit()">
             Aceptar
         </button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">
             Cancelar
         </button>
-    </div>
+  </div>
 </ng-template>
