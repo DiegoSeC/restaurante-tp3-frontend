@@ -10,6 +10,7 @@ import { GuiaRemisionNewcomponent } from './guia-remision/guia-remision-new.comp
 import { GuiaSalidaComponent } from './guia-salida/guia-salida.component';
 import { NewGuiaSalidaComponent } from './guia-salida/new-guia-salida.component';
 import { RecepcionPedidosComponent } from './recepcion-pedidos/recepcion-pedidos.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
   { path: 'nota-pedido', component: NotaPedidoComponent },
@@ -24,7 +25,8 @@ export const routes: Routes = [
   { path: 'guia-salida', component: GuiaSalidaComponent },
   { path: 'guia-salida/new', component: NewGuiaSalidaComponent },
   { path: 'guia-salida/edit/:id', component: NewGuiaSalidaComponent },
-  { path: 'recepcion-pedidos', component: RecepcionPedidosComponent }
+  { path: 'recepcion-pedidos', component: RecepcionPedidosComponent },
+  { path: '', component: LoginComponent }
 ];
 
 @NgModule({

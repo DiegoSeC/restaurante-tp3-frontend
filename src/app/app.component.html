@@ -8,7 +8,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" *ngIf="showMenu">
       <li class="nav-item dropdown active" ngbDropdown #myDrop="ngbDropdown">
         <a class="nav-link dropdown-toggle" href="javascript:;" id="logisticaNav"
            role="button" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle
