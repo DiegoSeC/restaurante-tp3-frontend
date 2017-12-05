@@ -16,13 +16,13 @@
     <div class="row" style="margin-top: 15px;">
         <div class="col-sm-6">
             <div class="form-group row">
-                <label for="warehouse_from" class="col-sm-2 col-form-label">Nota de Pedido:</label>
+                <label for="warehouse_from" class="col-sm-2 col-form-label">Gu&iacute;a de Salida:</label>
                 <div class="col-sm-8">
                 <input type="text" class="form-control" id="warehouse_from" name="warehouse_from"
-                        [(ngModel)]="guia.order.document_number" required readonly #almacen="ngModel"
+                        [(ngModel)]="guia.transfer_guide.document_number" required readonly #almacen="ngModel"
                         placeholder="Nota de Pedido">
                 <div *ngIf="almacen.invalid && f.submitted"
-                    class="alert alert-danger" style="margin-top: 5px">Nombre de Nota de Pedido Obligatorio
+                    class="alert alert-danger" style="margin-top: 5px">Guia de Salida Obligatoria
                 </div>
                 </div>
                 <div class="col-sm-2">
@@ -67,8 +67,12 @@
                            [(ngModel)]="guia.warehouse_to.code" required readonly #direccion2="ngModel"
                            placeholder="Ingrese un almacen destino">
                     <div class="col-sm-1">
-                        <button type="button" name="search" 
-                        (click)="openAlmacenModal(AlmacenModal)" class="btn btn-outline-secondary btn-sm">Buscar</button>
+                        <button type="button" name="search" style="margin-top: 3px;"
+                        (click)="openAlmacenModal(AlmacenModal)" 
+                        class="btn btn-outline-secondary btn-sm">Buscar</button>
+                    </div>
+                    <div *ngIf="direccion2.invalid && f.submitted" class="alert alert-danger" style="margin-top: 5px">
+                        Almacén Obligatorio
                     </div>
                   </div>
                 </div>
@@ -181,7 +185,7 @@
 <!--Modal de Nota de Pedidos-->
 <ng-template #notaPedidoModal let-d="dismiss" let-c="close">
     <div class="modal-header">
-        <h4 class="modal-title">Nota de Pedidos</h4>
+        <h4 class="modal-title">Guias de Salida</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -205,10 +209,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let notapedido of notaspedidos | search:'document_number':query; let i = index">
+            <tr *ngFor="let notapedido of guiassalida | search:'document_number':query; let i = index">
             <td>{{ notapedido.document_number }}</td>
             <td>{{ notapedido.date }}</td>
-            <td>{{ notapedido.warehouse.name }}</td>
+            <td>{{ notapedido.warehouse_from.code }}</td>
             <td>
                 <button class="btn btn-outline-primary" [disabled]="notapedido.estado" (click)="addNotaPedido(notapedido, i)">
                     Agregar

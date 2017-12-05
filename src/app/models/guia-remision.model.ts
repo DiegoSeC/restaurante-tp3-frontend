@@ -36,7 +36,7 @@ export class GuiaRemision {
     public comment: string;
     public delivery_status: string;
     public status: string;
-    public order: {
+    public transfer_guide: {
         uuid: string,
         document_number: string
     };

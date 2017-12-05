@@ -15,16 +15,9 @@ export class GuiaRemisionService {
         return this.api.get(this.endpoint);
     }
 
-    cancel(object: GuiaRemision) {
-        return this.api.patch(`${this.endpoint}/` + object.uuid, {
-            status: 'canceled',
-            delivery_status: 'canceled',
-            warehouse_from: object.warehouse_from.uuid,
-            warehouse_to: object.warehouse_to.uuid,
-            order: object.order.uuid,
-            carrier: object.carrier.uuid,
-            truck: object.truck.uuid,
-            products: object.products
+    cancel(guiaId: string) {
+        return this.api.patch(`${this.endpoint}/${guiaId}`, {
+            status: 'canceled'
         });
     }
 

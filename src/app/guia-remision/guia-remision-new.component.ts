@@ -5,11 +5,13 @@ import { GuiaRemision } from '../models/guia-remision.model';
 import { NotaPedido } from '../models/nota-pedido.model';
 import { Transportista } from '../models/transportista.model';
 import { Almacen } from '../models/almacen.model';
+import { GuiaSalida } from '../models/guia-salida.model';
 
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { TransportistaService } from '../providers/transportista.service';
 import { AlmacenService } from '../providers/almacen.service';
+import { GuiaSalidaService } from '../providers/guia-salida.service';
 
 @Component({
     selector: 'app-guia-remision-new',
@@ -20,6 +22,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     public action: string;
     guia: GuiaRemision;
     notaspedidos: NotaPedido[];
+    guiassalida: GuiaSalida[];
     transportistas: Transportista[];
     almacenes: Almacen[];
     private modalNotasRef: NgbModalRef;
@@ -31,7 +34,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     private today: any = new Date();
 
     constructor(private modalService: NgbModal,
-                private notapedidoService: NotaPedidoService,
+                private guiasalidaService: GuiaSalidaService,
                 private transpService: TransportistaService,
                 private almService: AlmacenService,
                 private guiaremisionService: GuiaRemisionService,
@@ -39,7 +42,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
                 private route: ActivatedRoute) {
         this.guia = <GuiaRemision> {
             carrier: {},
-            order: {},
+            transfer_guide: {},
             date: `${this.today.getDate()}-${this.today.getMonth() + 1}-${this.today.getFullYear()}`,
             warehouse_from: {},
             warehouse_to: {}
@@ -80,11 +83,11 @@ export class GuiaRemisionNewcomponent implements OnInit {
     }
 
     getNotas() {
-        this.notapedidoService.getNotaPedidos()
+        this.guiasalidaService.getAll()
                                 .subscribe(
                                     data => {
                                         const n = data['data'];
-                                        this.notaspedidos = n.filter(nota => nota.status === 'completed');
+                                        this.guiassalida = n.filter(nota => nota.status === 'active');
                                     },
                                     error => {
                                         console.log(error);
@@ -120,9 +123,9 @@ export class GuiaRemisionNewcomponent implements OnInit {
         this.modalNotasRef = this.modalService.open(content);
     }
 
-    addNotaPedido(nota: NotaPedido, index: number) {
-        this.guia.order.document_number = nota.document_number;
-        this.guia.warehouse_from.code = nota.warehouse.name;
+    addNotaPedido(guia: GuiaSalida, index: number) {
+        this.guia.transfer_guide.document_number = guia.document_number;
+        this.guia.warehouse_from.code = guia.warehouse_from.code;
         this.modalNotasRef.dismiss();
     }
 

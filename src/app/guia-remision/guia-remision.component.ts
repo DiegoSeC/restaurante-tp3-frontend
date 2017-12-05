@@ -66,16 +66,17 @@ export class GuiaRemisionComponent implements OnInit {
 
     anular() {
         const guia = this.guias[this.guiaIndex];
-        // this.guias[this.guiaIndex].status = 'canceled';
+        this.guias[this.guiaIndex].status = 'canceled';
         this.anularAction = true;
 
-        this.api.cancel(guia)
+        this.api.cancel(guia.uuid)
             .subscribe(data => {
                 this.modalNotaRef.close();
-                this.getAllGuias();
+                console.info("ELIMINADO");
             // tslint:disable-next-line:no-shadowed-variable
             }, error => {
                 this.modalNotaRef.close();
+                console.info("error");
             });
     }
 }
