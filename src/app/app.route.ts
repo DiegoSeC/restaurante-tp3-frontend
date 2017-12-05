@@ -14,21 +14,21 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './login/logout.component';
 
 export const routes: Routes = [
-  { path: 'nota-pedido', component: NotaPedidoComponent },
-  { path: 'nota-pedido/new', component: NewNotaPedidoComponent },
-  { path: 'nota-pedido/edit/:id', component: NewNotaPedidoComponent },
-  { path: 'solicitud-cotizacion', component: SolicitudCotizacionComponent },
-  { path: 'solicitud-cotizacion/new', component: SolicitudCotizacionNewComponent },
-  { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent },
-  { path: 'guia-remision', component: GuiaRemisionComponent },
-  { path: 'guia-remision/new', component: GuiaRemisionNewcomponent },
-  { path: 'guia-remision/edit/:id', component: GuiaRemisionNewcomponent },
-  { path: 'guia-salida', component: GuiaSalidaComponent },
-  { path: 'guia-salida/new', component: NewGuiaSalidaComponent },
-  { path: 'guia-salida/edit/:id', component: NewGuiaSalidaComponent },
-  { path: 'recepcion-pedidos', component: RecepcionPedidosComponent },
-  { path: 'logout', component: LogoutComponent},
-  { path: '', component: LoginComponent }
+  { path: 'nota-pedido', component: NotaPedidoComponent, pathMatch: 'full' },
+  { path: 'nota-pedido/new', component: NewNotaPedidoComponent, pathMatch: 'full' },
+  { path: 'nota-pedido/edit/:id', component: NewNotaPedidoComponent, pathMatch: 'full' },
+  { path: 'solicitud-cotizacion', component: SolicitudCotizacionComponent, pathMatch: 'full' },
+  { path: 'solicitud-cotizacion/new', component: SolicitudCotizacionNewComponent, pathMatch: 'full' },
+  { path: 'solicitud-cotizacion/edit/:id', component: SolicitudCotizacionNewComponent, pathMatch: 'full' },
+  { path: 'guia-remision', component: GuiaRemisionComponent, pathMatch: 'full' },
+  { path: 'guia-remision/new', component: GuiaRemisionNewcomponent, pathMatch: 'full' },
+  { path: 'guia-remision/edit/:id', component: GuiaRemisionNewcomponent, pathMatch: 'full' },
+  { path: 'guia-salida', component: GuiaSalidaComponent, pathMatch: 'full' },
+  { path: 'guia-salida/new', component: NewGuiaSalidaComponent, pathMatch: 'full' },
+  { path: 'guia-salida/edit/:id', component: NewGuiaSalidaComponent, pathMatch: 'full' },
+  { path: 'recepcion-pedidos', component: RecepcionPedidosComponent, pathMatch: 'full' },
+  { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
+  { path: '', component: LoginComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
