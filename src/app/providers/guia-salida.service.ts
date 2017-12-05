@@ -50,7 +50,8 @@ export class GuiaSalidaService {
       order: guia.order.uuid,
       products: products,
       contact: guia.contact,
-      comment: guia.comment
+      comment: guia.comment,
+      status: guia.status
     };
   }
 }

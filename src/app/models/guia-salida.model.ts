@@ -12,11 +12,14 @@ export class GuiaSalida {
       public warehouse_from: Almacen,
       public warehouse_to_uuid: string,
       public warehouse_from_uuid: string,
-      public warehouse_to: Almacen,
+      public warehouse_to: any,
       public direccion: string,
       public products: Producto[],
       public status: string,
       public contact: string,
-      public comment: string
+      public comment: string,
+      public warehouse?: {
+        contact: string
+      }
     ) {}
 }
