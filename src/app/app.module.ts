@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule, Response, RequestOptions, Headers } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AlmacenService } from './providers/almacen.service';
 import { ApiService } from './providers/api.service';
@@ -14,6 +15,7 @@ import { ProductoService } from './providers/producto.service';
 import { ProveedorService } from './providers/proveedor.service';
 import { TransportistaService } from './providers/transportista.service';
 import { CamionService } from './providers/camion.service';
+import { MessageService } from './providers/message.service';
 
 import { AppComponent } from './app.component';
 import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
@@ -21,6 +23,7 @@ import { SolicitudCotizacionModule } from './solicitud-cotizacion/solicitud-coti
 import { GuiaRemisionModule } from './guia-remision/guia-remision.module';
 import { GuiaSalidaModule } from './guia-salida/guia-salida.module';
 import { RecepcionPedidosModule } from './recepcion-pedidos/recepcion-pedidos.module';
+import { LoginModule } from './login/login.module';
 
 import { AppRoutingModule } from './app.route';
 
@@ -39,6 +42,7 @@ import { AppRoutingModule } from './app.route';
     GuiaRemisionModule,
     GuiaSalidaModule,
     RecepcionPedidosModule,
+    LoginModule,
     AppRoutingModule
   ],
   providers: [
@@ -50,7 +54,9 @@ import { AppRoutingModule } from './app.route';
     ApiService,
     ProveedorService,
     TransportistaService,
-    CamionService
+    CamionService,
+    CookieService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

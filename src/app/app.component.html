@@ -8,7 +8,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" *ngIf="showMenu">
       <li class="nav-item dropdown active" ngbDropdown #myDrop="ngbDropdown">
         <a class="nav-link dropdown-toggle" href="javascript:;" id="logisticaNav"
            role="button" data-toggle="dropdown" aria-haspopup="true" ngbDropdownToggle
@@ -21,6 +21,7 @@
           <a class="dropdown-item" [routerLink]="['/guia-remision']">Actualizar Gu&iacute;a de Remisi&oacute;n</a>
           <a class="dropdown-item" [routerLink]="['/guia-salida']">Actualizar Gu&iacute;a de Salida</a>
           <a class="dropdown-item" [routerLink]="['/recepcion-pedidos']">Cronograma de recepción de pedidos</a>
+          <a class="dropdown-item" [routerLink]="['/logout']">Cerrar Sesión</a>
         </div>
       </li>
     </ul>
