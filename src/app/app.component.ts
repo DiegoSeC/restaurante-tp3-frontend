@@ -15,6 +15,7 @@ export class AppComponent implements OnDestroy {
 
   constructor(private cookieService: CookieService, 
               private messageService: MessageService) {
+    this.showMenu = !!this.cookieService.get('auth')
     this.subscription = this.messageService.getMessage().subscribe(data => this.showMenu = !!this.cookieService.get('auth'));
   }
 

@@ -13,10 +13,12 @@ export class LoginComponent {
   public user: User = <User> {};
 
   constructor(private cookieService: CookieService, 
-              private messageService: MessageService) {}
+              private messageService: MessageService,
+              private router: Router) {}
 
   goToApp() {
     this.cookieService.set('auth', '1');
     this.messageService.sendMessage('login');
+    this.router.navigateByUrl('nota-pedido');
   }
 }
