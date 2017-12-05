@@ -15,11 +15,14 @@ export class NotaPedidoComponent implements OnInit {
   private notaIndex: number;
   public notaNumero: number;
   private sub: any;
-  private anularAction: boolean;
+  public anularAction: boolean;
   // Pagination
   public page = 1;
   public totalItems = 0;
   private localNotaPedidos: Array<NotaPedidoInterface[]> = [];
+
+  public query: string;
+  public checked: boolean;
 
   constructor(private router: Router,
               private notaApi: NotaPedidoService,

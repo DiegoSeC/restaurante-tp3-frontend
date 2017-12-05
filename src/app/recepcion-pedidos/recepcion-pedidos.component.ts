@@ -9,8 +9,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 export class RecepcionPedidosComponent {
   private modalNotaRef: NgbModalRef;
 
+  public query: string;
+  public checked: boolean;
+  public model: string;
+
   constructor(private modalService: NgbModal) {}
-  
+
   openNotaPedido(content) {
     this.modalNotaRef = this.modalService.open(content);
   }

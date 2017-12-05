@@ -8,75 +8,85 @@ import { error } from 'util';
 import 'rxjs/RX';
 
 @Component({
-    selector: 'app-guia-remision',
-    templateUrl: 'guia-remision.component.html',
-    providers: [GuiaRemision]
+  selector: 'app-guia-remision',
+  templateUrl: 'guia-remision.component.html',
+  providers: [GuiaRemision]
 })
 export class GuiaRemisionComponent implements OnInit {
-    guias: Array<any>= [];
-    guiaNumero: String;
-    guiaIndex: number;
-    private modalNotaRef: NgbModalRef;
-    private sub: any;
-    anularAction: boolean;
+  guias: Array<any> = [];
+  guiaNumero: String;
+  guiaIndex: number;
+  private modalNotaRef: NgbModalRef;
+  private sub: any;
+  anularAction: boolean;
 
-    // Pagination
-    public page = 1;
-    public totalItems = 0;
-    private localGuiaRemision: Array<GuiaRemision[]> = [];
+  // Pagination
+  public page = 1;
+  public totalItems = 0;
+  private localGuiaRemision: Array<GuiaRemision[]> = [];
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
-                private api: GuiaRemisionService,
-                private modalService: NgbModal) {
-                    this.getAllGuias();
-    }
+  public query: string;
+  public checked: boolean;
+  public notaNumero: string;
 
-    ngOnInit() {
-        this.guiaNumero = this.route.snapshot.queryParams['id'];
-    }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: GuiaRemisionService,
+    private modalService: NgbModal
+  ) {
+    this.getAllGuias();
+  }
 
-    goToForm(): void {
-        this.router.navigateByUrl('guia-remision/new');
-    }
+  ngOnInit() {
+    this.guiaNumero = this.route.snapshot.queryParams['id'];
+  }
 
-    getAllGuias() {
-        this.api.getAll().subscribe(data => {
-            const guias = data['data'];
-            let i, j, temparray, chunk = 10;
-            for (i = 0, j = guias.length; i < j; i += chunk) {
-                temparray = guias.slice(i,i+chunk);
-                this.localGuiaRemision.push(temparray);
-            }
-      
-            this.guias = this.localGuiaRemision[0];
-            this.totalItems = guias.length;
-        });
-    }
+  goToForm(): void {
+    this.router.navigateByUrl('guia-remision/new');
+  }
 
-    getPagination(e) {
-        this.guias = this.localGuiaRemision[e - 1];
+  getAllGuias() {
+    this.api.getAll().subscribe(data => {
+      const guias = data['data'];
+      let i,
+        j,
+        temparray;
+      const chunk = 10;
+      for (i = 0, j = guias.length; i < j; i += chunk) {
+        temparray = guias.slice(i, i + chunk);
+        this.localGuiaRemision.push(temparray);
       }
 
-    openAnularModal(content, index) {
-        this.guiaIndex = index;
-        console.log(index);
-        this.modalNotaRef = this.modalService.open(content);
-    }
+      this.guias = this.localGuiaRemision[0];
+      this.totalItems = guias.length;
+    });
+  }
 
-    anular() {
-        const guia = this.guias[this.guiaIndex];
-        this.guias[this.guiaIndex].status = 'canceled';
-        this.anularAction = true;
+  getPagination(e) {
+    this.guias = this.localGuiaRemision[e - 1];
+  }
 
-        this.api.cancel(guia.uuid)
-            .subscribe(data => {
-                this.modalNotaRef.close();
-                console.info("ELIMINADO");
-            // tslint:disable-next-line:no-shadowed-variable
-            }, error => {
-                this.modalNotaRef.close();
-                console.info("error");
-            });
-    }
+  openAnularModal(content, index) {
+    this.guiaIndex = index;
+    console.log(index);
+    this.modalNotaRef = this.modalService.open(content);
+  }
+
+  anular() {
+    const guia = this.guias[this.guiaIndex];
+    this.guias[this.guiaIndex].status = 'canceled';
+    this.anularAction = true;
+
+    this.api.cancel(guia.uuid).subscribe(
+      data => {
+        this.modalNotaRef.close();
+        // tslint:disable-next-line:no-shadowed-variable
+      },
+      error => {
+        this.modalNotaRef.close();
+        console.log(error);
+      }
+    );
+  }
 }
