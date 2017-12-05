@@ -8,10 +8,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './login.component';
 
 import { PipesModule } from '../pipes/pipes.module';
+import { LogoutComponent } from './logout.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { PipesModule } from '../pipes/pipes.module';
     PipesModule
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   providers: [
     CookieService
