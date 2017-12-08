@@ -10,6 +10,7 @@ import { NotaPedidoService } from '../providers/nota-pedido.service';
 
 import { ProductoService } from '../providers/producto.service';
 import { ProveedorService } from '../providers/proveedor.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-solicitud-cotizacion-new',
@@ -33,13 +34,16 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
     private today: any = new Date();
     bFlagEdicion: boolean;
 
+    public userName: string;
+
     constructor(private modalService: NgbModal,
                 private productoService: ProductoService,
                 private proveedorService: ProveedorService,
                 private solicitudService: SolicitudCotizacionService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private notaService: NotaPedidoService) {
+                private notaService: NotaPedidoService,
+                private cookie: CookieService) {
         /*Inicializar el objeto solicitud*/
         this.solicitud = <SolicitudCotizacion> {
             order: {
@@ -52,7 +56,7 @@ export class SolicitudCotizacionNewComponent implements OnInit, OnDestroy {
         this.getProductos();
         this.getProveedores();
         this.getNotaPedidos();
-        console.log('constructor');
+        this.userName = this.cookie.get('me');
     }
 
     ngOnInit() {

@@ -11,6 +11,7 @@ import { ProveedorService } from '../providers/proveedor.service';
 
 import { SolicitudCotizacionComponent } from './solicitud-cotizacion.component';
 import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion-new.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SolicitudCotizacionNewComponent } from './solicitud-cotizacion-new.comp
         SolicitudCotizacionNewComponent
     ],
     providers: [
-        SolicitudCotizacionService
+        SolicitudCotizacionService,
+        CookieService
     ]
 })
 export class SolicitudCotizacionModule {}

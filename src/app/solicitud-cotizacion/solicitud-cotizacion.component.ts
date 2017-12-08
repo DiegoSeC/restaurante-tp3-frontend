@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SolicitudCotizacionService } from '../providers/solicitud-cotizacion.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SolicitudCotizacion } from '../models/solicitud-cotizacion.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-solicitud-cotizacion',
@@ -24,13 +25,17 @@ export class SolicitudCotizacionComponent implements OnInit {
   public totalItems = 0;
   private localSolicitudes: Array<SolicitudCotizacion[]> = [];
 
+  public userName: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api: SolicitudCotizacionService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cookie: CookieService
   ) {
     this.getAllSolicitudes();
+    this.userName = this.cookie.get('me');
   }
 
   ngOnInit() {
