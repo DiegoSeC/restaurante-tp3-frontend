@@ -12,6 +12,7 @@ import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { TransportistaService } from '../providers/transportista.service';
 import { AlmacenService } from '../providers/almacen.service';
 import { GuiaSalidaService } from '../providers/guia-salida.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-guia-remision-new',
@@ -25,6 +26,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
   guiassalida: GuiaSalida[];
   transportistas: Transportista[];
   almacenes: Almacen[];
+  userName: string;
   private modalNotasRef: NgbModalRef;
   private modalTranspRef: NgbModalRef;
   private modalAlmacenRef: NgbModalRef;
@@ -40,7 +42,8 @@ export class GuiaRemisionNewcomponent implements OnInit {
     private almService: AlmacenService,
     private guiaremisionService: GuiaRemisionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cookie: CookieService
   ) {
     this.guia = <GuiaRemision> {
       carrier: {},
@@ -54,6 +57,8 @@ export class GuiaRemisionNewcomponent implements OnInit {
     this.getGuiaSalidas();
     this.getTransportistas();
     this.getAlmacenes();
+
+    this.userName = this.cookie.get('me');
   }
 
   ngOnInit() {

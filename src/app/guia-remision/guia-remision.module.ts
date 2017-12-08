@@ -10,6 +10,7 @@ import { GuiaRemisionService } from '../providers/guia-remision.service';
 
 import { GuiaRemisionComponent } from './guia-remision.component';
 import { GuiaRemisionNewcomponent } from './guia-remision-new.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { GuiaRemisionNewcomponent } from './guia-remision-new.component';
     ],
     providers: [
         GuiaRemisionService,
-        GuiaRemisionNewcomponent
+        GuiaRemisionNewcomponent,
+        CookieService
     ]
 })
 export class GuiaRemisionModule {}

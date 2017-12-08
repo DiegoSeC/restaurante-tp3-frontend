@@ -6,6 +6,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GuiaRemision } from '../models/guia-remision.model';
 import { error } from 'util';
 import 'rxjs/RX';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-guia-remision',
@@ -29,13 +30,17 @@ export class GuiaRemisionComponent implements OnInit {
   public checked: boolean;
   public notaNumero: string;
 
+  public userName: string;  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api: GuiaRemisionService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cookie: CookieService
   ) {
     this.getAllGuias();
+    this.userName = this.cookie.get('me');
   }
 
   ngOnInit() {
