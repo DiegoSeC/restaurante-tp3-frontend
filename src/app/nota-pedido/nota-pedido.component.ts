@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotaPedidoService } from '../providers/nota-pedido.service';
 import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nota-pedido',
@@ -23,12 +24,17 @@ export class NotaPedidoComponent implements OnInit {
 
   public query: string;
   public checked: boolean;
+  public userName: string;
 
-  constructor(private router: Router,
-              private notaApi: NotaPedidoService,
-              private route: ActivatedRoute,
-              private modalService: NgbModal) {
+  constructor(
+    private router: Router,
+    private notaApi: NotaPedidoService,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private cookie: CookieService
+  ) {
     this.getNotaPedidos();
+    this.userName = this.cookie.get('me');
   }
 
   ngOnInit() {

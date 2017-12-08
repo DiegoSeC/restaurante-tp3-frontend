@@ -27,6 +27,7 @@ import { RecepcionPedidosModule } from './recepcion-pedidos/recepcion-pedidos.mo
 import { LoginModule } from './login/login.module';
 
 import { AppRoutingModule } from './app.route';
+import { MeService } from './providers/me.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AppRoutingModule } from './app.route';
     CamionService,
     CookieService,
     MessageService,
-    LoginService
+    LoginService,
+    MeService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs/Subscription';
 import { MessageService } from './providers/message.service';
+import { MeService } from './providers/me.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnDestroy {
   public subscription: Subscription;
 
   constructor(private cookieService: CookieService, 
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private meService: MeService) {
     this.showMenu = !!this.cookieService.get('auth')
     this.subscription = this.messageService.getMessage().subscribe(data => this.showMenu = !!this.cookieService.get('auth'));
   }

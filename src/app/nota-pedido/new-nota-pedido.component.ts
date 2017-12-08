@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AlmacenService } from '../providers/almacen.service';
 import { ProductoService } from '../providers/producto.service';
@@ -24,13 +25,15 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
   public query: string;
   private sub: any;
+  public userName: string;
 
   constructor(private modalService: NgbModal,
               private almacen: AlmacenService,
               private producto: ProductoService,
               private notaApi: NotaPedidoService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private cookie: CookieService) {
 
     const date = new Date();
     this.nota = <NotaPedidoInterface> {
@@ -38,6 +41,8 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
       date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
       warehouse : {}
     };
+
+    this.userName = this.cookie.get('me');
 
     this.getAlmacenes();
     this.getProductos();
