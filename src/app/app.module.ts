@@ -16,6 +16,7 @@ import { ProveedorService } from './providers/proveedor.service';
 import { TransportistaService } from './providers/transportista.service';
 import { CamionService } from './providers/camion.service';
 import { MessageService } from './providers/message.service';
+import { LoginService } from './providers/login.service';
 
 import { AppComponent } from './app.component';
 import { NotaPedidoModule } from './nota-pedido/nota-pedido.module';
@@ -56,7 +57,8 @@ import { AppRoutingModule } from './app.route';
     TransportistaService,
     CamionService,
     CookieService,
-    MessageService
+    MessageService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { User } from '../models/user.model';
 import { MessageService } from '../providers/message.service';
+import { LoginService } from '../providers/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,14 @@ export class LoginComponent {
 
   constructor(private cookieService: CookieService, 
               private messageService: MessageService,
-              private router: Router) {}
+              private router: Router,
+              private loginService: LoginService) {}
 
-  goToApp() {
-    this.cookieService.set('auth', '1');
-    this.messageService.sendMessage('login');
-    this.router.navigateByUrl('nota-pedido');
+  goToApp(user) {
+    this.loginService.login(user).subscribe(data => {
+      this.cookieService.set('auth', data['access_token']);
+      this.messageService.sendMessage('login');
+      this.router.navigateByUrl('nota-pedido');
+    });
   }
 }

@@ -10,6 +10,8 @@ import { LoginComponent } from './login.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { LogoutComponent } from './logout.component';
 
+import { LoginService } from '../providers/login.service';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -27,7 +29,8 @@ import { LogoutComponent } from './logout.component';
     LogoutComponent
   ],
   providers: [
-    CookieService
+    CookieService,
+    LoginService
   ]
 })
 export class LoginModule {
