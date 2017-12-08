@@ -10,6 +10,8 @@ import { GuiaSalidaService } from '../providers/guia-salida.service';
 
 import { GuiaSalidaComponent } from './guia-salida.component';
 import {NewGuiaSalidaComponent} from './new-guia-salida.component';
+import { CookieService } from 'ngx-cookie-service';
+
 @NgModule({
     declarations: [
         GuiaSalidaComponent,
@@ -26,7 +28,8 @@ import {NewGuiaSalidaComponent} from './new-guia-salida.component';
         GuiaSalidaComponent
     ],
     providers: [
-        GuiaSalidaService
+        GuiaSalidaService,
+        CookieService
     ]
 })
 export class GuiaSalidaModule {}

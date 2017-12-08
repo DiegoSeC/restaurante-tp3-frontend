@@ -6,6 +6,7 @@ import { GuiaSalidaService } from '../providers/guia-salida.service';
 import { GuiaSalida as GuiaSalidaInterface } from '../models/guia-salida.model';
 import { NotaPedido as NotaPedidoInterface } from '../models/nota-pedido.model';
 import { NotaPedidoService } from '../providers/nota-pedido.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-new-guia-salida',
@@ -21,12 +22,15 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   private sub: any;
   private today: any = new Date();
 
+  public userName;
+
   constructor(
     private modalService: NgbModal,
     private guiaApi: GuiaSalidaService,
     private notaPedido: NotaPedidoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cookie: CookieService
   ) {
     const date = new Date();
 
@@ -37,6 +41,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
       warehouse_to: {}
     };
 
+    this.userName = this.cookie.get('me');
     this.getNotaPedidos();
   }
 

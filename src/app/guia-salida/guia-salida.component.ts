@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { GuiaSalidaService } from '../providers/guia-salida.service';
 import { GuiaSalida as GuiaSalidaInterface } from '../models/guia-salida.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-guia-salida',
@@ -25,14 +26,17 @@ export class GuiaSalidaComponent implements OnInit {
   public query: string;
   public checked: boolean;
   public notaNumero: string;
+  public userName: string;
 
   constructor(
     private router: Router,
     private guiaApi: GuiaSalidaService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cookie: CookieService
   ) {
     this.getGuiaSalidas();
+    this.userName = this.cookie.get('me');
   }
 
   ngOnInit() {
