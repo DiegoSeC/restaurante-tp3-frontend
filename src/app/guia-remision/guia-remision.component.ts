@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GuiaRemisionService } from '../providers/guia-remision.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GuiaRemision } from '../models/guia-remision.model';
-import { error } from 'util';
-import 'rxjs/RX';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
