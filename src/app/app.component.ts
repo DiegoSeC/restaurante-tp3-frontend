@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs/Subscription';
 import { MessageService } from './providers/message.service';
 import { MeService } from './providers/me.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,17 @@ export class AppComponent implements OnDestroy {
 
   constructor(private cookieService: CookieService, 
               private messageService: MessageService,
+              private router: Router,
               private meService: MeService) {
-    this.showMenu = !!this.cookieService.get('auth')
+    this.showMenu = !!this.cookieService.get('auth');
+    this.redirectToLogin();
     this.subscription = this.messageService.getMessage().subscribe(data => this.showMenu = !!this.cookieService.get('auth'));
+  }
+
+  redirectToLogin() {
+    if (!this.showMenu) {
+      this.router.navigateByUrl('/');
+    }
   }
 
   ngOnDestroy() {
