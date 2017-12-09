@@ -6,7 +6,7 @@
     <div class="media">
       <img class="align-self-center mr-3" src="http://via.placeholder.com/50x50" alt="Generic placeholder image">
       <div class="media-body">
-        <h2 class="mt-0">Juan Crespo</h2>
+        <h2 class="mt-0">{{ userName }}</h2>
       </div>
     </div>
   </div>
@@ -51,9 +51,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th>
-            <input type="checkbox" name="all" [(ngModel)]="checked">
-          </th>
           <th>Número</th>
           <th>Origen</th>
           <th>Fecha</th>
@@ -63,17 +60,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let nota of notaPedidos | search:'document_number':query;">
+          <td>{{ nota.document_number }}</td>
+          <td>{{ nota.warehouse.name }}</td>
+          <td>{{ nota.date | date:'d/M/y' }}</td>
+          <td>INTERNO</td>
+          <td>{{ nota.status }}</td>
           <td>
-            <input type="checkbox" name="test" [(ngModel)]="checked">
-          </td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>
-            <button class="btn btn-light" (click)="openNotaPedido(pedidoModal)">
+            <button class="btn btn-light" (click)="openNotaPedido(pedidoModal, nota)">
               Ver
             </button>
           </td>
@@ -91,7 +85,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <h5>NP000017</h5>
+    <h5>{{ notaDetail.document_number }}</h5>
     <table class="table">
       <thead>
         <tr>
@@ -102,11 +96,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
-          <td>asd</td>
+        <tr *ngFor="let p of notaDetail.products">
+          <td>{{ p.sku }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.quantity }}</td>
+          <td>{{ p.unit_of_measurement }}</td>
         </tr>
       </tbody>
     </table>
