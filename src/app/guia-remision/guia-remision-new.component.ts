@@ -35,6 +35,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
   private sub: any;
   private today: any = new Date();
   public trucks: any;
+  userWarehouse: any;
 
   constructor(
     private modalService: NgbModal,
@@ -62,6 +63,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     this.getMovilidad();
 
     this.userName = this.cookie.get("me");
+    this.userWarehouse = JSON.parse(this.cookie.get('warehouse'));
   }
 
   ngOnInit() {
@@ -123,7 +125,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
   getAlmacenes() {
     this.almService.getAlmacenes().subscribe(
       data => {
-        this.almacenes = data["data"];
+        this.almacenes = data['data'].filter(a => a.uuid !== this.userWarehouse.uuid);
       },
       error => {
         console.log(error);

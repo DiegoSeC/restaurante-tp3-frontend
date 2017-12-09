@@ -27,6 +27,8 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
   private sub: any;
   public userName: string;
 
+  public userWarehouse: any;
+
   constructor(private modalService: NgbModal,
               private almacen: AlmacenService,
               private producto: ProductoService,
@@ -43,6 +45,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
     };
 
     this.userName = this.cookie.get('me');
+    this.userWarehouse = JSON.parse(this.cookie.get('warehouse'));
 
     this.getAlmacenes();
     this.getProductos();
@@ -71,7 +74,7 @@ export class NewNotaPedidoComponent implements OnInit, OnDestroy {
 
   getAlmacenes() {
     this.almacen.getAlmacenes().subscribe(data => {
-      this.almacenes = data['data'];
+      this.almacenes = data['data'].filter(a => a.uuid !== this.userWarehouse.uuid);
     });
   }
 

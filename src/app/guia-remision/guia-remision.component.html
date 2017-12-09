@@ -55,8 +55,8 @@
           <td>{{ guia.warehouse_from.name }}</td>
           <td>{{ guia.warehouse_to.name }}</td>
           <td>
-            <button class="btn btn-light" [disabled]="guia.status == 'pending'" [routerLink]="['/guia-remision/edit/', guia.uuid]">Editar</button>
-            <button class="btn btn-danger" [disabled]="guia.status == 'canceled'" (click)="openAnularModal(anularModal, i)">Anular</button>
+            <button class="btn btn-light" [disabled]="guia.status !== 'active'" [routerLink]="['/guia-remision/edit/', guia.uuid]">Editar</button>
+            <button class="btn btn-danger" [disabled]="guia.status !== 'active'" (click)="openAnularModal(anularModal, i)">Anular</button>
           </td>
         </tr>
       </tbody>
