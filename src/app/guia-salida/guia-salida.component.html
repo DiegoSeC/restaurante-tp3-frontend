@@ -12,10 +12,14 @@
     </div>
   </div>
   
-  <h5 class="alert alert-secondary" *ngIf="notaNumero" style="margin: 15px 0;">
-    Se actualizó exitosamente la Guia de Salida
+  <h5 class="alert alert-secondary" *ngIf="guiaNumero" style="margin: 15px 0;">
+    Se actualizó exitosamente la Guia de Salida {{ guiaNumero }}
   </h5>
-  
+
+  <h5 class="alert alert-secondary" *ngIf="guiaNumeroNuevo" style="margin: 15px 0;">
+    Se guardo exitosamente la Guia de Salida {{ guiaNumeroNuevo }}
+  </h5>
+
   <h5 class="alert alert-warning" *ngIf="anularAction" style="margin: 15px 0;">
     Se anuló correctamente 
   </h5>

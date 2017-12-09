@@ -111,18 +111,17 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     action.subscribe(
       data => {
         if (this.action !== 'actualizar') {
-          this.guiasalida.document_number = data['data']['numero'];
+          this.guiasalida.document_number = data['data']['document_number'];
         }
-
+        console.log(data);
         this.modalGuiaRef.close();
       },
       error => this.modalGuiaRef.close()
     );
 
+    
     this.modalGuiaRef.result.then(data => {
-      this.router.navigateByUrl(
-        `guia-salida?id=${this.guiasalida.document_number}`
-      );
+      this.router.navigateByUrl(`guia-salida?id=${this.guiasalida.document_number}`);
     });
   }
 
