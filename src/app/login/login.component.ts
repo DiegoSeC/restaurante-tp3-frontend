@@ -29,6 +29,7 @@ export class LoginComponent {
   getUserInfo() {
     this.loginService.me().subscribe(data => {
       this.cookieService.set('me', data['data']['name']);
+      this.cookieService.set('warehouse', JSON.stringify(data['data']['warehouse']));
       this.router.navigateByUrl('nota-pedido');
     });
   }

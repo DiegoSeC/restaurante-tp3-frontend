@@ -23,6 +23,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   private today: any = new Date();
 
   public userName;
+  public userWarehouse;
 
   constructor(
     private modalService: NgbModal,
@@ -42,6 +43,8 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     };
 
     this.userName = this.cookie.get('me');
+    this.userWarehouse = this.cookie.get('warehouse');
+    
     this.getNotaPedidos();
   }
 
