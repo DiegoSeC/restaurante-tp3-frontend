@@ -39,7 +39,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th></th>
           <th>Número</th>
           <th>Fecha</th>
           <th>Estado</th>
@@ -50,9 +49,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let guia of guias  | search:'document_number':query; let i = index">
-          <td>
-            <input type="checkbox" name="test">
-          </td>
           <td>{{ guia.document_number }}</td>
           <td>{{ guia.date | date:'d/M/y' }}</td>
           <td>{{ guia.status }}</td>
@@ -67,13 +63,6 @@
     </table>
 
     <ngb-pagination *ngIf="totalItems" [collectionSize]="totalItems" (pageChange)="getPagination($event)" [(page)]="page" aria-label="Nota pedido paginacion"></ngb-pagination>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6"></div>
-  <div class="col-sm-6 text-right">
-    <button type="button" class="btn btn-sm" name="imprimir">Imprimir</button>
   </div>
 </div>
 

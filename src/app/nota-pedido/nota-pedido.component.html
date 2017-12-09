@@ -39,9 +39,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th>
-            <input type="checkbox" name="all" [(ngModel)]="checked">
-          </th>
           <th>Número</th>
           <th>Fecha</th>
           <th>Estado</th>
@@ -51,9 +48,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let nota of notaPedidos | search:'document_number':query; let i = index">
-          <td>
-            <input type="checkbox" name="test" [(ngModel)]="checked">
-          </td>
           <td>{{ nota.document_number }}</td>
           <td>{{ nota.date | date:'d/M/y' }}</td>
           <td>{{ nota.status }}</td>
@@ -69,13 +63,6 @@
     </table>
 
     <ngb-pagination *ngIf="totalItems" [collectionSize]="totalItems" (pageChange)="getPagination($event)" [(page)]="page" aria-label="Nota pedido paginacion"></ngb-pagination>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6"></div>
-  <div class="col-sm-6 text-right">
-    <button type="button" class="btn" name="imprimir">Imprimir</button>
   </div>
 </div>
 

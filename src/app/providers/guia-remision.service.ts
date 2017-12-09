@@ -40,7 +40,7 @@ export class GuiaRemisionService {
       order: guia.order,
       carrier: guia.carrier.uuid,
       products: guia.products,
-      truck: '3d125edd-e84e-33aa-bfda-4d69239dcaee',
+      truck: guia.truck.uuid,
       transfer_guide: guia.transfer_guide.uuid,
       comment: guia.comment
     };

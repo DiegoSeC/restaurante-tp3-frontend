@@ -1,22 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GuiaRemision } from '../models/guia-remision.model';
-import { NotaPedido } from '../models/nota-pedido.model';
-import { Transportista } from '../models/transportista.model';
-import { Almacen } from '../models/almacen.model';
-import { GuiaSalida } from '../models/guia-salida.model';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ActivatedRoute, Router } from "@angular/router";
+import { GuiaRemision } from "../models/guia-remision.model";
+import { NotaPedido } from "../models/nota-pedido.model";
+import { Transportista } from "../models/transportista.model";
+import { Almacen } from "../models/almacen.model";
+import { GuiaSalida } from "../models/guia-salida.model";
 
-import { GuiaRemisionService } from '../providers/guia-remision.service';
-import { NotaPedidoService } from '../providers/nota-pedido.service';
-import { TransportistaService } from '../providers/transportista.service';
-import { AlmacenService } from '../providers/almacen.service';
-import { GuiaSalidaService } from '../providers/guia-salida.service';
-import { CookieService } from 'ngx-cookie-service';
+import { GuiaRemisionService } from "../providers/guia-remision.service";
+import { NotaPedidoService } from "../providers/nota-pedido.service";
+import { TransportistaService } from "../providers/transportista.service";
+import { AlmacenService } from "../providers/almacen.service";
+import { GuiaSalidaService } from "../providers/guia-salida.service";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
-  selector: 'app-guia-remision-new',
-  templateUrl: 'guia-remision-new.componente.html'
+  selector: "app-guia-remision-new",
+  templateUrl: "guia-remision-new.componente.html"
 })
 // tslint:disable-next-line:component-class-suffix
 export class GuiaRemisionNewcomponent implements OnInit {
@@ -34,6 +34,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
   public query: string;
   private sub: any;
   private today: any = new Date();
+  public trucks: any;
 
   constructor(
     private modalService: NgbModal,
@@ -45,42 +46,44 @@ export class GuiaRemisionNewcomponent implements OnInit {
     private route: ActivatedRoute,
     private cookie: CookieService
   ) {
-    this.guia = <GuiaRemision> {
+    this.guia = <GuiaRemision>{
       carrier: {},
       transfer_guide: {},
       date: `${this.today.getDate()}-${this.today.getMonth() +
         1}-${this.today.getFullYear()}`,
       warehouse_from: {},
-      warehouse_to: {}
+      warehouse_to: {},
+      truck: {}
     };
 
     this.getGuiaSalidas();
     this.getTransportistas();
     this.getAlmacenes();
+    this.getMovilidad();
 
-    this.userName = this.cookie.get('me');
+    this.userName = this.cookie.get("me");
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      if (typeof params['id'] === 'undefined') {
+      if (typeof params["id"] === "undefined") {
         this.setguiaDefault();
       } else {
-        console.log('id => ' + params['id']);
-        this.getGuia(params['id']);
+        console.log("id => " + params["id"]);
+        this.getGuia(params["id"]);
       }
     });
   }
 
   setguiaDefault() {
-    this.action = 'registrar';
+    this.action = "registrar";
   }
 
   getGuia(id: string) {
-    this.action = 'actualizar';
+    this.action = "actualizar";
     this.guiaremisionService.getOne(id).subscribe(
       data => {
-        this.guia = data['data'];
+        this.guia = data["data"];
       },
       error => {
         console.log(error);
@@ -91,8 +94,8 @@ export class GuiaRemisionNewcomponent implements OnInit {
   getGuiaSalidas() {
     this.guiasalidaService.getAll().subscribe(
       data => {
-        const n = data['data'];
-        this.guiassalida = n.filter(nota => nota.status === 'active');
+        const n = data["data"];
+        this.guiassalida = n.filter(nota => nota.status === "active");
       },
       error => {
         console.log(error);
@@ -103,7 +106,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
   getTransportistas() {
     this.transpService.getAll().subscribe(
       data => {
-        this.transportistas = data['data'];
+        this.transportistas = data["data"];
       },
       error => {
         console.log(error);
@@ -111,10 +114,16 @@ export class GuiaRemisionNewcomponent implements OnInit {
     );
   }
 
+  getMovilidad() {
+    this.transpService.getTrucks().subscribe(data => {
+      this.trucks = data['data'];
+    });
+  }
+
   getAlmacenes() {
     this.almService.getAlmacenes().subscribe(
       data => {
-        this.almacenes = data['data'];
+        this.almacenes = data["data"];
       },
       error => {
         console.log(error);
@@ -128,7 +137,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
 
   addGuiaSalida(guia: GuiaSalida, index: number) {
     this.guiasalidaService.getGuiaSalida(guia.uuid).subscribe(data => {
-      const g = data['data'];
+      const g = data["data"];
 
       this.guia.transfer_guide.document_number = g.document_number;
       this.guia.warehouse_from.code = g.warehouse_from.code;
@@ -175,7 +184,7 @@ export class GuiaRemisionNewcomponent implements OnInit {
     this.modalSubmit.close();
     let action = this.guiaremisionService.save(this.guia);
 
-    if (this.action === 'actualizar') {
+    if (this.action === "actualizar") {
       action = this.guiaremisionService.update(this.guia);
     }
 

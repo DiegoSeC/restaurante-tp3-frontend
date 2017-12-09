@@ -130,6 +130,20 @@
   <div class="row" style="margin-top: 15px;">
     <div class="col-sm-6">
       <div class="form-group row">
+        <label for="truck" class="col-sm-3 col-form-label">Movilidad:</label>
+        <div class="col-sm-9">
+          <select class="form-control"  id="truck" required [(ngModel)]="guia.truck.uuid" name="truck">
+            <option *ngFor="let t of trucks" [value]="t.uuid">{{ t.brand + ' - ' + t.license_plate }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6"></div>
+  </div>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+      <div class="form-group row">
         <!--<label for="licencia" class="col-sm-2 col-form-label">Licenca:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="licencia" name="licencia"
