@@ -25,7 +25,6 @@ export class GuiaSalidaComponent implements OnInit {
 
   public query: string;
   public checked: boolean;
-  public notaNumero: string;
   public userName: string;
 
   constructor(
@@ -40,7 +39,9 @@ export class GuiaSalidaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.guiaNumero = this.route.snapshot.queryParams['id'];
+    if(typeof this.route.snapshot.queryParams['id'] !== 'undefined') {
+      this.guiaNumero = this.route.snapshot.queryParams['id'];
+    }
   }
 
   goToForm() {
