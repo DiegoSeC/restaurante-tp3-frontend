@@ -43,8 +43,8 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
     };
 
     this.userName = this.cookie.get('me');
-    this.userWarehouse = this.cookie.get('warehouse');
-    
+    this.userWarehouse = JSON.parse(this.cookie.get('warehouse'));
+
     this.getNotaPedidos();
   }
 
