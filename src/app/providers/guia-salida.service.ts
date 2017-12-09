@@ -45,7 +45,7 @@ export class GuiaSalidaService {
     });
 
     return {
-      warehouse_from: '972e4c84-f7e9-3939-84fb-a1d9df416778',
+      warehouse_from: guia.warehouse_from.uuid,
       warehouse_to: guia.warehouse_to.uuid,
       order: guia.order.uuid,
       products: products,

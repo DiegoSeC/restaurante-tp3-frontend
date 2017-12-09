@@ -39,18 +39,18 @@
         <table class="table">
             <thead>
             <tr>
-                <th>Número</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th class="text-center">Número</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let solicitud of solicitudes | search:'document_number':query; let i = index">
-                <td>{{ solicitud.document_number }}</td>
-                <td>{{ solicitud.date | date:'d/M/y' }}</td>
-                <td>{{ solicitud.status }}</td>
-                <td>
+                <td class="text-center">{{ solicitud.document_number }}</td>
+                <td class="text-center">{{ solicitud.date | date:'d/M/y' }}</td>
+                <td class="text-center">{{ solicitud.status }}</td>
+                <td class="text-center">
                     <button class="btn btn-light" [routerLink]="['/solicitud-cotizacion/edit/', solicitud.uuid]"><!--[disabled]="solicitud.status !== 'pending'"-->
                         Ver
                     </button>
