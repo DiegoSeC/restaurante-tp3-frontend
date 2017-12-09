@@ -127,6 +127,7 @@ export class NewGuiaSalidaComponent implements OnInit, OnDestroy {
   }
 
   createGuiaSalida() {
+    this.guiasalida.warehouse_from = this.userWarehouse;
     return this.guiaApi.saveGuiaSalida(this.guiasalida);
   }
 
