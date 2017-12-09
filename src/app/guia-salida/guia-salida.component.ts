@@ -27,6 +27,8 @@ export class GuiaSalidaComponent implements OnInit {
   public checked: boolean;
   public userName: string;
 
+  public guiaNumeroNuevo: string;
+
   constructor(
     private router: Router,
     private guiaApi: GuiaSalidaService,
